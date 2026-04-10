@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Developer Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ========== CSS VARIABLES - EDIT COLORS HERE ========== */
+        :root {
+            --color-bg-dark: #0a0e17;
+            --color-bg-darker: #060912;
+            --color-primary: #00f0ff;
+            --color-secondary: #ff006e;
+            --color-accent: #8338ec;
+            --color-text: #e0e6f0;
+            --color-text-dim: #8892a6;
+            --color-card-bg: rgba(15, 23, 42, 0.6);
+            --color-glow: rgba(0, 240, 255, 0.4);
+            
+            --font-display: 'Orbitron', sans-serif;
+            --font-mono: 'Share Tech Mono', monospace;
+            
+            --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ========== GLOBAL STYLES ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-mono);
+            background: linear-gradient(135deg, var(--color-bg-darker) 0%, var(--color-bg-dark) 100%);
+            color: var(--color-text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* ========== ANIMATED BACKGROUND GRID ========== */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.15;
+            background-image: 
+                linear-gradient(var(--color-primary) 1px, transparent 1px),
+                linear-gradient(90deg, var(--color-primary) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(50px, 50px);
+            }
+        }
+
+        /* Gradient overlay */
+        .gradient-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 20% 50%, rgba(131, 56, 236, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(255, 0, 110, 0.1) 0%, transparent 50%);
+            animation: gradientShift 15s ease infinite alternate;
+        }
+
+        @keyframes gradientShift {
+            0% {
+                opacity: 0.3;
+            }
+            100% {
+                opacity: 0.6;
+            }
+        }
+
+        /* ========== HERO SECTION ========== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* EDIT YOUR NAME HERE */
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary), var(--color-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            letter-spacing: -2px;
+            animation: glowPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% {
+                filter: drop-shadow(0 0 20px rgba(0, 240, 255, 0.5));
+            }
+            50% {
+                filter: drop-shadow(0 0 40px rgba(255, 0, 110, 0.6));
+            }
+        }
+
+        /* EDIT YOUR ROLE HERE */
+        .hero .role {
+            font-family: var(--font-display);
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--color-primary);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        /* EDIT YOUR TAGLINE HERE */
+        .hero .tagline {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            color: var(--color-text-dim);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: var(--color-bg-dark);
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition-smooth);
+            animation: fadeInUp 1s ease-out 0.6s both;
+            box-shadow: 0 10px 40px rgba(0, 240, 255, 0.3);
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .cta-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 50px rgba(255, 0, 110, 0.4);
+        }
+
+        /* ========== PROJECTS SECTION ========== */
+        .projects {
+            padding: 6rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--color-text-dim);
+            font-size: 1.2rem;
+            margin-bottom: 4rem;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        /* ========== PROJECT CARD STYLES ========== */
+        .project-card {
+            background: var(--color-card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid rgba(0, 240, 255, 0.2);
+            transition: var(--transition-smooth);
+            backdrop-filter: blur(10px);
+            position: relative;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 20px;
+            padding: 2px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: var(--transition-smooth);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px var(--color-glow);
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            background: var(--color-bg-darker);
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .project-info {
+            padding: 2rem;
+        }
+
+        .project-title {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+        }
+
+        .project-description {
+            color: var(--color-text-dim);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            padding: 0.4rem 1rem;
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid var(--color-primary);
+            border-radius: 20px;
+            color: var(--color-primary);
+            transition: var(--transition-smooth);
+        }
+
+        .tag:hover {
+            background: rgba(0, 240, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        /* ========== CONTACT/FOOTER SECTION ========== */
+        .contact {
+            padding: 6rem 2rem 4rem;
+            text-align: center;
+            background: linear-gradient(180deg, transparent 0%, rgba(0, 240, 255, 0.05) 100%);
+        }
+
+        .contact h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            color: var(--color-primary);
+        }
+
+        .contact-cta {
+            font-size: 1.2rem;
+            color: var(--color-text-dim);
+            margin-bottom: 3rem;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        /* EDIT YOUR EMAIL AND SOCIAL LINKS HERE */
+        .contact-link {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            color: var(--color-text);
+            text-decoration: none;
+            padding: 1rem 2rem;
+            border: 2px solid var(--color-primary);
+            border-radius: 50px;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .contact-link:hover::before {
+            left: 100%;
+        }
+
+        .contact-link:hover {
+            background: rgba(0, 240, 255, 0.1);
+            box-shadow: 0 5px 20px var(--color-glow);
+            transform: translateY(-3px);
+        }
+
+        .footer-text {
+            color: var(--color-text-dim);
+            font-size: 0.9rem;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(0, 240, 255, 0.2);
+            margin-top: 3rem;
+        }
+
+        /* ========== RESPONSIVE DESIGN ========== */
+        @media (max-width: 768px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .contact-link {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        /* ========== SCROLL ANIMATIONS ========== */
+        .fade-in-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background Elements -->
+    <div class="animated-bg"></div>
+    <div class="gradient-overlay"></div>
+
+    <!-- ========== HERO SECTION - EDIT YOUR INFO HERE ========== -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>ALEX MORGAN</h1> <!-- EDIT: Your Name -->
+            <p class="role">Game Developer & Designer</p> <!-- EDIT: Your Role -->
+            <p class="tagline">
+                Crafting immersive gaming experiences with cutting-edge technology. 
+                Specializing in Unity, Unreal Engine, and interactive storytelling.
+            </p> <!-- EDIT: Your Tagline -->
+            <a href="#projects" class="cta-button">View My Work</a>
+        </div>
+    </section>
+
+    <!-- ========== PROJECTS SECTION ========== -->
+    <section class="projects" id="projects">
+        <h2 class="section-title fade-in-on-scroll">Featured Projects</h2>
+        <p class="section-subtitle fade-in-on-scroll">Explore my latest game development work</p>
+        
+        <div class="projects-grid" id="projectsGrid">
+            <!-- Project cards will be dynamically generated here by JavaScript -->
+        </div>
+    </section>
+
+    <!-- ========== CONTACT SECTION - EDIT YOUR LINKS HERE ========== -->
+    <section class="contact">
+        <h2>Let's Create Together</h2>
+        <p class="contact-cta">Interested in collaborating? Get in touch!</p>
+        
+        <div class="contact-links">
+            <!-- EDIT: Your Email -->
+            <a href="mailto:alex.morgan@gamedev.com" class="contact-link">
+                📧 Email
+            </a>
+            
+            <!-- EDIT: Your LinkedIn -->
+            <a href="https://linkedin.com/in/yourprofile" class="contact-link" target="_blank">
+                💼 LinkedIn
+            </a>
+            
+            <!-- EDIT: Your Twitter/X -->
+            <a href="https://twitter.com/yourhandle" class="contact-link" target="_blank">
+                🐦 Twitter
+            </a>
+            
+            <!-- EDIT: Your GitHub -->
+            <a href="https://github.com/yourusername" class="contact-link" target="_blank">
+                💻 GitHub
+            </a>
+        </div>
+        
+        <p class="footer-text">
+            © 2024 Alex Morgan. Built with passion for games. <!-- EDIT: Your Name & Year -->
+        </p>
+    </section>
+
+    <script>
+        /* ========================================
+           PROJECT DATA - EDIT YOUR PROJECTS HERE
+           ======================================== */
+        
+        const projects = [
+            {
+                title: "Fight with friends (FWF)",
+                description: "A rogulite fast paced round-based game I worked on for 1 month as a primary scripter of this game.",
+                videoUrl: "https://player.vimeo.com/video/1178587778", // EDIT: Replace with your YouTube video ID
+                tags: ["Forestly Dev's", "Lua", "Studio project", "Multiplayer"]
+            },
+            {
+                title: "Neon Racing: Velocity",
+                description: "High-speed arcade racing game with synthwave aesthetics and dynamic track generation. Features online leaderboards and custom vehicle building.",
+                videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", // EDIT: Replace with your YouTube video ID
+                tags: ["Unity", "C#", "Online Multiplayer", "WebGL"]
+            },
+            {
+                title: "Tales of the Forgotten",
+                description: "Story-driven adventure game with branching narratives and hand-painted art. Winner of Indie Game Festival 2024 for Best Narrative Design.",
+                videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", // EDIT: Replace with your YouTube video ID
+                tags: ["Unity", "Narrative Design", "2D Art", "Sound Design"]
+            },
+            // ADD MORE PROJECTS HERE by copying the object above:
+            /*
+            {
+                title: "Your Game Title",
+                description: "Your game description here...",
+                videoUrl: "https://www.youtube.com/embed/YOUR_VIDEO_ID",
+                tags: ["Tag1", "Tag2", "Tag3"]
+            },
+            */
+        ];
+
+        /* ========================================
+           RENDER PROJECT CARDS
+           ======================================== */
+        
+        function renderProjects() {
+            const projectsGrid = document.getElementById('projectsGrid');
+            
+            projects.forEach((project, index) => {
+                const card = document.createElement('div');
+                card.className = 'project-card fade-in-on-scroll';
+                card.style.animationDelay = `${index * 0.1}s`;
+                
+                card.innerHTML = `
+                    <div class="video-wrapper">
+                        <iframe 
+                            src="${project.videoUrl}" 
+                            title="${project.title}"
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-title">${project.title}</h3>
+                        <p class="project-description">${project.description}</p>
+                        <div class="project-tags">
+                            ${project.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                        </div>
+                    </div>
+                `;
+                
+                projectsGrid.appendChild(card);
+            });
+        }
+
+        /* ========================================
+           SCROLL ANIMATION OBSERVER
+           ======================================== */
+        
+        function initScrollAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all elements with fade-in-on-scroll class
+            document.querySelectorAll('.fade-in-on-scroll').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        /* ========================================
+           INITIALIZE ON PAGE LOAD
+           ======================================== */
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProjects();
+            
+            // Small delay to ensure DOM is ready
+            setTimeout(() => {
+                initScrollAnimations();
+            }, 100);
+        });
+    </script>
+</body>
+</html>
