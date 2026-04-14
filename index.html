@@ -250,6 +250,8 @@
             transition: var(--transition-smooth);
             backdrop-filter: blur(10px);
             position: relative;
+            display: flex;
+            flex-direction: column;
         }
 
         .project-card::before {
@@ -267,6 +269,7 @@
             mask-composite: exclude;
             opacity: 0;
             transition: var(--transition-smooth);
+            pointer-events: none;
         }
 
         .project-card:hover {
@@ -278,6 +281,93 @@
             opacity: 1;
         }
 
+        /* ========== EXPANDABLE CARD LAYOUT ========== */
+        
+        /* Expand button positioned at top-right of card */
+        .expand-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            z-index: 10;
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 240, 255, 0.2);
+            border: 2px solid var(--color-primary);
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-smooth);
+            backdrop-filter: blur(10px);
+        }
+
+        .expand-btn:hover {
+            background: rgba(0, 240, 255, 0.4);
+            box-shadow: 0 0 20px var(--color-glow);
+            transform: scale(1.1);
+        }
+
+        .expand-btn svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--color-primary);
+            transition: var(--transition-smooth);
+        }
+
+        /* Expanded card state - spans 3 columns on desktop */
+        .project-card.expanded {
+            grid-column: span 3;
+            flex-direction: row;
+            min-height: 500px;
+        }
+
+        /* Rotate icon when expanded */
+        .project-card.expanded .expand-btn svg {
+            transform: rotate(180deg);
+        }
+
+        /* Expanded layout: video on left, content on right */
+        .project-card.expanded .video-wrapper {
+            flex: 0 0 60%;
+            padding-bottom: 0;
+            height: auto;
+        }
+
+        .project-card.expanded .video-wrapper iframe {
+            position: relative;
+            height: 100%;
+        }
+
+        .project-card.expanded .project-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 3rem;
+        }
+
+        .project-card.expanded .project-title {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-card.expanded .project-description {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            margin-bottom: 2rem;
+        }
+
+        .project-card.expanded .project-tags {
+            gap: 0.8rem;
+        }
+
+        .project-card.expanded .tag {
+            font-size: 0.95rem;
+            padding: 0.6rem 1.2rem;
+        }
+
+        /* Default (collapsed) video wrapper */
         .video-wrapper {
             position: relative;
             padding-bottom: 56.25%; /* 16:9 aspect ratio */
@@ -305,18 +395,21 @@
             font-weight: 700;
             color: var(--color-primary);
             margin-bottom: 1rem;
+            transition: var(--transition-smooth);
         }
 
         .project-description {
             color: var(--color-text-dim);
             margin-bottom: 1.5rem;
             line-height: 1.7;
+            transition: var(--transition-smooth);
         }
 
         .project-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
+            transition: var(--transition-smooth);
         }
 
         .tag {
@@ -408,10 +501,46 @@
         }
 
         /* ========== RESPONSIVE DESIGN ========== */
+        @media (max-width: 1200px) {
+            /* On medium screens, expanded cards span 2 columns */
+            .project-card.expanded {
+                grid-column: span 2;
+            }
+        }
+
         @media (max-width: 768px) {
             .projects-grid {
                 grid-template-columns: 1fr;
                 gap: 2rem;
+            }
+
+            /* On mobile, expanded cards stack vertically */
+            .project-card.expanded {
+                grid-column: span 1;
+                flex-direction: column;
+                min-height: auto;
+            }
+
+            .project-card.expanded .video-wrapper {
+                flex: none;
+                padding-bottom: 56.25%;
+                height: 0;
+            }
+
+            .project-card.expanded .video-wrapper iframe {
+                position: absolute;
+            }
+
+            .project-card.expanded .project-info {
+                padding: 2rem;
+            }
+
+            .project-card.expanded .project-title {
+                font-size: 2rem;
+            }
+
+            .project-card.expanded .project-description {
+                font-size: 1rem;
             }
 
             .contact-links {
@@ -478,15 +607,10 @@
                 📧 Email
             </a>
             
-            <!-- EDIT: Your LinkedIn -->
+            <!-- EDIT: Your Discord -->
             <a href="https://discord.com/users/1185876050501185577" class="contact-link" target="_blank">
                 🎮 Discord
             </a>
-            
-            <!-- EDIT: Your Twitter/X -->
-            <!-- <a href="https://twitter.com/yourhandle" class="contact-link" target="_blank">
-                🐦 Twitter
-            </a> -->
             
             <!-- EDIT: Your GitHub -->
             <a href="https://github.com/m-hito" class="contact-link" target="_blank">
@@ -508,20 +632,20 @@
             {
                 title: "Fight with friends (FWF)",
                 description: "A rogulite fast paced round-based game I worked on for 1 month as a primary scripter of this game.",
-                videoUrl: "https://player.vimeo.com/video/1178587778", // EDIT: Replace with your YouTube video ID
+                videoUrl: "https://player.vimeo.com/video/1178587778", // EDIT: Replace with your video URL
                 tags: ["Forestly Dev's", "Lua", "Studio project", "Multiplayer"]
             },
             {
                 title: "UI Animation Pattern",
                 description: "Bezeir Knit package used to make S-Curve, ZigZag, Sphere Pattern for UI element, can be implemented in 3d world too.",
-                videoUrl: "https://player.vimeo.com/video/1182999223", // EDIT: Replace with your YouTube video ID
+                videoUrl: "https://player.vimeo.com/video/1182999223", // EDIT: Replace with your video URL
                 tags: ["UI", "FrontEnd", "Bezeir Curve", "Pattern"]
             },
             {
-                title: "Tales of the Forgotten",
-                description: "Story-driven adventure game with branching narratives and hand-painted art. Winner of Indie Game Festival 2024 for Best Narrative Design.",
-                videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", // EDIT: Replace with your YouTube video ID
-                tags: ["Unity", "Narrative Design", "2D Art", "Sound Design"]
+                title: "Combat System",
+                description: "NPC Movement system, Comnbat system (Katana, Dagger, Fist, FireFist etc...), Sprint on shift State detection (Block, Idle, Sprint), Combo state m1 -> m2->...m5 (Stun on last hit).",
+                videoUrl: "https://player.vimeo.com/video/1183019726", // EDIT: Replace with your video URL
+                tags: ["Movement system", "State detection", "Combat system", "Combo mechanism", "Game owner"]
             },
             // ADD MORE PROJECTS HERE by copying the object above:
             /*
@@ -545,8 +669,16 @@
                 const card = document.createElement('div');
                 card.className = 'project-card fade-in-on-scroll';
                 card.style.animationDelay = `${index * 0.1}s`;
+                card.dataset.index = index; // Store index for expand/collapse logic
                 
+                // EXPAND BUTTON MARKUP - Added expand/collapse button
                 card.innerHTML = `
+                    <button class="expand-btn" aria-label="Expand project details">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="7 13 12 18 17 13"></polyline>
+                            <polyline points="7 6 12 11 17 6"></polyline>
+                        </svg>
+                    </button>
                     <div class="video-wrapper">
                         <iframe 
                             src="${project.videoUrl}" 
@@ -566,6 +698,44 @@
                 `;
                 
                 projectsGrid.appendChild(card);
+            });
+        }
+
+        /* ========================================
+           EXPAND TOGGLE LOGIC
+           ======================================== */
+        
+        function initExpandToggle() {
+            const projectsGrid = document.getElementById('projectsGrid');
+            
+            // Event delegation - listen for clicks on expand buttons
+            projectsGrid.addEventListener('click', (e) => {
+                const expandBtn = e.target.closest('.expand-btn');
+                if (!expandBtn) return;
+                
+                const clickedCard = expandBtn.closest('.project-card');
+                const isExpanded = clickedCard.classList.contains('expanded');
+                
+                // Collapse all other cards first (one-at-a-time behavior)
+                const allCards = document.querySelectorAll('.project-card');
+                allCards.forEach(card => {
+                    if (card !== clickedCard) {
+                        card.classList.remove('expanded');
+                    }
+                });
+                
+                // Toggle the clicked card
+                clickedCard.classList.toggle('expanded');
+                
+                // Smooth scroll to card when expanding
+                if (!isExpanded) {
+                    setTimeout(() => {
+                        clickedCard.scrollIntoView({ 
+                            behavior: 'smooth', 
+                            block: 'center' 
+                        });
+                    }, 100);
+                }
             });
         }
 
@@ -599,6 +769,7 @@
         
         document.addEventListener('DOMContentLoaded', () => {
             renderProjects();
+            initExpandToggle(); // Initialize expand/collapse functionality
             
             // Small delay to ensure DOM is ready
             setTimeout(() => {
