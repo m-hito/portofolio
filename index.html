@@ -1,781 +1,838 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="cyan">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Developer Portfolio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>xmvcz — Roblox Game Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── THEME TOKENS ─────────────────────────────────────────── */
+    :root {
+      --p:   #00f0ff;
+      --s:   #ff006e;
+      --a:   #8338ec;
+      --p-r: 0,240,255;
+      --s-r: 255,0,110;
+      --a-r: 131,56,236;
+
+      --bg:      #060912;
+      --bg2:     #0a0e17;
+      --card-bg: rgba(15,23,42,0.6);
+      --text:    #e0e6f0;
+      --muted:   #8892a6;
+      --border:  rgba(0,240,255,0.22);
+      --glow:    rgba(0,240,255,0.4);
+
+      --font-display: 'Orbitron', sans-serif;
+      --font-mono:    'Share Tech Mono', monospace;
+      --ease: all 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    /* theme palettes */
+    [data-theme="cyan"]    { --p:#00f0ff; --s:#ff006e; --a:#8338ec; --p-r:0,240,255;   --s-r:255,0,110;   --a-r:131,56,236; --glow:rgba(0,240,255,0.4);    --border:rgba(0,240,255,0.22);    }
+    [data-theme="magenta"] { --p:#ff7de7; --s:#8b74ff; --a:#00e5c8; --p-r:255,125,231; --s-r:139,116,255; --a-r:0,229,200;  --glow:rgba(255,125,231,0.4);  --border:rgba(255,125,231,0.22);  }
+    [data-theme="lime"]    { --p:#9dff7f; --s:#64d5ff; --a:#ff6ec7; --p-r:157,255,127; --s-r:100,213,255; --a-r:255,110,199;--glow:rgba(157,255,127,0.4);  --border:rgba(157,255,127,0.22);  }
+    [data-theme="amber"]   { --p:#ffc66d; --s:#ff7da6; --a:#7dc8ff; --p-r:255,198,109; --s-r:255,125,166; --a-r:125,200,255;--glow:rgba(255,198,109,0.4);  --border:rgba(255,198,109,0.22);  }
+    [data-theme="white"]   { --p:#ffffff; --s:#ff006e; --a:#8338ec; --p-r:255,255,255; --s-r:255,0,110;   --a-r:131,56,236; --glow:rgba(255,255,255,0.35); --border:rgba(255,255,255,0.22);  }
+
+    /* ── RESET ────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-mono);
+      background: linear-gradient(135deg, var(--bg) 0%, var(--bg2) 100%);
+      color: var(--text);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; }
+
+    /* ── FIXED BACKGROUND ─────────────────────────────────────── */
+    .bg-grid {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      opacity: 0.13;
+      background-image:
+        linear-gradient(var(--p) 1px, transparent 1px),
+        linear-gradient(90deg, var(--p) 1px, transparent 1px);
+      background-size: 50px 50px;
+      animation: gridMove 20s linear infinite;
+    }
+    @keyframes gridMove {
+      to { transform: translate(50px, 50px); }
+    }
+
+    .bg-glow {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background:
+        radial-gradient(circle at 20% 50%, rgba(var(--a-r),0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(var(--s-r),0.1) 0%, transparent 50%);
+      animation: glowShift 15s ease infinite alternate;
+    }
+    @keyframes glowShift { 0% { opacity:0.3; } 100% { opacity:0.7; } }
+
+    /* ── LAYOUT HELPERS ───────────────────────────────────────── */
+    .wrap { position: relative; z-index: 2; }
+
+    /* ── THEME SWITCHER ───────────────────────────────────────── */
+    .theme-bar {
+      position: fixed;
+      top: 1.2rem; right: 1.4rem;
+      z-index: 100;
+      display: flex; align-items: center; gap: 10px;
+      background: rgba(10,14,23,0.7);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 8px 14px;
+      backdrop-filter: blur(12px);
+    }
+    .theme-bar span {
+      font-family: var(--font-display);
+      font-size: 9px;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+    .tdot {
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      transition: var(--ease);
+      cursor: pointer;
+    }
+    .tdot:hover, .tdot.active {
+      transform: scale(1.25);
+      border-color: rgba(255,255,255,0.5);
+      box-shadow: 0 0 14px currentColor;
+    }
+    .tdot[data-t="cyan"]    { background:#00f0ff; color:#00f0ff; }
+    .tdot[data-t="magenta"] { background:#ff7de7; color:#ff7de7; }
+    .tdot[data-t="lime"]    { background:#9dff7f; color:#9dff7f; }
+    .tdot[data-t="amber"]   { background:#ffc66d; color:#ffc66d; }
+    .tdot[data-t="white"]   { background:#ffffff; color:#ffffff; }
+
+    /* ── HERO ─────────────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      text-align: center;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* interactive background layers inside hero */
+    .hero-layers {
+      position: absolute; inset: 0; pointer-events: none; z-index: 0;
+      overflow: hidden;
+    }
+    .hero-ring {
+      position: absolute;
+      width: min(80vw, 700px); aspect-ratio: 1;
+      left: 50%; top: 50%;
+      transform: translate(-50%,-50%);
+      border-radius: 50%;
+      border: 1px solid rgba(var(--p-r),0.12);
+      box-shadow:
+        inset 0 0 60px rgba(var(--p-r),0.06),
+        0 0 80px rgba(var(--p-r),0.07);
+      animation: ringPulse 6s ease-in-out infinite;
+    }
+    .hero-ring:nth-child(2) {
+      width: min(55vw, 480px);
+      border-color: rgba(var(--s-r),0.1);
+      animation-delay: -2s;
+    }
+    .hero-ring:nth-child(3) {
+      width: min(34vw, 300px);
+      border-color: rgba(var(--a-r),0.1);
+      animation-delay: -4s;
+    }
+    @keyframes ringPulse {
+      0%,100% { opacity:0.55; transform:translate(-50%,-50%) scale(1); }
+      50%      { opacity:1;    transform:translate(-50%,-50%) scale(1.04); }
+    }
+
+    .hero-scan {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        180deg,
+        transparent 0%,
+        rgba(var(--p-r),0.04) 50%,
+        transparent 100%
+      );
+      animation: scanMove 4s linear infinite;
+    }
+    @keyframes scanMove {
+      0%   { transform: translateY(-100%); }
+      100% { transform: translateY(100%); }
+    }
+
+    .hero-dots {
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(var(--p-r),0.18) 1px, transparent 1px);
+      background-size: 38px 38px;
+      opacity: 0.18;
+      mask-image: radial-gradient(circle at center, black 20%, transparent 75%);
+    }
+
+    /* hero content */
+    .hero-content {
+      position: relative; z-index: 1;
+      max-width: 900px;
+      animation: fadeUp 1s ease-out both;
+    }
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(30px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(3rem,8vw,6rem);
+      font-weight: 900;
+      letter-spacing: -2px;
+      background: linear-gradient(135deg, var(--p), var(--s), var(--a));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: glowPulse 3s ease-in-out infinite;
+    }
+    @keyframes glowPulse {
+      0%,100% { filter: drop-shadow(0 0 20px rgba(var(--p-r),0.5)); }
+      50%      { filter: drop-shadow(0 0 40px rgba(var(--s-r),0.6)); }
+    }
+
+    .hero .role {
+      font-family: var(--font-display);
+      font-size: clamp(1.1rem,2.5vw,1.6rem);
+      color: var(--p);
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      margin: 0.6rem 0 1.2rem;
+      animation: fadeUp 1s ease-out 0.2s both;
+    }
+
+    .hero .tagline {
+      font-size: clamp(0.95rem,2vw,1.2rem);
+      color: var(--muted);
+      max-width: 560px; margin: 0 auto 2.5rem;
+      line-height: 1.9;
+      animation: fadeUp 1s ease-out 0.4s both;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      padding: 1rem 2.8rem;
+      font-family: var(--font-display);
+      font-size: 1rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 2px;
+      color: var(--bg);
+      background: linear-gradient(135deg, var(--p), var(--s));
+      border: none; border-radius: 50px;
+      box-shadow: 0 8px 32px rgba(var(--p-r),0.3);
+      transition: var(--ease);
+      animation: fadeUp 1s ease-out 0.6s both;
+      position: relative; overflow: hidden;
+    }
+    .cta-btn::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+      opacity: 0; transition: var(--ease);
+    }
+    .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 14px 44px rgba(var(--s-r),0.4); }
+    .cta-btn:hover::before { opacity: 1; }
+
+    /* ── NAV ──────────────────────────────────────────────────── */
+    /* simple top-left brand */
+    .brand-fixed {
+      position: fixed; top: 1.1rem; left: 1.6rem;
+      z-index: 100;
+      font-family: var(--font-display);
+      font-size: 13px; font-weight: 700;
+      color: var(--p);
+      letter-spacing: 0.1em;
+      text-shadow: 0 0 14px rgba(var(--p-r),0.5);
+    }
+
+    /* ── PROJECTS ─────────────────────────────────────────────── */
+    .projects-section {
+      padding: 6rem 2rem;
+      max-width: 1400px; margin: 0 auto;
+      position: relative; z-index: 2;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem,5vw,3.5rem);
+      font-weight: 900; text-align: center;
+      margin-bottom: 0.6rem;
+      background: linear-gradient(135deg, var(--p), var(--a));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .section-sub {
+      text-align: center; color: var(--muted);
+      font-size: 1.1rem; margin-bottom: 2rem;
+    }
+
+    /* global expand/collapse controls */
+    .card-controls {
+      display: flex; align-items: center;
+      justify-content: space-between; flex-wrap: wrap;
+      gap: 14px;
+      padding: 14px 20px; margin-bottom: 2rem;
+      border-radius: 16px;
+      background: rgba(15,23,42,0.5);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+    }
+    .card-controls-note { color: var(--muted); font-size: 13px; }
+    .ctrl-btns { display: flex; gap: 10px; }
+    .ctrl-btn {
+      padding: 9px 20px;
+      border-radius: 50px;
+      border: 1px solid var(--border);
+      background: rgba(var(--p-r),0.07);
+      color: var(--text);
+      font-family: var(--font-display);
+      font-size: 12px; font-weight: 700;
+      letter-spacing: 0.05em;
+      transition: var(--ease);
+    }
+    .ctrl-btn:hover {
+      background: rgba(var(--p-r),0.15);
+      border-color: var(--p);
+      box-shadow: 0 0 16px rgba(var(--p-r),0.2);
+    }
+    .ctrl-btn.danger {
+      background: rgba(255,255,255,0.04);
+      border-color: rgba(255,255,255,0.1);
+    }
+    .ctrl-btn.danger:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.3);
+    }
+
+    /* grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 2rem;
+    }
+
+    /* card */
+    .project-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+      transition: var(--ease);
+      position: relative;
+      display: flex; flex-direction: column;
+    }
+    .project-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      border-radius: 20px;
+      background: linear-gradient(135deg, var(--p), var(--s));
+      padding: 1.5px;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0; transition: opacity 0.4s;
+      pointer-events: none;
+    }
+    .project-card:hover { transform: translateY(-8px); box-shadow: 0 18px 56px var(--glow); }
+    .project-card:hover::before { opacity: 1; }
+
+    /* video */
+    .video-wrap {
+      position: relative; padding-bottom: 56.25%; height: 0;
+      background: var(--bg); overflow: hidden;
+    }
+    .video-wrap iframe {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; border: 0;
+    }
+
+    /* info */
+    .card-info { padding: 1.8rem; display: flex; flex-direction: column; gap: 0.8rem; }
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem; font-weight: 700;
+      color: var(--p);
+    }
+    .card-desc { color: var(--muted); line-height: 1.75; font-size: 0.95rem; }
+    .card-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.2rem; }
+    .tag {
+      font-size: 0.82rem; padding: 0.35rem 0.9rem;
+      border-radius: 20px;
+      border: 1px solid var(--p);
+      background: rgba(var(--p-r),0.08);
+      color: var(--p);
+      transition: var(--ease);
+    }
+    .tag:hover { background: rgba(var(--p-r),0.2); transform: scale(1.05); }
+
+    /* expand toggle row */
+    .card-toggle-row {
+      display: flex; justify-content: flex-end;
+      margin-top: 0.4rem;
+    }
+    .card-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(var(--p-r), 0.06);
+      color: var(--text);
+      font-size: 12px;
+      transition: var(--ease);
+    }
+
+    .card-toggle:hover {
+      border-color: var(--p);
+      background: rgba(var(--p-r), 0.14);
+      box-shadow: 0 0 12px rgba(var(--p-r), 0.18);
+    }
+
+    .card-toggle-icon {
+      display: inline-block;
+      font-size: 14px;
+      line-height: 1;
+      transition: transform 0.35s ease;
+      transform-origin: center;
+    }
+
+    .project-card.expanded .card-toggle-icon {
+      transform: rotate(180deg);
+    }
+
+    .card-extra {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.4s ease, opacity 0.3s ease, padding 0.3s ease;
+      padding: 0 1.8rem;
+    }
+
+    .project-card.expanded .card-extra {
+      max-height: 500px;
+      opacity: 1;
+      padding: 0 1.8rem 1.4rem;
+    }
+    /* extra details (hidden by default) */
+    .card-extra {
+      max-height: 0; overflow: hidden; opacity: 0;
+      transition: max-height 0.4s ease, opacity 0.3s ease, padding 0.3s ease;
+      padding: 0 1.8rem;
+    }
+    .project-card.expanded .card-extra {
+      max-height: 400px; opacity: 1;
+      padding: 0 1.8rem 1.4rem;
+    }
+    .feat-list { list-style: none; display: grid; gap: 8px; }
+    .feat-list li {
+      padding-left: 16px; position: relative;
+      color: #d0e8f8; font-size: 0.9rem; line-height: 1.6;
+    }
+    .feat-list li::before {
+      content: '';
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--p);
+      box-shadow: 0 0 10px rgba(var(--p-r),0.6);
+      position: absolute; left: 0; top: 8px;
+    }
+
+    /* expanded wide layout on desktop */
+    @media (min-width: 900px) {
+      .projects-grid.has-expanded {
+        grid-template-columns: 1fr;
+      }
     
-    <style>
-        /* ========== CSS VARIABLES - EDIT COLORS HERE ========== */
-        :root {
-            --color-bg-dark: #0a0e17;
-            --color-bg-darker: #060912;
-            --color-primary: #00f0ff;
-            --color-secondary: #ff006e;
-            --color-accent: #8338ec;
-            --color-text: #e0e6f0;
-            --color-text-dim: #8892a6;
-            --color-card-bg: rgba(15, 23, 42, 0.6);
-            --color-glow: rgba(0, 240, 255, 0.4);
-            
-            --font-display: 'Orbitron', sans-serif;
-            --font-mono: 'Share Tech Mono', monospace;
-            
-            --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        /* ========== GLOBAL STYLES ========== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: var(--font-mono);
-            background: linear-gradient(135deg, var(--color-bg-darker) 0%, var(--color-bg-dark) 100%);
-            color: var(--color-text);
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-
-        /* ========== ANIMATED BACKGROUND GRID ========== */
-        .animated-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.15;
-            background-image: 
-                linear-gradient(var(--color-primary) 1px, transparent 1px),
-                linear-gradient(90deg, var(--color-primary) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: gridMove 20s linear infinite;
-        }
-
-        @keyframes gridMove {
-            0% {
-                transform: translate(0, 0);
-            }
-            100% {
-                transform: translate(50px, 50px);
-            }
-        }
-
-        /* Gradient overlay */
-        .gradient-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: radial-gradient(circle at 20% 50%, rgba(131, 56, 236, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, rgba(255, 0, 110, 0.1) 0%, transparent 50%);
-            animation: gradientShift 15s ease infinite alternate;
-        }
-
-        @keyframes gradientShift {
-            0% {
-                opacity: 0.3;
-            }
-            100% {
-                opacity: 0.6;
-            }
-        }
-
-        /* ========== HERO SECTION ========== */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 2rem;
-            position: relative;
-        }
-
-        .hero-content {
-            max-width: 900px;
-            animation: fadeInUp 1s ease-out;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* EDIT YOUR NAME HERE */
-        .hero h1 {
-            font-family: var(--font-display);
-            font-size: clamp(3rem, 8vw, 6rem);
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary), var(--color-accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-            letter-spacing: -2px;
-            animation: glowPulse 3s ease-in-out infinite;
-        }
-
-        @keyframes glowPulse {
-            0%, 100% {
-                filter: drop-shadow(0 0 20px rgba(0, 240, 255, 0.5));
-            }
-            50% {
-                filter: drop-shadow(0 0 40px rgba(255, 0, 110, 0.6));
-            }
-        }
-
-        /* EDIT YOUR ROLE HERE */
-        .hero .role {
-            font-family: var(--font-display);
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
-            color: var(--color-primary);
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            margin-bottom: 1.5rem;
-            animation: fadeInUp 1s ease-out 0.2s both;
-        }
-
-        /* EDIT YOUR TAGLINE HERE */
-        .hero .tagline {
-            font-size: clamp(1rem, 2.5vw, 1.3rem);
-            color: var(--color-text-dim);
-            max-width: 600px;
-            margin: 0 auto 3rem;
-            line-height: 1.8;
-            animation: fadeInUp 1s ease-out 0.4s both;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 1.2rem 3rem;
-            font-family: var(--font-display);
-            font-size: 1.1rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            text-decoration: none;
-            color: var(--color-bg-dark);
-            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            transition: var(--transition-smooth);
-            animation: fadeInUp 1s ease-out 0.6s both;
-            box-shadow: 0 10px 40px rgba(0, 240, 255, 0.3);
-        }
-
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-
-        .cta-button:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 50px rgba(255, 0, 110, 0.4);
-        }
-
-        /* ========== PROJECTS SECTION ========== */
-        .projects {
-            padding: 6rem 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            font-family: var(--font-display);
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 900;
-            text-align: center;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: var(--color-text-dim);
-            font-size: 1.2rem;
-            margin-bottom: 4rem;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2.5rem;
-            margin-bottom: 4rem;
-        }
-
-        /* ========== PROJECT CARD STYLES ========== */
-        .project-card {
-            background: var(--color-card-bg);
-            border-radius: 20px;
-            overflow: hidden;
-            border: 2px solid rgba(0, 240, 255, 0.2);
-            transition: var(--transition-smooth);
-            backdrop-filter: blur(10px);
-            position: relative;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border-radius: 20px;
-            padding: 2px;
-            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            opacity: 0;
-            transition: var(--transition-smooth);
-            pointer-events: none;
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 60px var(--color-glow);
-        }
-
-        .project-card:hover::before {
-            opacity: 1;
-        }
-
-        /* ========== EXPANDABLE CARD LAYOUT ========== */
-        
-        /* Expand button positioned at top-right of card */
-        .expand-btn {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            z-index: 10;
-            width: 40px;
-            height: 40px;
-            background: rgba(0, 240, 255, 0.2);
-            border: 2px solid var(--color-primary);
-            border-radius: 8px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition-smooth);
-            backdrop-filter: blur(10px);
-        }
-
-        .expand-btn:hover {
-            background: rgba(0, 240, 255, 0.4);
-            box-shadow: 0 0 20px var(--color-glow);
-            transform: scale(1.1);
-        }
-
-        .expand-btn svg {
-            width: 20px;
-            height: 20px;
-            stroke: var(--color-primary);
-            transition: var(--transition-smooth);
-        }
-
-        /* Expanded card state - spans 3 columns on desktop */
-        .project-card.expanded {
-            grid-column: span 3;
-            flex-direction: row;
-            min-height: 500px;
-        }
-
-        /* Rotate icon when expanded */
-        .project-card.expanded .expand-btn svg {
-            transform: rotate(180deg);
-        }
-
-        /* Expanded layout: video on left, content on right */
-        .project-card.expanded .video-wrapper {
-            flex: 0 0 60%;
-            padding-bottom: 0;
-            height: auto;
-        }
-
-        .project-card.expanded .video-wrapper iframe {
-            position: relative;
-            height: 100%;
-        }
-
-        .project-card.expanded .project-info {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 3rem;
-        }
-
-        .project-card.expanded .project-title {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .project-card.expanded .project-description {
-            font-size: 1.1rem;
-            line-height: 1.9;
-            margin-bottom: 2rem;
-        }
-
-        .project-card.expanded .project-tags {
-            gap: 0.8rem;
-        }
-
-        .project-card.expanded .tag {
-            font-size: 0.95rem;
-            padding: 0.6rem 1.2rem;
-        }
-
-        /* Default (collapsed) video wrapper */
-        .video-wrapper {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
-            height: 0;
-            overflow: hidden;
-            background: var(--color-bg-darker);
-        }
-
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        .project-info {
-            padding: 2rem;
-        }
-
-        .project-title {
-            font-family: var(--font-display);
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--color-primary);
-            margin-bottom: 1rem;
-            transition: var(--transition-smooth);
-        }
-
-        .project-description {
-            color: var(--color-text-dim);
-            margin-bottom: 1.5rem;
-            line-height: 1.7;
-            transition: var(--transition-smooth);
-        }
-
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            transition: var(--transition-smooth);
-        }
-
-        .tag {
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            padding: 0.4rem 1rem;
-            background: rgba(0, 240, 255, 0.1);
-            border: 1px solid var(--color-primary);
-            border-radius: 20px;
-            color: var(--color-primary);
-            transition: var(--transition-smooth);
-        }
-
-        .tag:hover {
-            background: rgba(0, 240, 255, 0.2);
-            transform: scale(1.05);
-        }
-
-        /* ========== CONTACT/FOOTER SECTION ========== */
-        .contact {
-            padding: 6rem 2rem 4rem;
-            text-align: center;
-            background: linear-gradient(180deg, transparent 0%, rgba(0, 240, 255, 0.05) 100%);
-        }
-
-        .contact h2 {
-            font-family: var(--font-display);
-            font-size: clamp(2rem, 5vw, 3rem);
-            font-weight: 900;
-            margin-bottom: 1rem;
-            color: var(--color-primary);
-        }
-
-        .contact-cta {
-            font-size: 1.2rem;
-            color: var(--color-text-dim);
-            margin-bottom: 3rem;
-        }
-
-        .contact-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-            margin-bottom: 3rem;
-        }
-
-        /* EDIT YOUR EMAIL AND SOCIAL LINKS HERE */
-        .contact-link {
-            font-family: var(--font-display);
-            font-size: 1.1rem;
-            color: var(--color-text);
-            text-decoration: none;
-            padding: 1rem 2rem;
-            border: 2px solid var(--color-primary);
-            border-radius: 50px;
-            transition: var(--transition-smooth);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .contact-link::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.3), transparent);
-            transition: left 0.5s;
-        }
-
-        .contact-link:hover::before {
-            left: 100%;
-        }
-
-        .contact-link:hover {
-            background: rgba(0, 240, 255, 0.1);
-            box-shadow: 0 5px 20px var(--color-glow);
-            transform: translateY(-3px);
-        }
-
-        .footer-text {
-            color: var(--color-text-dim);
-            font-size: 0.9rem;
-            padding: 2rem 0;
-            border-top: 1px solid rgba(0, 240, 255, 0.2);
-            margin-top: 3rem;
-        }
-
-        /* ========== RESPONSIVE DESIGN ========== */
-        @media (max-width: 1200px) {
-            /* On medium screens, expanded cards span 2 columns */
-            .project-card.expanded {
-                grid-column: span 2;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .projects-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            /* On mobile, expanded cards stack vertically */
-            .project-card.expanded {
-                grid-column: span 1;
-                flex-direction: column;
-                min-height: auto;
-            }
-
-            .project-card.expanded .video-wrapper {
-                flex: none;
-                padding-bottom: 56.25%;
-                height: 0;
-            }
-
-            .project-card.expanded .video-wrapper iframe {
-                position: absolute;
-            }
-
-            .project-card.expanded .project-info {
-                padding: 2rem;
-            }
-
-            .project-card.expanded .project-title {
-                font-size: 2rem;
-            }
-
-            .project-card.expanded .project-description {
-                font-size: 1rem;
-            }
-
-            .contact-links {
-                flex-direction: column;
-                align-items: center;
-                gap: 1rem;
-            }
-
-            .contact-link {
-                width: 100%;
-                max-width: 300px;
-            }
-        }
-
-        /* ========== SCROLL ANIMATIONS ========== */
-        .fade-in-on-scroll {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-
-        .fade-in-on-scroll.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    </style>
+      .project-card.expanded {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr; /* 🔥 better ratio */
+        min-height: 320px;
+        border-radius: 22px;
+      }
+    
+      .project-card.expanded .video-wrap {
+        padding-bottom: 0;
+        height: 100%;
+        border-right: 1px solid var(--border);
+      }
+    
+      .project-card.expanded .video-wrap iframe {
+        height: 100%;
+      }
+    
+      .project-card.expanded .card-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 2.5rem;
+        gap: 1rem;
+      }
+    
+      .project-card.expanded .card-title {
+        font-size: 2rem;
+      }
+    
+      .project-card.expanded .card-desc {
+        font-size: 1rem;
+        line-height: 1.8;
+      }
+    
+      .project-card.expanded .card-tags {
+        margin-top: 0.5rem;
+      }
+    
+      .project-card.expanded .card-extra {
+        margin-top: 1rem;
+      }
+    }
+
+    /* scroll reveal */
+    .reveal { opacity:0; transform:translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+
+    /* ── CONTACT / FOOTER ─────────────────────────────────────── */
+    .contact {
+      position: relative; overflow: hidden;
+      padding: 6rem 2rem 5rem;
+      text-align: center;
+      z-index: 2;
+    }
+
+    /* interactive footer background layers */
+    .footer-layers {
+      position: absolute; inset: 0; pointer-events: none; z-index: 0;
+      overflow: hidden;
+    }
+    .footer-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(var(--p-r),0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(var(--p-r),0.05) 1px, transparent 1px);
+      background-size: 28px 28px;
+      opacity: 0.3;
+      mask-image: radial-gradient(ellipse at center, black 10%, transparent 80%);
+    }
+    .footer-ring {
+      position: absolute;
+      width: min(60vw, 600px); aspect-ratio: 1;
+      left: 50%; top: 50%;
+      transform: translate(-50%,-50%);
+      border-radius: 50%;
+      border: 1px solid rgba(var(--p-r),0.1);
+      animation: ringPulse 7s ease-in-out infinite;
+    }
+    .footer-ring:nth-child(3) {
+      width: min(38vw, 380px);
+      border-color: rgba(var(--s-r),0.08);
+      animation-delay: -3s;
+    }
+    .footer-sweep {
+      position: absolute; inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(var(--p-r),0.06), transparent);
+      width: 35%; left: -35%;
+      filter: blur(8px);
+      animation: sweep 9s linear infinite;
+    }
+    @keyframes sweep { to { left: 135%; } }
+
+    /* contact content */
+    .contact-inner { position: relative; z-index: 1; }
+    .contact h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem,5vw,3rem);
+      font-weight: 900; color: var(--p);
+      text-shadow: 0 0 30px rgba(var(--p-r),0.4);
+      margin-bottom: 0.8rem;
+    }
+    .contact-sub { color: var(--muted); font-size: 1.1rem; margin-bottom: 3rem; }
+
+    .contact-links {
+      display: flex; justify-content: center;
+      gap: 1.5rem; flex-wrap: wrap; margin-bottom: 4rem;
+    }
+    .c-link {
+      font-family: var(--font-display);
+      font-size: 0.95rem; font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--text);
+      padding: 0.9rem 1.8rem;
+      border: 1.5px solid var(--border);
+      border-radius: 50px;
+      background: rgba(var(--p-r),0.04);
+      backdrop-filter: blur(10px);
+      transition: var(--ease);
+      position: relative; overflow: hidden;
+    }
+    .c-link::before {
+      content: '';
+      position: absolute; top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(var(--p-r),0.25), transparent);
+      transition: left 0.55s;
+    }
+
+    .c-link:hover::before { left: 100%; }
+    .c-link:hover {
+      border-color: var(--p);
+      background: rgba(var(--p-r),0.12);
+      box-shadow: 0 4px 24px var(--glow);
+      transform: translateY(-3px);
+      color: var(--p);
+    }
+
+    .footer-text {
+      color: var(--muted); font-size: 0.88rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(var(--p-r),0.15);
+    }
+  </style>
 </head>
+
 <body>
-    <!-- Animated Background Elements -->
-    <div class="animated-bg"></div>
-    <div class="gradient-overlay"></div>
+  <!-- fixed bg layers -->
+  <div class="bg-grid"></div>
+  <div class="bg-glow"></div>
 
-    <!-- ========== HERO SECTION - EDIT YOUR INFO HERE ========== -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Hi, I'm xmvcz</h1> <!-- EDIT: Your Name -->
-            <p class="role">Game Developer & Designer</p> <!-- EDIT: Your Role -->
-            <p class="tagline">
-                Can make knit packages, work on it.
-                Specializing in Lua, Frontend and backend.
-            </p> <!-- EDIT: Your Tagline -->
-            <a href="#projects" class="cta-button">View My Work</a>
-        </div>
-    </section>
+  <!-- brand + theme switcher -->
+  <div class="brand-fixed">xmvcz</div>
 
-    <!-- ========== PROJECTS SECTION ========== -->
-    <section class="projects" id="projects">
-        <h2 class="section-title fade-in-on-scroll">Featured Projects</h2>
-        <p class="section-subtitle fade-in-on-scroll">Explore my latest game development work</p>
-        
-        <div class="projects-grid" id="projectsGrid">
-            <!-- Project cards will be dynamically generated here by JavaScript -->
-        </div>
-    </section>
+  <div class="theme-bar">
+    <span>Theme</span>
+    <button class="tdot active" data-t="cyan"    title="Cyan"></button>
+    <button class="tdot"        data-t="magenta" title="Magenta"></button>
+    <button class="tdot"        data-t="lime"    title="Lime"></button>
+    <button class="tdot"        data-t="amber"   title="Amber"></button>
+    <button class="tdot"        data-t="white"   title="White"></button>
+  </div>
 
-    <!-- ========== CONTACT SECTION - EDIT YOUR LINKS HERE ========== -->
-    <section class="contact">
-        <h2>Let's Create Together</h2>
-        <p class="contact-cta">Interested in collaborating? Get in touch!</p>
-        
-        <div class="contact-links">
-            <!-- EDIT: Your Email -->
-            <a href="mailto:dhruvjha1802123@gmail.com" class="contact-link">
-                📧 Email
-            </a>
-            
-            <!-- EDIT: Your Discord -->
-            <a href="https://discord.com/users/1185876050501185577" class="contact-link" target="_blank">
-                🎮 Discord
-            </a>
-            
-            <!-- EDIT: Your GitHub -->
-            <a href="https://github.com/m-hito" class="contact-link" target="_blank">
-                💻 GitHub
-            </a>
-        </div>
-        
-        <p class="footer-text">
-            © 2026 xmvcz. Built with passion for games Scripter. <!-- EDIT: Your Name & Year -->
-        </p>
-    </section>
+  <!-- ── HERO ────────────────────────────────────────────────── -->
+  <section class="hero">
+    <!-- interactive background pattern inside hero -->
+    <div class="hero-layers" aria-hidden="true">
+      <div class="hero-dots"></div>
+      <div class="hero-ring"></div>
+      <div class="hero-ring"></div>
+      <div class="hero-ring"></div>
+      <div class="hero-scan"></div>
+    </div>
 
-    <script>
-        /* ========================================
-           PROJECT DATA - EDIT YOUR PROJECTS HERE
-           ======================================== */
-        
-        const projects = [
-            {
-                title: "Fight with friends (FWF)",
-                description: "A rogulite fast paced round-based game I worked on for 1 month as a primary scripter of this game.",
-                videoUrl: "https://player.vimeo.com/video/1178587778", // EDIT: Replace with your video URL
-                tags: ["Forestly Dev's", "Lua", "Studio project", "Multiplayer"]
-            },
-            {
-                title: "UI Animation Pattern",
-                description: "Bezeir Knit package used to make S-Curve, ZigZag, Sphere Pattern for UI element, can be implemented in 3d world too.",
-                videoUrl: "https://player.vimeo.com/video/1182999223", // EDIT: Replace with your video URL
-                tags: ["UI", "FrontEnd", "Bezeir Curve", "Pattern"]
-            },
-            {
-                title: "Combat System",
-                description: "NPC Movement system, Comnbat system (Katana, Dagger, Fist, FireFist etc...), Sprint on shift State detection (Block, Idle, Sprint), Combo state m1 -> m2->...m5 (Stun on last hit).",
-                videoUrl: "https://player.vimeo.com/video/1183019726", // EDIT: Replace with your video URL
-                tags: ["Movement system", "State detection", "Combat system", "Combo mechanism", "Game owner"]
-            },
-            // ADD MORE PROJECTS HERE by copying the object above:
-            /*
-            {
-                title: "Your Game Title",
-                description: "Your game description here...",
-                videoUrl: "https://www.youtube.com/embed/YOUR_VIDEO_ID",
-                tags: ["Tag1", "Tag2", "Tag3"]
-            },
-            */
-        ];
+    <div class="hero-content wrap">
+      <h1>Hi, I'm xmvcz</h1>
+      <p class="role">Game Developer &amp; Systems Designer</p>
+      <p class="tagline">
+        Building clean, scalable Roblox systems — combat, progression,
+        UI patterns, and structured Luau architecture with Knit.
+      </p>
+      <a href="#projects" class="cta-btn">View My Work</a>
+    </div>
+  </section>
 
-        /* ========================================
-           RENDER PROJECT CARDS
-           ======================================== */
-        
-        function renderProjects() {
-            const projectsGrid = document.getElementById('projectsGrid');
-            
-            projects.forEach((project, index) => {
-                const card = document.createElement('div');
-                card.className = 'project-card fade-in-on-scroll';
-                card.style.animationDelay = `${index * 0.1}s`;
-                card.dataset.index = index; // Store index for expand/collapse logic
-                
-                // EXPAND BUTTON MARKUP - Added expand/collapse button
-                card.innerHTML = `
-                    <button class="expand-btn" aria-label="Expand project details">
-                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="7 13 12 18 17 13"></polyline>
-                            <polyline points="7 6 12 11 17 6"></polyline>
-                        </svg>
-                    </button>
-                    <div class="video-wrapper">
-                        <iframe 
-                            src="${project.videoUrl}" 
-                            title="${project.title}"
-                            frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                    <div class="project-info">
-                        <h3 class="project-title">${project.title}</h3>
-                        <p class="project-description">${project.description}</p>
-                        <div class="project-tags">
-                            ${project.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
-                        </div>
-                    </div>
-                `;
-                
-                projectsGrid.appendChild(card);
-            });
-        }
+  <!-- ── PROJECTS ────────────────────────────────────────────── -->
+  <section class="projects-section" id="projects">
+    <h2 class="section-title reveal">Featured Projects</h2>
+    <p class="section-sub reveal">Explore my latest game development work</p>
 
-        /* ========================================
-           EXPAND TOGGLE LOGIC
-           ======================================== */
-        
-        function initExpandToggle() {
-            const projectsGrid = document.getElementById('projectsGrid');
-            
-            // Event delegation - listen for clicks on expand buttons
-            projectsGrid.addEventListener('click', (e) => {
-                const expandBtn = e.target.closest('.expand-btn');
-                if (!expandBtn) return;
-                
-                const clickedCard = expandBtn.closest('.project-card');
-                const isExpanded = clickedCard.classList.contains('expanded');
-                
-                // Collapse all other cards first (one-at-a-time behavior)
-                const allCards = document.querySelectorAll('.project-card');
-                allCards.forEach(card => {
-                    if (card !== clickedCard) {
-                        card.classList.remove('expanded');
-                    }
-                });
-                
-                // Toggle the clicked card
-                clickedCard.classList.toggle('expanded');
-                
-                // Smooth scroll to card when expanding
-                if (!isExpanded) {
-                    setTimeout(() => {
-                        clickedCard.scrollIntoView({ 
-                            behavior: 'smooth', 
-                            block: 'center' 
-                        });
-                    }, 100);
-                }
-            });
-        }
+    <!-- global controls -->
+    <div class="card-controls reveal">
+      <div class="ctrl-btns">
+        <button class="ctrl-btn" id="expandAll">Expand All</button>
+        <button class="ctrl-btn danger" id="collapseAll">Collapse All</button>
+      </div>
+      <div class="card-controls-note">Use global controls or expand individual cards below.</div>
+    </div>
 
-        /* ========================================
-           SCROLL ANIMATION OBSERVER
-           ======================================== */
-        
-        function initScrollAnimations() {
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -100px 0px'
-            };
+    <div class="projects-grid" id="projectsGrid"></div>
+  </section>
 
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, observerOptions);
+  <!-- ── CONTACT ──────────────────────────────────────────────── -->
+  <section class="contact" id="contact">
+    <!-- interactive footer background -->
+    <div class="footer-layers" aria-hidden="true">
+      <div class="footer-grid"></div>
+      <div class="footer-ring"></div>
+      <div class="footer-ring"></div>
+      <div class="footer-sweep"></div>
+    </div>
 
-            // Observe all elements with fade-in-on-scroll class
-            document.querySelectorAll('.fade-in-on-scroll').forEach(el => {
-                observer.observe(el);
-            });
-        }
+    <div class="contact-inner">
+      <h2>Let's Create Together</h2>
+      <p class="contact-sub">Interested in collaborating? Get in touch!</p>
 
-        /* ========================================
-           INITIALIZE ON PAGE LOAD
-           ======================================== */
-        
-        document.addEventListener('DOMContentLoaded', () => {
-            renderProjects();
-            initExpandToggle(); // Initialize expand/collapse functionality
-            
-            // Small delay to ensure DOM is ready
-            setTimeout(() => {
-                initScrollAnimations();
-            }, 100);
+      <div class="contact-links">
+        <a class="c-link" href="mailto:dhruvjha1802123@gmail.com">📧 Email</a>
+        <a class="c-link" href="https://discord.com/users/1185876050501185577" target="_blank" rel="noreferrer">🎮 Discord</a>
+        <a class="c-link" href="https://www.roblox.com/users/3556700523/profile" target="_blank" rel="noreferrer">🎯 Roblox</a>
+        <a class="c-link" href="https://github.com/m-hito" target="_blank" rel="noreferrer">💻 GitHub</a>
+      </div>
+
+      <p class="footer-text">© <span id="yr"></span> xmvcz — Built with passion for games.</p>
+    </div>
+  </section>
+
+  <script>
+    /* ── PROJECT DATA ───────────────────────────────────────── */
+    const projects = [
+      {
+        title: "Fight with Friends (FWF)",
+        role: "Primary Scripter",
+        description: "A roguelite fast-paced round-based game I worked on for 1 month as primary scripter.",
+        features: ["Round-based game loop", "Multiplayer replication", "Roguelite progression"],
+        videoUrl: "https://player.vimeo.com/video/1178587778",
+        tags: ["Forestly Dev's", "Lua", "Studio Project", "Multiplayer"]
+      },
+      {
+        title: "UI Animation Pattern",
+        role: "UI Developer",
+        description: "Bezier Knit package — S-Curve, ZigZag, Sphere Pattern for UI elements. Can be implemented in 3D world too.",
+        features: ["Bezier curve engine", "Reusable Knit package", "3D world compatible"],
+        videoUrl: "https://player.vimeo.com/video/1182999223",
+        tags: ["UI", "Frontend", "Bezier Curve", "Pattern"]
+      },
+      {
+        title: "Combat System",
+        role: "Game Owner / Lead Scripter",
+        description: "NPC movement, combat (Katana, Dagger, Fist, FireFist), sprint/state detection (Block, Idle, Sprint), M1→M5 combo with stun on last hit.",
+        features: ["NPC movement system", "Multiple weapon types", "Combo mechanism M1–M5", "State machine (Block / Sprint / Idle)"],
+        videoUrl: "https://player.vimeo.com/video/1183019726",
+        tags: ["Movement", "State Detection", "Combat", "Combo Mechanic"]
+      },
+    ];
+
+    /* ── RENDER ─────────────────────────────────────────────── */
+    function render() {
+     const grid = document.getElementById("projectsGrid");
+
+      document.getElementById("expandAll").addEventListener("click", () => {
+        grid.classList.add("has-expanded"); // 🔥 THIS WAS MISSING
+      
+        // document.querySelectorAll(".project-card").forEach(c => {
+        //   c.classList.add("expanded");
+        //   c.querySelector(".card-toggle").textContent = "Collapse Details";
+        //   c.querySelector(".card-toggle").setAttribute("aria-expanded","true");
+        // });
+      });
+      
+      document.getElementById("collapseAll").addEventListener("click", () => {
+        grid.classList.remove("has-expanded"); // 🔥 ALSO REMOVE
+      
+        document.querySelectorAll(".project-card").forEach(c => {
+          c.classList.remove("expanded");
+          c.querySelector(".card-toggle").textContent = "Expand Details";
+          c.querySelector(".card-toggle").setAttribute("aria-expanded","false");
         });
-    </script>
+      });
+
+      grid.innerHTML = projects.map((p, i) => `
+        <article class="project-card reveal" style="transition-delay:${i*0.1}s">
+          <div class="video-wrap">
+            <iframe src="${p.videoUrl}" title="${esc(p.title)}"
+              loading="lazy"
+              allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="card-info">
+            <div class="card-title">${esc(p.title)}</div>
+            <div class="card-desc">${esc(p.description)}</div>
+            <div class="card-tags">${p.tags.map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</div>
+            <div class="card-toggle-row">
+              <button class="card-toggle" aria-expanded="false" aria-label="Expand project details">
+                <span class="card-toggle-text">Details</span>
+                <span class="card-toggle-icon" aria-hidden="true">^</span>
+              </button>
+            </div>
+            <div class="card-extra">
+              <ul class="feat-list">
+                ${p.features.map(f=>`<li>${esc(f)}</li>`).join("")}
+              </ul>
+            </div>
+          </div>
+        </article>
+      `).join("");
+
+      /* per-card toggles */
+      grid.querySelectorAll(".project-card").forEach(card => {
+        const btn = card.querySelector(".card-toggle");
+
+        btn.addEventListener("click", () => {
+          const open = card.classList.toggle("expanded");
+          btn.setAttribute("aria-expanded", String(open));
+          btn.setAttribute("aria-label", open ? "Collapse project details" : "Expand project details");
+          btn.querySelector(".card-toggle-text").textContent = open ? "Close" : "Details";
+        });
+      });
+      initReveal();
+    }
+
+    /* ── GLOBAL CONTROLS ────────────────────────────────────── */
+    document.getElementById("expandAll").addEventListener("click", () => {
+      document.querySelectorAll(".project-card").forEach(c => {
+        c.classList.add("expanded");
+        const btn = c.querySelector(".card-toggle");
+        btn.textContent = "Close";
+        btn.setAttribute("aria-expanded", "true");
+        btn.setAttribute("aria-label", "Collapse project details");
+      });
+    });
+
+    document.getElementById("collapseAll").addEventListener("click", () => {
+      document.querySelectorAll(".project-card").forEach(c => {
+        c.classList.remove("expanded");
+        const btn = c.querySelector(".card-toggle");
+        btn.textContent = "Details";
+        btn.setAttribute("aria-expanded", "false");
+        btn.setAttribute("aria-label", "Expand project details");
+      });
+    });
+
+    /* ── THEME ──────────────────────────────────────────────── */
+    const saved = localStorage.getItem("xmvcz-theme") || "cyan";
+    applyTheme(saved);
+
+    document.querySelectorAll(".tdot").forEach(dot => {
+      dot.addEventListener("click", () => {
+        applyTheme(dot.dataset.t);
+        localStorage.setItem("xmvcz-theme", dot.dataset.t);
+      });
+    });
+
+    function applyTheme(t) {
+      document.documentElement.setAttribute("data-theme", t);
+      document.querySelectorAll(".tdot").forEach(d => d.classList.toggle("active", d.dataset.t === t));
+    }
+
+    /* ── SCROLL REVEAL ──────────────────────────────────────── */
+    function initReveal() {
+      const obs = new IntersectionObserver((entries, o) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("visible"); o.unobserve(e.target); } });
+      }, { threshold: 0.1 });
+      document.querySelectorAll(".reveal").forEach(el => obs.observe(el));
+    }
+    initReveal();
+
+    /* ── UTILS ──────────────────────────────────────────────── */
+    function esc(s) {
+      return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+    }
+
+    document.getElementById("yr").textContent = new Date().getFullYear();
+    render();
+  </script>
 </body>
 </html>
+
