@@ -301,6 +301,405 @@
     .cta-btn:hover::after{opacity:1;}
     [data-theme="white"] .cta-btn{color:#fff;}
 
+/* ═══ HERO SPLIT POLISH ═══════════════════════════════════ */
+.hero-split {
+  align-items:stretch;
+  text-align:left;
+}
+
+.hero-shell {
+  position:relative;
+  z-index:1;
+  width:min(1180px,92%);
+  margin:auto;
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  gap:3rem;
+  align-items:center;
+}
+
+.hero-left {
+  max-width:680px;
+}
+
+.hero-left .hero-tag {
+  margin-left:0;
+  margin-right:0;
+  max-width:620px;
+}
+
+.hero-actions {
+  display:flex;
+  gap:1rem;
+  flex-wrap:wrap;
+  align-items:center;
+}
+
+.hero-secondary-btn {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:.88rem 2rem;
+  border-radius:999px;
+  border:1px solid var(--border);
+  background:rgba(var(--p-r),.045);
+  color:var(--text);
+  font-family:var(--font-d);
+  font-size:.82rem;
+  font-weight:700;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  transition:var(--ease);
+}
+
+.hero-secondary-btn:hover {
+  color:var(--p);
+  border-color:rgba(var(--p-r),.45);
+  box-shadow:0 8px 28px var(--glow);
+  transform:translateY(-2px);
+}
+
+.hero-dev-box {
+  background:var(--card-bg);
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:1.45rem;
+  backdrop-filter:blur(16px);
+  box-shadow:0 22px 70px rgba(var(--p-r),.18);
+  overflow:hidden;
+}
+
+.dev-box-top {
+  display:flex;
+  gap:8px;
+  margin-bottom:1rem;
+}
+
+.dev-box-top span {
+  width:12px;
+  height:12px;
+  border-radius:50%;
+}
+
+.dev-box-top span:nth-child(1){background:var(--s);}
+.dev-box-top span:nth-child(2){background:var(--p);}
+.dev-box-top span:nth-child(3){background:var(--a);}
+
+.hero-dev-box pre {
+  white-space:pre-wrap;
+  color:var(--text);
+  font-family:var(--font-m);
+  font-size:.95rem;
+  line-height:1.8;
+}
+
+.hero-stack {
+  display:flex;
+  flex-wrap:wrap;
+  gap:.55rem;
+  margin-top:1rem;
+}
+
+.hero-stack span {
+  padding:.4rem .75rem;
+  border-radius:999px;
+  border:1px solid rgba(var(--p-r),.24);
+  background:rgba(var(--p-r),.07);
+  color:var(--p);
+  font-size:.75rem;
+}
+
+/* ═══ ABOUT POLISH ════════════════════════════════════════ */
+.about-fancy-grid {
+  display:grid;
+  grid-template-columns:1fr 1.2fr;
+  gap:1.5rem;
+}
+
+.about-main-card,
+.about-stat-card {
+  background:var(--card-bg);
+  border:1px solid var(--border);
+  backdrop-filter:blur(16px);
+  box-shadow:0 18px 50px rgba(var(--p-r),.08);
+}
+
+.about-main-card {
+  position:relative;
+  overflow:hidden;
+  border-radius:24px;
+  padding:2.2rem;
+}
+
+.about-orb {
+  position:absolute;
+  width:190px;
+  height:190px;
+  right:-60px;
+  top:-60px;
+  border-radius:50%;
+  background:radial-gradient(circle,var(--p),transparent 68%);
+  opacity:.16;
+  filter:blur(4px);
+}
+
+.about-kicker {
+  font-family:var(--font-d);
+  font-size:.68rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--p);
+  margin-bottom:.8rem;
+}
+
+.about-main-card h3 {
+  font-family:var(--font-d);
+  font-size:clamp(1.45rem,3vw,2.25rem);
+  line-height:1.15;
+  margin-bottom:1rem;
+}
+
+.about-main-card p,
+.about-stat-card p {
+  color:var(--muted);
+  line-height:1.8;
+}
+
+.about-status {
+  display:inline-flex;
+  align-items:center;
+  gap:.65rem;
+  margin-top:1.4rem;
+  padding:.7rem 1rem;
+  border-radius:999px;
+  border:1px solid rgba(var(--p-r),.22);
+  background:rgba(var(--p-r),.06);
+  color:var(--text);
+  font-size:.85rem;
+}
+
+.about-status span {
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:var(--p);
+  box-shadow:0 0 16px rgba(var(--p-r),.8);
+}
+
+.about-mini-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1rem;
+}
+
+.about-stat-card {
+  border-radius:20px;
+  padding:1.35rem;
+  transition:var(--ease);
+}
+
+.about-stat-card:hover {
+  transform:translateY(-4px);
+  border-color:rgba(var(--p-r),.4);
+  box-shadow:0 16px 42px var(--glow);
+}
+
+.about-stat-card span {
+  display:inline-flex;
+  font-family:var(--font-d);
+  color:var(--p);
+  font-size:.78rem;
+  margin-bottom:.8rem;
+}
+
+.about-stat-card h4 {
+  font-family:var(--font-d);
+  color:var(--text);
+  margin-bottom:.45rem;
+}
+
+/* ═══ INTERACTION POLISH ══════════════════════════════════ */
+.cursor-glow {
+  position:fixed;
+  left:0;
+  top:0;
+  width:260px;
+  height:260px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(var(--p-r),.16),transparent 68%);
+  pointer-events:none;
+  z-index:2;
+  transform:translate(-50%,-50%);
+  opacity:0;
+  transition:opacity .25s ease;
+  mix-blend-mode:screen;
+}
+
+.section-indicator {
+  position:fixed;
+  left:1.2rem;
+  top:50%;
+  transform:translateY(-50%);
+  z-index:90;
+  display:flex;
+  flex-direction:column;
+  gap:.75rem;
+}
+
+.section-indicator a {
+  width:10px;
+  height:10px;
+  border-radius:999px;
+  border:1px solid rgba(var(--p-r),.35);
+  background:rgba(var(--p-r),.08);
+  transition:var(--ease);
+}
+
+.section-indicator a.active {
+  height:28px;
+  background:var(--p);
+  box-shadow:0 0 18px rgba(var(--p-r),.7);
+}
+
+.project-card {
+  transform-style:preserve-3d;
+  will-change:transform;
+}
+
+.toast {
+  position:fixed;
+  right:1.3rem;
+  bottom:1.3rem;
+  z-index:120;
+  padding:.85rem 1.1rem;
+  border-radius:14px;
+  border:1px solid rgba(var(--p-r),.35);
+  background:var(--card-bg);
+  color:var(--text);
+  backdrop-filter:blur(14px);
+  box-shadow:0 12px 34px var(--glow);
+  opacity:0;
+  transform:translateY(16px);
+  pointer-events:none;
+  transition:opacity .25s ease,transform .25s ease;
+}
+
+.toast.show {
+  opacity:1;
+  transform:translateY(0);
+}
+
+.back-top-btn {
+  position:fixed;
+  right:1.3rem;
+  bottom:5rem;
+  z-index:110;
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  border:1px solid rgba(var(--p-r),.35);
+  background:rgba(var(--p-r),.08);
+  color:var(--p);
+  font-family:var(--font-d);
+  font-size:1.1rem;
+  opacity:0;
+  pointer-events:none;
+  transform:translateY(10px);
+  transition:var(--ease);
+}
+
+.back-top-btn.visible {
+  opacity:1;
+  pointer-events:auto;
+  transform:translateY(0);
+}
+
+.back-top-btn:hover {
+  box-shadow:0 8px 28px var(--glow);
+  transform:translateY(-3px);
+}
+
+/* Better Details button */
+.card-btn-text {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:.55rem 1rem;
+  border-radius:999px;
+  border:1px solid rgba(var(--p-r),.25);
+  background:rgba(var(--p-r),.08);
+  color:var(--p);
+  font-family:var(--font-d);
+  font-size:.72rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  transition:var(--ease);
+}
+
+.card-btn-text:hover {
+  background:rgba(var(--p-r),.16);
+  box-shadow:0 0 18px var(--glow);
+}
+
+/* Ripple-like background reaction */
+.bg-grid {
+  transition:transform .25s ease-out, filter .25s ease-out;
+}
+
+body.mouse-moving .bg-grid {
+  filter:url(#none);
+}
+
+/* Responsive */
+@media(max-width:860px) {
+  .hero-shell,
+  .about-fancy-grid {
+    grid-template-columns:1fr;
+  }
+
+  .hero-split {
+    text-align:center;
+  }
+
+  .hero-left .hero-tag {
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  .hero-actions {
+    justify-content:center;
+  }
+
+  .section-indicator {
+    display:none;
+  }
+}
+
+@media(max-width:600px) {
+  .about-mini-grid {
+    grid-template-columns:1fr;
+  }
+
+  .cursor-glow {
+    display:none;
+  }
+}
+
+/* Reduced motion support */
+@media(prefers-reduced-motion:reduce) {
+  *,
+  *::before,
+  *::after {
+    animation:none !important;
+    transition:none !important;
+    scroll-behavior:auto !important;
+  }
+
+  .cursor-glow {
+    display:none;
+  }
+}
+
     /* ═══ PROJECTS ═════════════════════════════════════════ */
     .projects-section{
       padding:5rem 1.8rem 7rem;
@@ -1221,8 +1620,8 @@
       <p class="hero-role">Game Developer &amp; Systems Designer</p>
 
       <p class="hero-tag">
-        I build scalable Roblox systems, combat frameworks, progression loops,
-        UI animations, NPC logic, and structured Luau/Knit architecture.
+        I build scalable Roblox gameplay systems, combat frameworks,
+        progression loops, NPC logic, UI animation, and clean Luau/Knit architecture.
       </p>
 
       <div class="hero-actions">
@@ -1238,12 +1637,20 @@
 
       <pre><code>local developer = {
   name = "xmvcz",
-  role = "Roblox Game Developer",
-  stack = { "Luau", "Knit", "UI", "Combat" },
-  focus = "Clean scalable systems"
+  role = "Roblox Developer",
+  stack = { "Luau", "Knit", "Combat", "UI" },
+  focus = "Clean scalable systems",
+  available = true
 }
 
 developer:Build()</code></pre>
+
+      <div class="hero-stack">
+        <span>Luau</span>
+        <span>Knit</span>
+        <span>Combat</span>
+        <span>UI Systems</span>
+      </div>
     </aside>
   </div>
 </section>
@@ -1272,7 +1679,7 @@ developer:Build()</code></pre>
     <div class="section-eyebrow">About Me</div>
     <h2 class="section-title">Systems-first Roblox Developer</h2>
     <p class="section-sub">
-      I design Roblox features with clean architecture, readable logic, and game-feel in mind.
+      I design gameplay systems that are clean, modular, responsive, and expandable.
     </p>
   </div>
 
@@ -1280,36 +1687,43 @@ developer:Build()</code></pre>
     <div class="about-main-card">
       <div class="about-orb"></div>
       <p class="about-kicker">Developer Profile</p>
-      <h3>Building scalable Roblox gameplay systems.</h3>
+      <h3>Building Roblox systems with structure, polish, and game feel.</h3>
       <p>
-        I focus on combat frameworks, round systems, UI animation, NPC logic,
-        progression loops, and modular Luau/Knit services that are easy to expand.
+        I specialize in combat systems, round-based loops, UI animation,
+        NPC behavior, progression mechanics, and reusable Knit services.
+        My goal is to create systems that feel smooth for players and stay
+        maintainable for developers.
       </p>
+
+      <div class="about-status">
+        <span></span>
+        Available for freelance / contract Roblox work
+      </div>
     </div>
 
     <div class="about-mini-grid">
       <div class="about-stat-card">
         <span>01</span>
-        <h4>Combat</h4>
-        <p>Combo chains, states, stun logic, weapon modules.</p>
+        <h4>Combat Systems</h4>
+        <p>Combo chains, weapon modules, stun logic, blocking, states.</p>
       </div>
 
       <div class="about-stat-card">
         <span>02</span>
-        <h4>Systems</h4>
-        <p>Round loops, replication, services, reusable architecture.</p>
+        <h4>Architecture</h4>
+        <p>Knit services, modular code, clean replication patterns.</p>
       </div>
 
       <div class="about-stat-card">
         <span>03</span>
         <h4>UI / UX</h4>
-        <p>Animated interfaces, feedback patterns, clean player flow.</p>
+        <p>Animated interfaces, feedback systems, readable player flow.</p>
       </div>
 
       <div class="about-stat-card">
         <span>04</span>
         <h4>Game Feel</h4>
-        <p>Responsive interactions, smooth logic, readable gameplay states.</p>
+        <p>Responsive mechanics, polished interactions, smooth systems.</p>
       </div>
     </div>
   </div>
@@ -1432,7 +1846,19 @@ developer:Build()</code></pre>
       <p class="footer-copy">© <span id="yr"></span> xmvcz — Built with passion for games.</p>
     </div>
   </section>
+<div class="cursor-glow" aria-hidden="true"></div>
 
+<nav class="section-indicator" aria-label="Section indicator">
+  <a href="#top" class="active" data-section-link="top"></a>
+  <a href="#projects" data-section-link="projects"></a>
+  <a href="#about" data-section-link="about"></a>
+  <a href="#donate" data-section-link="donate"></a>
+  <a href="#contact" data-section-link="contact"></a>
+</nav>
+
+<button class="back-top-btn" type="button" aria-label="Back to top">↑</button>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script>
     /* ─── DATA ────────────────────────────────────────────── */
     const PROJECTS = [
@@ -1495,7 +1921,7 @@ developer:Build()</code></pre>
         
           <div class="info-panel">
             <div class="card-body">
-              <div class="card-role"><h1>Role: ${esc(p.role)}</div>
+              <div class="card-role">Role: ${esc(p.role)}</div>
               <div class="card-title">${esc(p.title)}</div>
               <div class="card-desc">${esc(p.description)}</div>
             
@@ -1622,6 +2048,159 @@ document.addEventListener("click", e => {
     document.querySelectorAll(".donation-card").forEach(card => {
       card.classList.toggle("active", card.dataset.panel === payment);
     });
+  }
+});
+
+/* ─── LAUNCH POLISH INTERACTIONS ───────────────────────── */
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  if (!toast) return;
+
+  toast.textContent = message;
+  toast.classList.add("show");
+
+  clearTimeout(showToast.timer);
+  showToast.timer = setTimeout(() => {
+    toast.classList.remove("show");
+  }, 1600);
+}
+
+/* Mouse glow + soft grid movement */
+if (!prefersReducedMotion) {
+  const glow = document.querySelector(".cursor-glow");
+  const grid = document.querySelector(".bg-grid");
+
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+  let glowX = mouseX;
+  let glowY = mouseY;
+
+  window.addEventListener("mousemove", e => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+
+    document.body.classList.add("mouse-moving");
+
+    if (glow) glow.style.opacity = "1";
+
+    if (grid) {
+      const moveX = (mouseX / window.innerWidth - 0.5) * 18;
+      const moveY = (mouseY / window.innerHeight - 0.5) * 18;
+      grid.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.015)`;
+    }
+
+    clearTimeout(window.__mouseStill);
+    window.__mouseStill = setTimeout(() => {
+      document.body.classList.remove("mouse-moving");
+      if (grid) grid.style.transform = "";
+    }, 220);
+  });
+
+  function animateGlow() {
+    glowX += (mouseX - glowX) * 0.14;
+    glowY += (mouseY - glowY) * 0.14;
+
+    if (glow) {
+      glow.style.left = `${glowX}px`;
+      glow.style.top = `${glowY}px`;
+    }
+
+    requestAnimationFrame(animateGlow);
+  }
+
+  animateGlow();
+}
+
+/* Active section indicator */
+const sectionLinks = document.querySelectorAll("[data-section-link]");
+const observedSections = [...sectionLinks]
+  .map(link => document.getElementById(link.dataset.sectionLink))
+  .filter(Boolean);
+
+const sectionObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+
+    sectionLinks.forEach(link => {
+      link.classList.toggle("active", link.dataset.sectionLink === entry.target.id);
+    });
+  });
+}, {
+  threshold: 0.45
+});
+
+observedSections.forEach(section => sectionObserver.observe(section));
+
+/* Project card hover tilt */
+if (!prefersReducedMotion) {
+  document.addEventListener("mousemove", e => {
+    const card = e.target.closest(".project-card");
+    if (!card || card.classList.contains("expanded")) return;
+
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const rotateX = ((y / rect.height) - 0.5) * -6;
+    const rotateY = ((x / rect.width) - 0.5) * 6;
+
+    card.style.transform = `translateY(-6px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+  });
+
+  document.addEventListener("mouseleave", e => {
+    const card = e.target.closest?.(".project-card");
+    if (card) card.style.transform = "";
+  }, true);
+
+  document.addEventListener("mouseout", e => {
+    const card = e.target.closest?.(".project-card");
+    if (!card) return;
+    if (!card.contains(e.relatedTarget)) card.style.transform = "";
+  });
+}
+
+/* Back to top */
+const backTopBtn = document.querySelector(".back-top-btn");
+
+window.addEventListener("scroll", () => {
+  if (!backTopBtn) return;
+  backTopBtn.classList.toggle("visible", window.scrollY > 650);
+});
+
+if (backTopBtn) {
+  backTopBtn.addEventListener("click", () => {
+    window.scrollTo({ top:0, behavior: prefersReducedMotion ? "auto" : "smooth" });
+  });
+}
+
+/* Improved clipboard feedback */
+document.addEventListener("click", e => {
+  const copyBtn = e.target.closest(".copy-wallet-btn");
+  if (!copyBtn) return;
+
+  const wallet = document.getElementById("walletAddress");
+  if (!wallet) return;
+
+  const done = () => {
+    copyBtn.textContent = "Copied";
+    showToast("Wallet address copied");
+    setTimeout(() => {
+      copyBtn.textContent = "Copy";
+    }, 1400);
+  };
+
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(wallet.value).then(done).catch(() => {
+      wallet.select();
+      document.execCommand("copy");
+      done();
+    });
+  } else {
+    wallet.select();
+    document.execCommand("copy");
+    done();
   }
 });
     /* ─── INIT ────────────────────────────────────────────── */
