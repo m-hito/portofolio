@@ -7,11 +7,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css"/>
+  
+<style>
 
-  <style>
-    /* ═══════════════════════════════════════════════════════
-       THEME TOKENS — each theme owns its full background
-    ═══════════════════════════════════════════════════════ */
     :root {
       --p:#00f0ff; --s:#ff006e; --a:#8338ec;
       --p-r:0,240,255; --s-r:255,0,110; --a-r:131,56,236;
@@ -24,71 +23,77 @@
       --scan-c:rgba(0,240,255,0.013);
       --font-d:'Orbitron',sans-serif; --font-m:'Share Tech Mono',monospace;
       --ease:all 0.38s cubic-bezier(.4,0,.2,1);
+      --hover-glow:rgba(255,50,50,0.55); --hover-glow-rgb:255,50,50;
     }
 
     /* CYAN — deep navy/teal */
     [data-theme="cyan"] {
       --p:#00f0ff; --s:#ff006e; --a:#8338ec;
       --p-r:0,240,255; --s-r:255,0,110; --a-r:131,56,236;
-      --bg:#03070d; --bg2:#060e1a; --bg3:#091626;
+      --bg:#001431; --bg2:#000000; --bg3:#170043;
       --card-bg:rgba(8,20,38,0.68);
-      --text:#e0e6f0; --muted:#7a8da8;
+      --text:#e0e6f0; --muted:#569dff;
       --border:rgba(0,240,255,0.18); --glow:rgba(0,240,255,0.35);
-      --grid-c:rgba(0,240,255,0.055);
+      --grid-c:rgba(0, 238, 255, 0.364);
       --bg-g1:rgba(0,180,255,0.10); --bg-g2:rgba(120,50,240,0.07); --bg-g3:rgba(0,240,255,0.04);
-      --scan-c:rgba(0,240,255,0.012);
+      --scan-c:rgba(0, 238, 255, 0);
+      --hover-glow:rgba(255,50,50,0.55); --hover-glow-rgb:255,50,50;
     }
 
     /* MAGENTA — deep purple/pink */
     [data-theme="magenta"] {
       --p:#ff7de7; --s:#8b74ff; --a:#00e5c8;
       --p-r:255,125,231; --s-r:139,116,255; --a-r:0,229,200;
-      --bg:#0d0412; --bg2:#160820; --bg3:#1e0c2e;
+      --bg:#200031; --bg2:#000000; --bg3:#21013d;
       --card-bg:rgba(22,8,36,0.68);
       --text:#f0e0f8; --muted:#9a7db0;
       --border:rgba(255,125,231,0.18); --glow:rgba(255,125,231,0.35);
-      --grid-c:rgba(255,125,231,0.055);
+      --grid-c:rgba(222, 31, 187, 0.337);
       --bg-g1:rgba(200,60,255,0.12); --bg-g2:rgba(100,80,255,0.08); --bg-g3:rgba(255,125,231,0.05);
-      --scan-c:rgba(255,125,231,0.012);
+      --scan-c:rgba(255, 0, 208, 0.012);
+      --hover-glow:rgba(50,255,150,0.55); --hover-glow-rgb:50,255,150;
     }
 
     /* LIME — dark forest green */
     [data-theme="lime"] {
       --p:#9dff7f; --s:#64d5ff; --a:#ff6ec7;
       --p-r:157,255,127; --s-r:100,213,255; --a-r:255,110,199;
-      --bg:#030d06; --bg2:#061409; --bg3:#091c0e;
-      --card-bg:rgba(6,20,10,0.68);
+      --bg:#003005; --bg2:#000000; --bg3:#002b0b;
+      --card-bg:rgba(49, 62, 53, 0.68);
       --text:#dff0e0; --muted:#6a9070;
       --border:rgba(157,255,127,0.18); --glow:rgba(157,255,127,0.32);
-      --grid-c:rgba(157,255,127,0.055);
+      --grid-c:rgba(157, 255, 127, 0.312);
       --bg-g1:rgba(60,200,80,0.10); --bg-g2:rgba(0,180,180,0.07); --bg-g3:rgba(157,255,127,0.04);
       --scan-c:rgba(157,255,127,0.012);
+      --hover-glow:rgba(255,100,220,0.55); --hover-glow-rgb:255,100,220;
     }
 
     /* AMBER — warm deep orange/gold */
     [data-theme="amber"] {
       --p:#ffc66d; --s:#ff7da6; --a:#7dc8ff;
       --p-r:255,198,109; --s-r:255,125,166; --a-r:125,200,255;
-      --bg:#0e0800; --bg2:#170e02; --bg3:#1f1404;
-      --card-bg:rgba(22,12,2,0.68);
+      --bg:#402400; --bg2:#000000; --bg3:#341f00;
+      --card-bg:rgba(83, 62, 41, 0.356);
       --text:#f0e8d8; --muted:#9a8060;
       --border:rgba(255,198,109,0.18); --glow:rgba(255,198,109,0.32);
-      --grid-c:rgba(255,198,109,0.055);
+      --grid-c:rgba(255, 199, 109, 0.292);
       --bg-g1:rgba(255,150,30,0.12); --bg-g2:rgba(200,80,60,0.07); --bg-g3:rgba(255,198,109,0.04);
       --scan-c:rgba(255,198,109,0.012);
+      --hover-glow:rgba(130,100,255,0.55); --hover-glow-rgb:130,100,255;
     }
 
     /* WHITE — clean light neutral */
     [data-theme="white"] {
       --p:#0a0a0a; --s:#e00060; --a:#5c2adb;
       --p-r:10,10,10; --s-r:224,0,96; --a-r:92,42,219;
-      --bg:#f4f6f8; --bg2:#eaeef2; --bg3:#dde4ea;
-      --card-bg:rgba(255,255,255,0.75);
-      --text:#1a1e28; --muted:#5a6070;
+      --bg:#bebebe; --bg2:#797777; --bg3:#dde4ea;
+      --card-bg:rgba(255, 255, 255, 0.75);
+      --text:#1a1e28; --muted:#000000;
       --border:rgba(10,10,10,0.12); --glow:rgba(10,10,10,0.10);
-      --grid-c:rgba(10,10,10,0.045);
+      --grid-c:rgba(10, 10, 10, 0.321);
       --bg-g1:rgba(92,42,219,0.06); --bg-g2:rgba(224,0,96,0.04); --bg-g3:rgba(0,180,220,0.03);
       --scan-c:rgba(0,0,0,0.006);
+      --hover-glow:rgba(255,90,30,0.45); --hover-glow-rgb:255,90,30;
     }
 
     /* ═══ RESET ═══════════════════════════════════════════ */
@@ -242,8 +247,25 @@
       0%,100%{filter:drop-shadow(0 0 18px rgba(var(--p-r),.45));}
       50%{filter:drop-shadow(0 0 36px rgba(var(--s-r),.55));}
     }
+
     [data-theme="white"] .hero h1{filter:none;}
 
+        h3{
+      font-family:var(--font-d);
+      font-size:clamp(2.8rem,8vw,5.8rem);
+      font-weight:900;letter-spacing:-.04em;line-height:1;
+      background:linear-gradient(130deg,var(--p) 20%,var(--s) 60%,var(--a));
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+      filter:drop-shadow(0 0 22px rgba(var(--p-r),.45));
+      animation:namePulse 3.5s ease-in-out infinite;
+      transition:filter .5s;
+    }
+    @keyframes namePulse{
+      0%,100%{filter:drop-shadow(0 0 18px rgba(var(--p-r),.45));}
+      50%{filter:drop-shadow(0 0 36px rgba(var(--s-r),.55));}
+    }
+    [data-theme="white"] h3{filter:none;}
+    
     .hero-role{
       font-family:var(--font-d);
       font-size:clamp(.85rem,2vw,1.3rem);
@@ -375,6 +397,10 @@
   pointer-events:none;
 }
 
+.project-card:hover .info-label {
+  box-shadow:0 20px 52px var(--glow),0 0 0 1px rgba(var(--p-r),.12);
+}
+
 .project-card:hover{
   transform:translateY(-6px);
   box-shadow:0 20px 52px var(--glow),0 0 0 1px rgba(var(--p-r),.12);
@@ -383,6 +409,16 @@
 
 .project-card:hover::after{opacity:1;}
 
+.card-btn-text {
+  background-color: rgba(48, 48, 48, 0.236);
+   border-radius:10px; padding-inline: .9rem;
+}
+
+.card-btn-text:hover {
+  background-color: rgb(255, 255, 255);
+  size: 1.5rem;
+}
+
 .video-panel{
   position:relative;
   background:var(--bg);
@@ -390,7 +426,7 @@
 }
 
 .video-panel:hover{
-  box-shadow:inset 0 0 38px rgba(var(--p-r),.18);
+  box-shadow:0 0 28px rgba(var(--p-r),0.35),0 0 56px rgba(var(--p-r),0.15);
 }
 
 .video-wrap{
@@ -419,8 +455,8 @@
 }
 
 .info-panel:hover{
-  box-shadow:inset 0 0 32px rgba(var(--s-r),.08);
-  background:linear-gradient(180deg,rgba(var(--p-r),.045),transparent 55%);
+  box-shadow:0 0 22px var(--hover-glow),0 0 48px rgba(var(--hover-glow-rgb),0.25);
+  background:linear-gradient(180deg,rgba(var(--hover-glow-rgb),0.08),transparent 55%);
 }
 
 .card-body{
@@ -444,9 +480,21 @@
   font-size:1.25rem;
   font-weight:700;
   color:var(--text);
-  line-height:1.2;
+  line-height:1.1;
   letter-spacing:-.02em;
+  font-family:var(--font-d);
+  /* font-size:clamp(2.8rem,8vw,5.8rem); */
+  font-weight:900;letter-spacing:-.04em;line-height:1.5;
+  background:linear-gradient(130deg,var(--p) 20%,var(--s) 60%,var(--a));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  filter:drop-shadow(0 0 22px rgba(var(--p-r),.45));
+  animation:namePulse 3.5s ease-in-out infinite;
+  transition:filter .5s;
+}@keyframes namePulse{
+  0%,100%{filter:drop-shadow(0 0 18px rgba(var(--p-r),.45));}
+  50%{filter:drop-shadow(0 0 36px rgba(var(--s-r),.55));}
 }
+[data-theme="white"] .card-title{filter:none;}
 
 .card-desc{
   color:var(--muted);
@@ -454,14 +502,14 @@
   line-height:1.75;
 }
 
-    .card-tags{display:flex;flex-wrap:wrap;gap:.45rem;}
-    .tag{
-      font-size:.75rem;padding:.3rem .8rem;border-radius:999px;
-      border:1px solid rgba(var(--p-r),.25);
-      background:rgba(var(--p-r),.07);color:var(--p);letter-spacing:.04em;
-      transition:var(--ease);
-    }
-    .tag:hover{background:rgba(var(--p-r),.18);transform:scale(1.04);}
+.card-tags{display:flex;flex-wrap:wrap;gap:.45rem;}
+.tag{
+  font-size:.75rem;padding:.3rem .8rem;border-radius:999px;
+  border:1px solid rgba(var(--p-r),.25);
+  background:rgba(var(--p-r),.07);color:var(--p);letter-spacing:.04em;
+  transition:var(--ease);
+}
+.tag:hover{background:rgba(var(--p-r),.18);transform:scale(1.04);}
  
 .card-extra{
   overflow:hidden;
@@ -572,6 +620,487 @@
     padding:0 2rem 1.6rem;
   }
 }
+
+.hero-split {
+  align-items:stretch;
+  text-align:left;
+}
+
+.hero-shell {
+  position:relative;
+  z-index:1;
+  width:min(1180px,92%);
+  margin:auto;
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  gap:3rem;
+  align-items:center;
+}
+
+.hero-left {
+  max-width:680px;
+}
+
+.hero-left .hero-tag {
+  margin-left:0;
+  margin-right:0;
+}
+
+.hero-actions {
+  display:flex;
+  gap:1rem;
+  flex-wrap:wrap;
+  align-items:center;
+}
+
+.hero-secondary-btn {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:.88rem 2rem;
+  border-radius:999px;
+  border:1px solid var(--border);
+  background:rgba(var(--p-r),.045);
+  color:var(--text);
+  font-family:var(--font-d);
+  font-size:.82rem;
+  font-weight:700;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  transition:var(--ease);
+}
+
+.hero-secondary-btn:hover {
+  color:var(--p);
+  border-color:rgba(var(--p-r),.45);
+  box-shadow:0 8px 28px var(--glow);
+  transform:translateY(-2px);
+}
+
+.hero-dev-box {
+  background:var(--card-bg);
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:1.4rem;
+  backdrop-filter:blur(16px);
+  box-shadow:0 22px 70px var(--glow);
+  overflow:hidden;
+}
+
+.dev-box-top {
+  display:flex;
+  gap:8px;
+  margin-bottom:1rem;
+}
+
+.dev-box-top span {
+  width:12px;
+  height:12px;
+  border-radius:50%;
+}
+
+.dev-box-top span:nth-child(1){background:var(--s);}
+.dev-box-top span:nth-child(2){background:var(--p);}
+.dev-box-top span:nth-child(3){background:var(--a);}
+
+.hero-dev-box pre {
+  white-space:pre-wrap;
+  color:var(--text);
+  font-family:var(--font-m);
+  font-size:.95rem;
+  line-height:1.8;
+}
+/*ABOUT SECTION*/
+.about-section,
+.donation-section {
+  position:relative;
+  z-index:1;
+  padding:5rem 1.8rem;
+  max-width:1180px;
+  margin:0 auto;
+}
+
+.info-section-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1.5rem;
+}
+
+.info-box,
+.donation-box {
+  background:var(--card-bg);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:1.8rem;
+  backdrop-filter:blur(14px);
+  box-shadow:0 14px 42px rgba(var(--p-r),.08);
+}
+
+.info-box h3,
+.donation-box h3 {
+  font-family:var(--font-d);
+  color:var(--p);
+  margin-bottom:.8rem;
+}
+
+.info-box p,
+.donation-box p {
+  color:var(--muted);
+  line-height:1.8;
+}
+
+.about-tags {
+  display:flex;
+  flex-wrap:wrap;
+  gap:.55rem;
+  margin-top:1.3rem;
+}
+
+.about-tags span {
+  padding:.4rem .85rem;
+  border-radius:999px;
+  border:1px solid rgba(var(--p-r),.25);
+  color:var(--p);
+  background:rgba(var(--p-r),.07);
+  font-size:.78rem;
+}
+
+.wallet-row {
+  display:flex;
+  gap:.8rem;
+  margin:1.4rem 0 1rem;
+}
+
+.wallet-row input {
+  flex:1;
+  min-width:0;
+  padding:.85rem 1rem;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:rgba(var(--p-r),.04);
+  color:var(--text);
+  font-family:var(--font-m);
+}
+
+.copy-wallet-btn {
+  padding:.85rem 1.2rem;
+  border-radius:12px;
+  background:linear-gradient(130deg,var(--p),var(--s));
+  color:var(--bg);
+  font-family:var(--font-d);
+  font-weight:700;
+  transition:var(--ease);
+}
+
+.copy-wallet-btn:hover {
+  transform:translateY(-2px);
+  box-shadow:0 8px 28px var(--glow);
+}
+
+.wallet-note {
+  font-size:.86rem;
+}
+
+@media(max-width:860px) {
+  .hero-shell,
+  .info-section-grid {
+    grid-template-columns:1fr;
+  }
+
+  .hero-split {
+    text-align:center;
+  }
+
+  .hero-left .hero-tag {
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  .hero-actions {
+    justify-content:center;
+  }
+}
+
+@media(max-width:600px) {
+  .wallet-row {
+    flex-direction:column;
+  }
+}
+
+.about-fancy-grid {
+  display:grid;
+  grid-template-columns:1fr 1.2fr;
+  gap:1.5rem;
+}
+
+.about-main-card,
+.about-stat-card,
+.donation-system,
+.donation-card {
+  background:var(--card-bg);
+  border:1px solid var(--border);
+  backdrop-filter:blur(16px);
+  box-shadow:0 18px 50px rgba(var(--p-r),.08);
+}
+
+.about-main-card {
+  position:relative;
+  overflow:hidden;
+  border-radius:24px;
+  padding:2.2rem;
+  min-height:100%;
+}
+
+.about-orb {
+  position:absolute;
+  width:180px;
+  height:180px;
+  right:-55px;
+  top:-55px;
+  border-radius:50%;
+  background:radial-gradient(circle,var(--p),transparent 68%);
+  opacity:.16;
+  filter:blur(4px);
+}
+
+.about-kicker,
+.donation-kicker {
+  font-family:var(--font-d);
+  font-size:.68rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--p);
+  margin-bottom:.7rem;
+}
+
+.about-main-card h3 {
+  font-family:var(--font-d);
+  font-size:clamp(1.45rem,3vw,2.2rem);
+  line-height:1.15;
+  color:var(--text);
+  margin-bottom:1rem;
+}
+
+.about-main-card p,
+.about-stat-card p,
+.donation-desc {
+  color:var(--muted);
+  line-height:1.8;
+}
+
+.about-mini-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1rem;
+}
+
+.about-stat-card {
+  border-radius:20px;
+  padding:1.35rem;
+  transition:var(--ease);
+}
+
+.about-stat-card:hover {
+  transform:translateY(-4px);
+  border-color:rgba(var(--p-r),.4);
+  box-shadow:0 16px 42px var(--glow);
+}
+
+.about-stat-card span {
+  display:inline-flex;
+  font-family:var(--font-d);
+  color:var(--p);
+  font-size:.78rem;
+  margin-bottom:.8rem;
+}
+
+.about-stat-card h4 {
+  font-family:var(--font-d);
+  color:var(--text);
+  margin-bottom:.45rem;
+}
+
+.donation-system {
+  max-width:760px;
+  margin:0 auto;
+  border-radius:26px;
+  padding:1rem;
+}
+
+.payment-tabs {
+  display:flex;
+  gap:.7rem;
+  margin-bottom:1rem;
+}
+
+.payment-tab {
+  flex:1;
+  padding:.85rem 1rem;
+  border-radius:999px;
+  border:1px solid var(--border);
+  color:var(--muted);
+  background:rgba(var(--p-r),.035);
+  font-family:var(--font-d);
+  font-size:.75rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  transition:var(--ease);
+}
+
+.payment-tab.active,
+.payment-tab:hover {
+  color:var(--p);
+  border-color:rgba(var(--p-r),.45);
+  background:rgba(var(--p-r),.12);
+}
+
+.donation-card {
+  display:none;
+  position:relative;
+  border-radius:22px;
+  padding:1.6rem;
+  overflow:hidden;
+}
+
+.donation-card.active {
+  display:block;
+  animation:donationSwap .28s ease both;
+}
+
+@keyframes donationSwap {
+  from { opacity:0; transform:translateY(8px) scale(.98); }
+  to { opacity:1; transform:translateY(0) scale(1); }
+}
+
+.donation-card-head {
+  display:flex;
+  justify-content:space-between;
+  gap:1rem;
+  align-items:flex-start;
+  margin-bottom:1rem;
+}
+
+.donation-card h3 {
+  font-family:var(--font-d);
+  color:var(--text);
+  font-size:1.45rem;
+}
+
+.network-pill {
+  padding:.45rem .85rem;
+  border-radius:999px;
+  background:rgba(var(--p-r),.1);
+  color:var(--p);
+  border:1px solid rgba(var(--p-r),.28);
+  font-family:var(--font-d);
+  font-size:.72rem;
+}
+
+.clean-wallet {
+  margin:1.25rem 0;
+}
+
+.network-meta {
+  display:flex;
+  justify-content:space-between;
+  gap:1rem;
+  padding:1rem;
+  border-radius:16px;
+  background:rgba(var(--p-r),.045);
+  border:1px solid rgba(var(--p-r),.12);
+  color:var(--muted);
+}
+
+.network-meta strong {
+  color:var(--text);
+  font-weight:400;
+}
+
+.extra-networks {
+  max-height:0;
+  opacity:0;
+  overflow:hidden;
+  transition:max-height .38s ease, opacity .28s ease, margin .28s ease;
+}
+
+.donation-card.expanded .extra-networks {
+  max-height:420px;
+  opacity:1;
+  margin-top:1rem;
+}
+
+.network-option {
+  display:grid;
+  gap:.55rem;
+  padding:1rem;
+  border-radius:16px;
+  border:1px solid var(--border);
+  background:rgba(var(--p-r),.035);
+  margin-bottom:.75rem;
+}
+
+.network-option strong {
+  color:var(--text);
+  font-family:var(--font-d);
+}
+
+.network-option span {
+  display:block;
+  color:var(--muted);
+  font-size:.85rem;
+}
+
+.network-option code {
+  color:var(--p);
+  word-break:break-all;
+  font-family:var(--font-m);
+  font-size:.85rem;
+}
+
+.expand-donation-btn {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:42px;
+  height:42px;
+  margin:1.2rem auto 0;
+  border-radius:50%;
+  border:1px solid rgba(var(--p-r),.35);
+  background:rgba(var(--p-r),.09);
+  color:var(--p);
+  font-family:var(--font-d);
+  font-size:1.2rem;
+  transition:var(--ease);
+}
+
+.expand-donation-btn:hover {
+  transform:translateY(-2px);
+  box-shadow:0 8px 24px var(--glow);
+}
+
+.donation-card.expanded .expand-donation-btn {
+  transform:rotate(180deg);
+}
+
+@media(max-width:860px) {
+  .about-fancy-grid {
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:600px) {
+  .about-mini-grid,
+  .payment-tabs {
+    grid-template-columns:1fr;
+    display:grid;
+  }
+
+  .donation-card-head,
+  .network-meta {
+    flex-direction:column;
+  }
+}
+
     /* scroll reveal */
     .reveal{opacity:0;transform:translateY(20px);transition:opacity .65s ease,transform .65s ease;}
     .reveal.visible{opacity:1;transform:translateY(0);}
@@ -596,6 +1125,7 @@
       background-size:26px 26px;opacity:.28;
       mask-image:radial-gradient(ellipse at center,black,transparent 75%);
     }
+
     .f-sweep{
       position:absolute;inset:0;
       background:linear-gradient(90deg,transparent,rgba(var(--p-r),.055),transparent);
@@ -647,7 +1177,9 @@
       .contact-links{gap:.8rem;}
       .c-link{font-size:.76rem;padding:.7rem 1.2rem;}
     }
-  </style>
+
+</style>
+
 </head>
 
 <body>
@@ -671,30 +1203,50 @@
   </div>
 
   <!-- HERO -->
-  <section class="hero" id="top">
-    <div class="hero-layers" aria-hidden="true">
-      <div class="h-dot-field"></div>
-      <div class="h-ring"></div>
-      <div class="h-ring"></div>
-      <div class="h-ring"></div>
-      <div class="h-sweep"></div>
-    </div>
-    <div class="hero-content">
+  <section class="hero hero-split" id="top">
+  <div class="hero-layers" aria-hidden="true">
+    <div class="h-dot-field"></div>
+    <div class="h-ring"></div>
+    <div class="h-ring"></div>
+    <div class="h-ring"></div>
+    <div class="h-sweep"></div>
+  </div>
+
+  <div class="hero-shell">
+    <div class="hero-content hero-left">
+      <div class="section-eyebrow">Roblox Developer Portfolio</div>
+
       <h1>Hi, I'm xmvcz</h1>
+
       <p class="hero-role">Game Developer &amp; Systems Designer</p>
+
       <p class="hero-tag">
-        Building clean, scalable Roblox systems — combat, progression,
-        UI patterns, and structured Luau architecture with Knit.
+        I build scalable Roblox systems, combat frameworks, progression loops,
+        UI animations, NPC logic, and structured Luau/Knit architecture.
       </p>
-      <a class="cta-btn" href="#projects">
-        View My Work
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-          <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.8"
-                stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </a>
+
+      <div class="hero-actions">
+        <a class="cta-btn" href="#projects">View My Work</a>
+        <a class="hero-secondary-btn" href="#contact">Contact Me</a>
+      </div>
     </div>
-  </section>
+
+    <aside class="hero-dev-box reveal">
+      <div class="dev-box-top">
+        <span></span><span></span><span></span>
+      </div>
+
+      <pre><code>local developer = {
+  name = "xmvcz",
+  role = "Roblox Game Developer",
+  stack = { "Luau", "Knit", "UI", "Combat" },
+  focus = "Clean scalable systems"
+}
+
+developer:Build()</code></pre>
+    </aside>
+  </div>
+</section>
 
   <!-- PROJECTS -->
   <section class="projects-section" id="projects">
@@ -715,7 +1267,151 @@
 
     <div class="projects-grid" id="projectsGrid"></div>
   </section>
+  <section class="about-section reveal" id="about">
+  <div class="section-header">
+    <div class="section-eyebrow">About Me</div>
+    <h2 class="section-title">Systems-first Roblox Developer</h2>
+    <p class="section-sub">
+      I design Roblox features with clean architecture, readable logic, and game-feel in mind.
+    </p>
+  </div>
 
+  <div class="about-fancy-grid">
+    <div class="about-main-card">
+      <div class="about-orb"></div>
+      <p class="about-kicker">Developer Profile</p>
+      <h3>Building scalable Roblox gameplay systems.</h3>
+      <p>
+        I focus on combat frameworks, round systems, UI animation, NPC logic,
+        progression loops, and modular Luau/Knit services that are easy to expand.
+      </p>
+    </div>
+
+    <div class="about-mini-grid">
+      <div class="about-stat-card">
+        <span>01</span>
+        <h4>Combat</h4>
+        <p>Combo chains, states, stun logic, weapon modules.</p>
+      </div>
+
+      <div class="about-stat-card">
+        <span>02</span>
+        <h4>Systems</h4>
+        <p>Round loops, replication, services, reusable architecture.</p>
+      </div>
+
+      <div class="about-stat-card">
+        <span>03</span>
+        <h4>UI / UX</h4>
+        <p>Animated interfaces, feedback patterns, clean player flow.</p>
+      </div>
+
+      <div class="about-stat-card">
+        <span>04</span>
+        <h4>Game Feel</h4>
+        <p>Responsive interactions, smooth logic, readable gameplay states.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="donation-section reveal" id="donate">
+  <div class="section-header">
+    <div class="section-eyebrow">Support</div>
+    <h2 class="section-title">Donate / Support My Work</h2>
+    <p class="section-sub">
+      Choose a payment type. Crypto is active now, with room for future payment methods.
+    </p>
+  </div>
+
+  <div class="donation-system">
+    <div class="payment-tabs" role="tablist" aria-label="Payment type">
+      <button class="payment-tab active" data-payment="crypto" type="button">Crypto</button>
+      <button class="payment-tab" data-payment="paypal" type="button">PayPal</button>
+      <button class="payment-tab" data-payment="card" type="button">Card</button>
+    </div>
+
+    <div class="donation-card active" data-panel="crypto">
+      <div class="donation-card-head">
+        <div>
+          <p class="donation-kicker">Primary Network</p>
+          <h3>USDT Donation</h3>
+        </div>
+        <span class="network-pill">USDT</span>
+      </div>
+
+      <p class="donation-desc">
+        Primary support method. Copy the wallet address below and send only through the selected network.
+      </p>
+
+      <div class="wallet-row clean-wallet">
+        <input id="walletAddress" value="0xF7807e47Ee4c54b7319e8dE4269269571bF0973d" readonly />
+        <button class="copy-wallet-btn" type="button">Copy</button>
+      </div>
+
+      <div class="network-meta">
+        <span>Network</span>
+        <strong>USDT BNB</strong>
+      </div>
+
+      <div class="extra-networks" id="extraNetworks">
+        <div class="network-option">
+          <div>
+            <strong>Ethereum</strong>
+            <span>ETH BNB</span>
+          </div>
+          <code>0x8dee08bcf01b512006c060935c25a0839eac3c02</code>
+        </div>
+
+        <div class="network-option">
+          <div>
+            <strong>Bitcoin</strong>
+            <span>BTC support placeholder</span>
+          </div>
+          <code>YourBitcoinAddressHere</code>
+        </div>
+
+        <div class="network-option">
+          <div>
+            <strong>Solana</strong>
+            <span>SOL support placeholder</span>
+          </div>
+          <code>YourSolanaAddressHere</code>
+        </div>
+      </div>
+
+      <button class="expand-donation-btn" type="button" aria-expanded="false">
+        ^
+      </button>
+    </div>
+
+    <div class="donation-card" data-panel="paypal">
+      <div class="donation-card-head">
+        <div>
+          <p class="donation-kicker">Coming Soon</p>
+          <h3>PayPal Support</h3>
+        </div>
+        <span class="network-pill">Soon</span>
+      </div>
+      <p class="donation-desc">
+        PayPal payment support can be added here later.
+      </p>
+    </div>
+
+    <div class="donation-card" data-panel="card">
+      <div class="donation-card-head">
+        <div>
+          <p class="donation-kicker">Coming Soon</p>
+          <h3>Card Payments</h3>
+        </div>
+        <span class="network-pill">Soon</span>
+      </div>
+      <p class="donation-desc">
+        Stripe or direct card payment support can be connected here later.
+      </p>
+    </div>
+  </div>
+</section>
   <!-- CONTACT -->
   <section class="contact" id="contact">
     <div class="footer-layers" aria-hidden="true">
@@ -799,7 +1495,7 @@
         
           <div class="info-panel">
             <div class="card-body">
-              <div class="card-role">${esc(p.role)}</div>
+              <div class="card-role"><h1>Role: ${esc(p.role)}</div>
               <div class="card-title">${esc(p.title)}</div>
               <div class="card-desc">${esc(p.description)}</div>
             
@@ -815,8 +1511,7 @@
           
             <div class="card-footer">
               <button class="card-btn" aria-expanded="false" aria-label="Expand details for ${esc(p.title)}">
-                <span class="card-btn-text">Details</span>
-                <span class="card-btn-icon" aria-hidden="true">^</span>
+                <span class="card-btn-text" style="">Details </span>
               </button>
             </div>
           </div>
@@ -877,7 +1572,58 @@
       }, { threshold: 0.08 });
       document.querySelectorAll(".reveal:not(.visible)").forEach(el => obs.observe(el));
     }
+    document.addEventListener("click", e => {
+  const btn = e.target.closest(".copy-wallet-btn");
+  if (!btn) return;
 
+  const wallet = document.getElementById("walletAddress");
+  if (!wallet) return;
+
+  navigator.clipboard.writeText(wallet.value).then(() => {
+    btn.textContent = "Copied";
+    setTimeout(() => {
+      btn.textContent = "Copy";
+    }, 1400);
+  });
+});
+
+document.addEventListener("click", e => {
+  const copyBtn = e.target.closest(".copy-wallet-btn");
+
+  if (copyBtn) {
+    const wallet = document.getElementById("walletAddress");
+    if (!wallet) return;
+
+    navigator.clipboard.writeText(wallet.value).then(() => {
+      copyBtn.textContent = "Copied";
+      setTimeout(() => {
+        copyBtn.textContent = "Copy";
+      }, 1400);
+    });
+  }
+
+  const expandBtn = e.target.closest(".expand-donation-btn");
+
+  if (expandBtn) {
+    const card = expandBtn.closest(".donation-card");
+    const expanded = card.classList.toggle("expanded");
+    expandBtn.setAttribute("aria-expanded", String(expanded));
+  }
+
+  const tab = e.target.closest(".payment-tab");
+
+  if (tab) {
+    const payment = tab.dataset.payment;
+
+    document.querySelectorAll(".payment-tab").forEach(btn => {
+      btn.classList.toggle("active", btn === tab);
+    });
+
+    document.querySelectorAll(".donation-card").forEach(card => {
+      card.classList.toggle("active", card.dataset.panel === payment);
+    });
+  }
+});
     /* ─── INIT ────────────────────────────────────────────── */
     document.getElementById("yr").textContent = new Date().getFullYear();
     renderProjects();
