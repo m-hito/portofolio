@@ -2204,7 +2204,17 @@ document.addEventListener("click", e => {
   }
 });
     /* ─── INIT ────────────────────────────────────────────── */
-    document.getElementById("yr").textContent = new Date().getFullYear();
+document.addEventListener("DOMContentLoaded", () => {
+  const projectList = document.getElementById("githubProjectList");
+  const readmeTitle = document.getElementById("readmeTitle");
+  const readmeContent = document.getElementById("readmeContent");
+  const repoButton = document.getElementById("repoButton");
+
+  if (!projectList || !readmeTitle || !readmeContent || !repoButton) {
+    console.error("GitHub section elements are missing. Check your HTML IDs.");
+    return;
+  }
+
     renderProjects();
     initReveal();
   </script>
