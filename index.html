@@ -6,1603 +6,939 @@
   <title>xmvcz — Roblox Game Developer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css"/>
-  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
 <style>
-
-    :root {
-      --p:#00f0ff; --s:#ff006e; --a:#8338ec;
-      --p-r:0,240,255; --s-r:255,0,110; --a-r:131,56,236;
-      --bg:#04080f; --bg2:#07111c; --bg3:#0a1826;
-      --card-bg:rgba(10,22,40,0.65);
-      --text:#e0e6f0; --muted:#7a8da8;
-      --border:rgba(0,240,255,0.18); --glow:rgba(0,240,255,0.35);
-      --grid-c:rgba(0,240,255,0.06);
-      --bg-g1:rgba(0,180,255,0.10); --bg-g2:rgba(131,56,236,0.08); --bg-g3:rgba(255,0,110,0.05);
-      --scan-c:rgba(0,240,255,0.013);
-      --font-d:'Orbitron',sans-serif; --font-m:'Share Tech Mono',monospace;
-      --ease:all 0.38s cubic-bezier(.4,0,.2,1);
-      --hover-glow:rgba(255,50,50,0.55); --hover-glow-rgb:255,50,50;
-    }
-
-    /* CYAN — deep navy/teal */
-    [data-theme="cyan"] {
-      --p:#00f0ff; --s:#ff006e; --a:#8338ec;
-      --p-r:0,240,255; --s-r:255,0,110; --a-r:131,56,236;
-      --bg:#001431; --bg2:#000000; --bg3:#170043;
-      --card-bg:rgba(8,20,38,0.68);
-      --text:#e0e6f0; --muted:#569dff;
-      --border:rgba(0,240,255,0.18); --glow:rgba(0,240,255,0.35);
-      --grid-c:rgba(0, 238, 255, 0.364);
-      --bg-g1:rgba(0,180,255,0.10); --bg-g2:rgba(120,50,240,0.07); --bg-g3:rgba(0,240,255,0.04);
-      --scan-c:rgba(0, 238, 255, 0);
-      --hover-glow:rgba(255,50,50,0.55); --hover-glow-rgb:255,50,50;
-    }
-
-    /* MAGENTA — deep purple/pink */
-    [data-theme="magenta"] {
-      --p:#ff7de7; --s:#8b74ff; --a:#00e5c8;
-      --p-r:255,125,231; --s-r:139,116,255; --a-r:0,229,200;
-      --bg:#200031; --bg2:#000000; --bg3:#21013d;
-      --card-bg:rgba(22,8,36,0.68);
-      --text:#f0e0f8; --muted:#9a7db0;
-      --border:rgba(255,125,231,0.18); --glow:rgba(255,125,231,0.35);
-      --grid-c:rgba(222, 31, 187, 0.337);
-      --bg-g1:rgba(200,60,255,0.12); --bg-g2:rgba(100,80,255,0.08); --bg-g3:rgba(255,125,231,0.05);
-      --scan-c:rgba(255, 0, 208, 0.012);
-      --hover-glow:rgba(50,255,150,0.55); --hover-glow-rgb:50,255,150;
-    }
-
-    /* LIME — dark forest green */
-    [data-theme="lime"] {
-      --p:#9dff7f; --s:#64d5ff; --a:#ff6ec7;
-      --p-r:157,255,127; --s-r:100,213,255; --a-r:255,110,199;
-      --bg:#003005; --bg2:#000000; --bg3:#002b0b;
-      --card-bg:rgba(49, 62, 53, 0.68);
-      --text:#dff0e0; --muted:#6a9070;
-      --border:rgba(157,255,127,0.18); --glow:rgba(157,255,127,0.32);
-      --grid-c:rgba(157, 255, 127, 0.312);
-      --bg-g1:rgba(60,200,80,0.10); --bg-g2:rgba(0,180,180,0.07); --bg-g3:rgba(157,255,127,0.04);
-      --scan-c:rgba(157,255,127,0.012);
-      --hover-glow:rgba(255,100,220,0.55); --hover-glow-rgb:255,100,220;
-    }
-
-    /* AMBER — warm deep orange/gold */
-    [data-theme="amber"] {
-      --p:#ffc66d; --s:#ff7da6; --a:#7dc8ff;
-      --p-r:255,198,109; --s-r:255,125,166; --a-r:125,200,255;
-      --bg:#402400; --bg2:#000000; --bg3:#341f00;
-      --card-bg:rgba(83, 62, 41, 0.356);
-      --text:#f0e8d8; --muted:#9a8060;
-      --border:rgba(255,198,109,0.18); --glow:rgba(255,198,109,0.32);
-      --grid-c:rgba(255, 199, 109, 0.292);
-      --bg-g1:rgba(255,150,30,0.12); --bg-g2:rgba(200,80,60,0.07); --bg-g3:rgba(255,198,109,0.04);
-      --scan-c:rgba(255,198,109,0.012);
-      --hover-glow:rgba(130,100,255,0.55); --hover-glow-rgb:130,100,255;
-    }
-
-    /* WHITE — clean light neutral */
-    [data-theme="white"] {
-      --p:#0a0a0a; --s:#e00060; --a:#5c2adb;
-      --p-r:10,10,10; --s-r:224,0,96; --a-r:92,42,219;
-      --bg:#bebebe; --bg2:#797777; --bg3:#dde4ea;
-      --card-bg:rgba(255, 255, 255, 0.75);
-      --text:#1a1e28; --muted:#000000;
-      --border:rgba(10,10,10,0.12); --glow:rgba(10,10,10,0.10);
-      --grid-c:rgba(10, 10, 10, 0.321);
-      --bg-g1:rgba(92,42,219,0.06); --bg-g2:rgba(224,0,96,0.04); --bg-g3:rgba(0,180,220,0.03);
-      --scan-c:rgba(0,0,0,0.006);
-      --hover-glow:rgba(255,90,30,0.45); --hover-glow-rgb:255,90,30;
-    }
-
-    /* ═══ RESET ═══════════════════════════════════════════ */
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-    html{scroll-behavior:smooth;}
-    body{
-      font-family:var(--font-m);
-      color:var(--text);
-      background:var(--bg);
-      overflow-x:hidden;
-      line-height:1.6;
-      min-height:100vh;
-      transition:background .5s ease,color .5s ease;
-    }
-    a{color:inherit;text-decoration:none;}
-    button{font:inherit;cursor:pointer;background:none;border:none;}
-
-    /* ═══ GLOBAL BACKGROUND ═══════════════════════════════ */
-    .bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
-
-    .bg-base{
-      position:absolute;inset:0;
-      background:
-        radial-gradient(ellipse 75% 55% at 18% 12%,var(--bg-g1),transparent 60%),
-        radial-gradient(ellipse 55% 75% at 82% 82%,var(--bg-g2),transparent 55%),
-        radial-gradient(ellipse 45% 45% at 52% 44%,var(--bg-g3),transparent 65%),
-        linear-gradient(155deg,var(--bg) 0%,var(--bg2) 52%,var(--bg3) 100%);
-      transition:background .5s ease;
-    }
-
-    .bg-grid{
-      position:absolute;inset:0;
-      background-image:
-        linear-gradient(var(--grid-c) 1px,transparent 1px),
-        linear-gradient(90deg,var(--grid-c) 1px,transparent 1px);
-      background-size:48px 48px;
-      animation:gridDrift 22s linear infinite;
-      transition:background-image .5s ease;
-    }
-    @keyframes gridDrift{to{transform:translate(48px,48px);}}
-
-    .bg-scan{
-      position:absolute;inset:0;
-      background-image:repeating-linear-gradient(
-        0deg,transparent 0px,transparent 3px,var(--scan-c) 3px,var(--scan-c) 4px
-      );
-    }
-
-    .bg-vignette{
-      position:absolute;inset:0;
-      background:radial-gradient(ellipse 100% 100% at 50% 50%,transparent 38%,rgba(0,0,0,.38) 100%);
-    }
-    [data-theme="white"] .bg-vignette{
-      background:radial-gradient(ellipse 100% 100% at 50% 50%,transparent 38%,rgba(0,0,0,.06) 100%);
-    }
-
-    /* ═══ CHROME ═══════════════════════════════════════════ */
-    .brand-fixed{
-      position:fixed;top:1.1rem;left:1.6rem;z-index:100;
-      font-family:var(--font-d);font-size:13px;font-weight:700;
-      color:var(--p);letter-spacing:.12em;
-      text-shadow:0 0 18px rgba(var(--p-r),.55);
-      transition:color .4s,text-shadow .4s;
-    }
-    [data-theme="white"] .brand-fixed{text-shadow:none;}
-
-    .theme-bar{
-      position:fixed;top:1rem;right:1.4rem;z-index:100;
-      display:flex;align-items:center;gap:9px;
-      padding:7px 14px;border-radius:999px;
-      border:1px solid var(--border);
-      background:rgba(var(--p-r),.04);
-      backdrop-filter:blur(16px);
-      transition:border-color .4s,background .4s;
-    }
-    [data-theme="white"] .theme-bar{background:rgba(255,255,255,.82);}
-    .theme-bar-label{
-      font-family:var(--font-d);font-size:8px;
-      letter-spacing:.18em;text-transform:uppercase;
-      color:var(--muted);white-space:nowrap;
-    }
-    .tdot{
-      width:15px;height:15px;border-radius:50%;
-      border:2px solid transparent;
-      transition:transform .3s,box-shadow .3s,border-color .3s;
-    }
-    .tdot:hover{transform:scale(1.22);}
-    .tdot.active{border-color:rgba(255,255,255,.55);transform:scale(1.18);box-shadow:0 0 12px currentColor;}
-    [data-theme="white"] .tdot.active{border-color:rgba(0,0,0,.4);}
-    .tdot[data-t="cyan"]   {background:#00f0ff;color:#00f0ff;}
-    .tdot[data-t="magenta"]{background:#ff7de7;color:#ff7de7;}
-    .tdot[data-t="lime"]   {background:#9dff7f;color:#9dff7f;}
-    .tdot[data-t="amber"]  {background:#ffc66d;color:#ffc66d;}
-    .tdot[data-t="white"]  {background:#dde4ea;color:#aaa;border-color:rgba(0,0,0,.22);}
-
-    /* ═══ HERO ═════════════════════════════════════════════ */
-    .hero{
-      min-height:100vh;
-      display:flex;flex-direction:column;
-      justify-content:center;align-items:center;
-      text-align:center;padding:2rem;
-      position:relative;overflow:hidden;z-index:1;
-    }
-
-    /* hero local layers */
-    .hero-layers{position:absolute;inset:0;pointer-events:none;z-index:0;}
-    .h-dot-field{
-      position:absolute;inset:0;
-      background-image:radial-gradient(circle,rgba(var(--p-r),.2) 1px,transparent 1px);
-      background-size:36px 36px;opacity:.16;
-      mask-image:radial-gradient(circle at center,black 16%,transparent 72%);
-      transition:background-image .5s;
-    }
-    .h-ring{
-      position:absolute;border-radius:50%;left:50%;top:50%;
-      transform:translate(-50%,-50%);
-      border:1px solid rgba(var(--p-r),.13);
-      transition:border-color .5s;
-    }
-    .h-ring:nth-child(2){width:min(74vw,680px);aspect-ratio:1;animation:rp 6.5s ease-in-out infinite;}
-    .h-ring:nth-child(3){width:min(52vw,480px);aspect-ratio:1;border-color:rgba(var(--s-r),.09);animation:rp 6.5s ease-in-out -2.2s infinite;}
-    .h-ring:nth-child(4){width:min(33vw,300px);aspect-ratio:1;border-color:rgba(var(--a-r),.09);animation:rp 6.5s ease-in-out -4.4s infinite;}
-    @keyframes rp{
-      0%,100%{opacity:.5;transform:translate(-50%,-50%) scale(1);}
-      50%{opacity:1;transform:translate(-50%,-50%) scale(1.035);}
-    }
-    .h-sweep{
-      position:absolute;inset:0;
-      background:linear-gradient(180deg,transparent,rgba(var(--p-r),.035) 50%,transparent);
-      animation:sweepY 5s linear infinite;
-    }
-    @keyframes sweepY{0%{transform:translateY(-110%);}100%{transform:translateY(110%);}}
-
-    .hero-content{
-      position:relative;z-index:1;max-width:860px;
-      animation:fadeUp .9s ease both;
-    }
-    @keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
-
-    .hero h1{
-      font-family:var(--font-d);
-      font-size:clamp(2.8rem,8vw,5.8rem);
-      font-weight:900;letter-spacing:-.04em;line-height:1;
-      background:linear-gradient(130deg,var(--p) 20%,var(--s) 60%,var(--a));
-      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-      filter:drop-shadow(0 0 22px rgba(var(--p-r),.45));
-      animation:namePulse 3.5s ease-in-out infinite;
-      transition:filter .5s;
-    }
-    @keyframes namePulse{
-      0%,100%{filter:drop-shadow(0 0 18px rgba(var(--p-r),.45));}
-      50%{filter:drop-shadow(0 0 36px rgba(var(--s-r),.55));}
-    }
-
-    [data-theme="white"] .hero h1{filter:none;}
-
-        h3{
-      font-family:var(--font-d);
-      font-size:clamp(2.8rem,8vw,5.8rem);
-      font-weight:900;letter-spacing:-.04em;line-height:1;
-      background:linear-gradient(130deg,var(--p) 20%,var(--s) 60%,var(--a));
-      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-      filter:drop-shadow(0 0 22px rgba(var(--p-r),.45));
-      animation:namePulse 3.5s ease-in-out infinite;
-      transition:filter .5s;
-    }
-    @keyframes namePulse{
-      0%,100%{filter:drop-shadow(0 0 18px rgba(var(--p-r),.45));}
-      50%{filter:drop-shadow(0 0 36px rgba(var(--s-r),.55));}
-    }
-    [data-theme="white"] h3{filter:none;}
-    
-    .hero-role{
-      font-family:var(--font-d);
-      font-size:clamp(.85rem,2vw,1.3rem);
-      color:var(--p);text-transform:uppercase;letter-spacing:.22em;
-      margin:.9rem 0 1.1rem;
-      animation:fadeUp .9s .18s ease both;
-      transition:color .4s;
-    }
-    .hero-tag{
-      font-size:clamp(.88rem,1.8vw,1.1rem);
-      color:var(--muted);max-width:520px;margin:0 auto 2.4rem;line-height:1.85;
-      animation:fadeUp .9s .32s ease both;
-    }
-    .cta-btn{
-      display:inline-flex;align-items:center;gap:10px;
-      padding:.88rem 2.4rem;
-      font-family:var(--font-d);font-size:.88rem;font-weight:700;
-      letter-spacing:.12em;text-transform:uppercase;
-      color:var(--bg);
-      background:linear-gradient(130deg,var(--p),var(--s));
-      border-radius:999px;
-      box-shadow:0 8px 28px rgba(var(--p-r),.28);
-      transition:var(--ease);
-      animation:fadeUp .9s .46s ease both;
-      position:relative;overflow:hidden;
-    }
-    .cta-btn::after{
-      content:'';position:absolute;inset:0;
-      background:linear-gradient(130deg,rgba(255,255,255,.18),transparent 55%);
-      opacity:0;transition:opacity .3s;
-    }
-    .cta-btn:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(var(--s-r),.38);}
-    .cta-btn:hover::after{opacity:1;}
-    [data-theme="white"] .cta-btn{color:#fff;}
-
-/* ═══ HERO SPLIT POLISH ═══════════════════════════════════ */
-.hero-split {
-  align-items:stretch;
-  text-align:left;
+/* ═══ VARIABLES ═════════════════════════════════════════════ */
+:root {
+  --p:#00f0ff; --s:#ff006e; --a:#8338ec;
+  --p-r:0,240,255; --s-r:255,0,110; --a-r:131,56,236;
+  --bg:#001431; --bg2:#000000; --bg3:#170043;
+  --card-bg:rgba(8,20,38,0.68);
+  --text:#e0e6f0; --muted:#569dff;
+  --border:rgba(0,240,255,0.18); --glow:rgba(0,240,255,0.35);
+  --grid-c:rgb(2, 95, 102);
+  --bg-g1:rgba(0, 52, 74, 0.656); --bg-g2:rgba(120,50,240,0.07); --bg-g3:rgba(0,240,255,0.04);
+  --scan-c:rgba(0,238,255,0);
+  --hover-glow:rgba(255,50,50,0.55); --hover-glow-rgb:255,50,50;
+  --font-d:'Orbitron',sans-serif; --font-m:'Share Tech Mono',monospace; --font-body:'Inter',sans-serif;
+  --ease:all 0.38s cubic-bezier(.4,0,.2,1);
+}
+[data-theme="magenta"] {
+  --p:#ff7de7; --s:#8b74ff; --a:#00e5c8;
+  --p-r:255,125,231; --s-r:139,116,255; --a-r:0,229,200;
+  --bg:#200031; --bg2:#000000; --bg3:#21013d;
+  --card-bg:rgba(22,8,36,0.68); --text:#f0e0f8; --muted:#9a7db0;
+  --border:rgba(255,125,231,0.18); --glow:rgba(255,125,231,0.35);
+  --grid-c:rgba(130, 5, 107, 0.711);
+  --bg-g1:rgba(200,60,255,0.12); --bg-g2:rgba(100,80,255,0.08); --bg-g3:rgba(255,125,231,0.05);
+  --hover-glow:rgba(50,255,150,0.55); --hover-glow-rgb:50,255,150;
+}
+[data-theme="lime"] {
+  --p:#9dff7f; --s:#64d5ff; --a:#ff6ec7;
+  --p-r:157,255,127; --s-r:100,213,255; --a-r:255,110,199;
+  --bg:#003005; --bg2:#000000; --bg3:#002b0b;
+  --card-bg:rgba(49,62,53,0.68); --text:#dff0e0; --muted:#6a9070;
+  --border:rgba(157,255,127,0.18); --glow:rgba(157,255,127,0.32);
+  --grid-c:rgba(22, 96, 0, 0.812);
+  --bg-g1:rgba(60,200,80,0.10); --bg-g2:rgba(0,180,180,0.07); --bg-g3:rgba(157,255,127,0.04);
+  --hover-glow:rgba(255,100,220,0.55); --hover-glow-rgb:255,100,220;
+}
+[data-theme="amber"] {
+  --p:#ffc66d; --s:#ff7da6; --a:#7dc8ff;
+  --p-r:255,198,109; --s-r:255,125,166; --a-r:125,200,255;
+  --bg:#402400; --bg2:#000000; --bg3:#341f00;
+  --card-bg:rgba(83,62,41,0.36); --text:#f0e8d8; --muted:#9a8060;
+  --border:rgba(255,198,109,0.18); --glow:rgba(255,198,109,0.32);
+  --grid-c:rgba(172, 106, 0, 0.842);
+  --bg-g1:rgba(255,150,30,0.12); --bg-g2:rgba(200,80,60,0.07); --bg-g3:rgba(255,198,109,0.04);
+  --hover-glow:rgba(130,100,255,0.55); --hover-glow-rgb:130,100,255;
+}
+[data-theme="white"] {
+  --p:#0a0a0a; --s:#e00060; --a:#5c2adb;
+  --p-r:10,10,10; --s-r:224,0,96; --a-r:92,42,219;
+  --bg:#bebebe; --bg2:#797777; --bg3:#dde4ea;
+  --card-bg:rgba(255,255,255,0.75); --text:#1a1e28; --muted:#000000;
+  --border:rgba(10,10,10,0.12); --glow:rgba(10,10,10,0.10);
+  --grid-c:rgba(0, 0, 0, 0.445);
+  --bg-g1:rgba(92,42,219,0.06); --bg-g2:rgba(224,0,96,0.04); --bg-g3:rgba(0,180,220,0.03);
+  --hover-glow:rgba(255,90,30,0.45); --hover-glow-rgb:255,90,30;
 }
 
-.hero-shell {
-  position:relative;
-  z-index:1;
-  width:min(1180px,92%);
-  margin:auto;
-  display:grid;
-  grid-template-columns:1.05fr .95fr;
-  gap:3rem;
-  align-items:center;
+/* ═══ RESET ═════════════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-body);color:var(--text);background:var(--bg);overflow-x:hidden;line-height:1.6;min-height:100vh;transition:background .5s,color .5s;}
+a{color:inherit;text-decoration:none;}
+button{font:inherit;cursor:pointer;background:none;border:none;}
+
+/* ═══ BACKGROUND ════════════════════════════════════════════ */
+.bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+.bg-base{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 75% 55% at 18% 12%,var(--bg-g1),transparent 60%),
+    radial-gradient(ellipse 55% 75% at 82% 82%,var(--bg-g2),transparent 55%),
+    radial-gradient(ellipse 45% 45% at 52% 44%,var(--bg-g3),transparent 65%),
+    linear-gradient(155deg,var(--bg) 0%,var(--bg2) 52%,var(--bg3) 100%);
+  transition:background .5s;
 }
-
-.hero-left {
-  max-width:680px;
+.bg-grid{
+  position:absolute;inset:0;
+  background-image:linear-gradient(var(--grid-c) 1px,transparent 1px),linear-gradient(90deg,var(--grid-c) 1px,transparent 1px);
+  background-size:48px 48px;
+  animation:gridDrift 22s linear infinite;
+  transition:background-image .5s;
 }
+@keyframes gridDrift{to{transform:translate(48px,48px);}}
+.bg-scan{position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,transparent 0px,transparent 3px,var(--scan-c) 3px,var(--scan-c) 4px);}
+.bg-vignette{position:absolute;inset:0;background:radial-gradient(ellipse 100% 100% at 50% 50%,transparent 38%,rgba(0,0,0,.38) 100%);}
+[data-theme="white"] .bg-vignette{background:radial-gradient(ellipse 100% 100% at 50% 50%,transparent 38%,rgba(0,0,0,.06) 100%);}
 
-.hero-left .hero-tag {
-  margin-left:0;
-  margin-right:0;
-  max-width:620px;
-}
+/* ═══ CHROME ════════════════════════════════════════════════ */
+.brand-fixed{position:fixed;top:1.1rem;left:1.6rem;z-index:100;font-family:var(--font-d);font-size:13px;font-weight:700;color:var(--p);letter-spacing:.12em;text-shadow:0 0 18px rgba(var(--p-r),.55);transition:color .4s,text-shadow .4s;}
+[data-theme="white"] .brand-fixed{text-shadow:none;}
+.theme-bar{position:fixed;top:1rem;right:1.4rem;z-index:100;display:flex;align-items:center;gap:9px;padding:7px 14px;border-radius:999px;border:1px solid var(--border);background:rgba(var(--p-r),.04);backdrop-filter:blur(16px);transition:border-color .4s,background .4s;}
+[data-theme="white"] .theme-bar{background:rgba(255,255,255,.82);}
+.theme-bar-label{font-family:var(--font-d);font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+.tdot{width:15px;height:15px;border-radius:50%;border:2px solid transparent;transition:transform .3s,box-shadow .3s,border-color .3s;}
+.tdot:hover{transform:scale(1.22);}
+.tdot.active{border-color:rgba(255,255,255,.55);transform:scale(1.18);box-shadow:0 0 12px currentColor;}
+[data-theme="white"] .tdot.active{border-color:rgba(0,0,0,.4);}
+.tdot[data-t="cyan"]   {background:#00f0ff;color:#00f0ff;}
+.tdot[data-t="magenta"]{background:#ff7de7;color:#ff7de7;}
+.tdot[data-t="lime"]   {background:#9dff7f;color:#9dff7f;}
+.tdot[data-t="amber"]  {background:#ffc66d;color:#ffc66d;}
+.tdot[data-t="white"]  {background:#dde4ea;color:#aaa;border-color:rgba(0,0,0,.22);}
 
-.hero-actions {
-  display:flex;
-  gap:1rem;
-  flex-wrap:wrap;
-  align-items:center;
-}
+/* Section nav */
+.section-indicator{position:fixed;left:1.2rem;top:50%;transform:translateY(-50%);z-index:90;display:flex;flex-direction:column;gap:.75rem;}
+.section-indicator a{width:10px;height:10px;border-radius:999px;border:1px solid rgba(var(--p-r),.35);background:rgba(var(--p-r),.08);transition:var(--ease);}
+.section-indicator a.active{height:28px;background:var(--p);box-shadow:0 0 18px rgba(var(--p-r),.7);}
 
-.hero-secondary-btn {
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:.88rem 2rem;
-  border-radius:999px;
-  border:1px solid var(--border);
-  background:rgba(var(--p-r),.045);
-  color:var(--text);
-  font-family:var(--font-d);
-  font-size:.82rem;
-  font-weight:700;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  transition:var(--ease);
-}
+/* Back to top + toast */
+.back-top-btn{position:fixed;right:1.3rem;bottom:5rem;z-index:110;width:44px;height:44px;border-radius:50%;border:1px solid rgba(var(--p-r),.35);background:rgba(var(--p-r),.08);color:var(--p);opacity:0;pointer-events:none;transform:translateY(10px);transition:var(--ease);}
+.back-top-btn.visible{opacity:1;pointer-events:auto;transform:translateY(0);}
+.back-top-btn:hover{box-shadow:0 8px 28px var(--glow);transform:translateY(-3px);}
+.toast{position:fixed;right:1.3rem;bottom:1.3rem;z-index:120;padding:.85rem 1.1rem;border-radius:14px;border:1px solid rgba(var(--p-r),.35);background:var(--card-bg);color:var(--text);backdrop-filter:blur(14px);box-shadow:0 12px 34px var(--glow);opacity:0;transform:translateY(16px);pointer-events:none;transition:opacity .25s,transform .25s;}
+.toast.show{opacity:1;transform:translateY(0);}
 
-.hero-secondary-btn:hover {
-  color:var(--p);
-  border-color:rgba(var(--p-r),.45);
-  box-shadow:0 8px 28px var(--glow);
-  transform:translateY(-2px);
-}
+/* Cursor glow */
+.cursor-glow{position:fixed;left:0;top:0;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(var(--p-r),.16),transparent 68%);pointer-events:none;z-index:2;transform:translate(-50%,-50%);opacity:0;transition:opacity .25s;mix-blend-mode:screen;}
 
-.hero-dev-box {
-  background:var(--card-bg);
-  border:1px solid var(--border);
-  border-radius:24px;
-  padding:1.45rem;
-  backdrop-filter:blur(16px);
-  box-shadow:0 22px 70px rgba(var(--p-r),.18);
-  overflow:hidden;
-}
+/* ═══ REVEAL ════════════════════════════════════════════════ */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .65s ease,transform .65s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
 
-.dev-box-top {
-  display:flex;
-  gap:8px;
-  margin-bottom:1rem;
-}
+/* ═══ SHARED SECTION HEADERS ════════════════════════════════ */
+.section-eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-d);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--p);margin-bottom:.8rem;}
+.section-eyebrow::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--p);box-shadow:0 0 14px rgba(var(--p-r),.7);}
+.section-title{font-family:var(--font-d);font-size:clamp(1.8rem,4vw,3rem);font-weight:900;letter-spacing:-.04em;background:linear-gradient(130deg,var(--p),var(--a));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.section-sub{color:var(--muted);font-size:.95rem;margin-top:.5rem;}
+.section-header{text-align:center;margin-bottom:2.6rem;}
 
-.dev-box-top span {
-  width:12px;
-  height:12px;
-  border-radius:50%;
-}
+/* ═══ HERO ══════════════════════════════════════════════════ */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:2rem;position:relative;overflow:hidden;z-index:1;}
+.hero-layers{position:absolute;inset:0;pointer-events:none;z-index:0;}
+.h-dot-field{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(var(--p-r),.2) 1px,transparent 1px);background-size:36px 36px;opacity:.16;mask-image:radial-gradient(circle at center,black 16%,transparent 72%);}
+.h-ring{position:absolute;border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%);border:1px solid rgba(var(--p-r),.13);}
+.h-ring:nth-child(2){width:min(74vw,680px);aspect-ratio:1;animation:rp 6.5s ease-in-out infinite;}
+.h-ring:nth-child(3){width:min(52vw,480px);aspect-ratio:1;border-color:rgba(var(--s-r),.09);animation:rp 6.5s ease-in-out -2.2s infinite;}
+.h-ring:nth-child(4){width:min(33vw,300px);aspect-ratio:1;border-color:rgba(var(--a-r),.09);animation:rp 6.5s ease-in-out -4.4s infinite;}
+@keyframes rp{0%,100%{opacity:.5;transform:translate(-50%,-50%) scale(1);}50%{opacity:1;transform:translate(-50%,-50%) scale(1.035);}}
+.h-sweep{position:absolute;inset:0;background:linear-gradient(180deg,transparent,rgba(var(--p-r),.035) 50%,transparent);animation:sweepY 5s linear infinite;}
+@keyframes sweepY{0%{transform:translateY(-110%);}100%{transform:translateY(110%);}}
 
-.dev-box-top span:nth-child(1){background:var(--s);}
-.dev-box-top span:nth-child(2){background:var(--p);}
-.dev-box-top span:nth-child(3){background:var(--a);}
+.hero-shell{position:relative;z-index:1;width:min(1180px,92%);margin:auto;display:grid;grid-template-columns:1.05fr .95fr;gap:3rem;align-items:center;}
+.hero-content{animation:fadeUp .9s ease both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+.hero h1{font-family:var(--font-d);font-size:clamp(2.8rem,8vw,5.8rem);font-weight:900;letter-spacing:-.04em;line-height:1;background:linear-gradient(130deg,var(--p) 20%,var(--s) 60%,var(--a));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 22px rgba(var(--p-r),.45));animation:namePulse 3.5s ease-in-out infinite;}
+@keyframes namePulse{0%,100%{filter:drop-shadow(0 0 18px rgba(var(--p-r),.45));}50%{filter:drop-shadow(0 0 36px rgba(var(--s-r),.55));}}
+[data-theme="white"] .hero h1{filter:none;}
+.hero-role{font-family:var(--font-d);font-size:clamp(.85rem,2vw,1.3rem);color:var(--p);text-transform:uppercase;letter-spacing:.22em;margin:.9rem 0 1.1rem;animation:fadeUp .9s .18s ease both;}
+.hero-tag{font-size:clamp(.88rem,1.8vw,1.1rem);color:var(--muted);max-width:540px;margin:0 0 2.4rem;line-height:1.85;animation:fadeUp .9s .32s ease both;}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;align-items:center;animation:fadeUp .9s .46s ease both;}
+.cta-btn{display:inline-flex;align-items:center;gap:10px;padding:.88rem 2.4rem;font-family:var(--font-d);font-size:.88rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--bg);background:linear-gradient(130deg,var(--p),var(--s));border-radius:999px;box-shadow:0 8px 28px rgba(var(--p-r),.28);transition:var(--ease);position:relative;overflow:hidden;}
+.cta-btn::after{content:'';position:absolute;inset:0;background:linear-gradient(130deg,rgba(255,255,255,.18),transparent 55%);opacity:0;transition:opacity .3s;}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(var(--s-r),.38);}
+.cta-btn:hover::after{opacity:1;}
+[data-theme="white"] .cta-btn{color:#fff;}
+.hero-secondary-btn{display:inline-flex;align-items:center;justify-content:center;padding:.88rem 2rem;border-radius:999px;border:1px solid var(--border);background:rgba(var(--p-r),.045);color:var(--text);font-family:var(--font-d);font-size:.82rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;transition:var(--ease);}
+.hero-secondary-btn:hover{color:var(--p);border-color:rgba(var(--p-r),.45);box-shadow:0 8px 28px var(--glow);transform:translateY(-2px);}
 
-.hero-dev-box pre {
-  white-space:pre-wrap;
-  color:var(--text);
-  font-family:var(--font-m);
-  font-size:.95rem;
-  line-height:1.8;
-}
+/* Hero dev card */
+.hero-dev-card{position:relative;overflow:hidden;background:linear-gradient(145deg,rgba(var(--p-r),.12),rgba(var(--s-r),.08),rgba(var(--a-r),.1));border:1px solid rgba(var(--p-r),.28);border-radius:26px;padding:1.45rem;backdrop-filter:blur(18px);box-shadow:0 24px 80px rgba(var(--p-r),.2);}
+.dev-card-glow{position:absolute;width:220px;height:220px;right:-70px;top:-70px;border-radius:50%;background:radial-gradient(circle,var(--p),var(--s),transparent 68%);opacity:.2;filter:blur(6px);animation:orbFloat 7s ease-in-out infinite;}
+@keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(-18px,20px) scale(1.08);}}
+.dev-card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;position:relative;z-index:1;}
+.dev-dots{display:flex;gap:8px;}
+.dev-dots span{width:12px;height:12px;border-radius:50%;}
+.dev-dots span:nth-child(1){background:var(--s);}
+.dev-dots span:nth-child(2){background:var(--p);}
+.dev-dots span:nth-child(3){background:var(--a);}
+.dev-card-top p{font-family:var(--font-d);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--p);}
+.dev-status-row{display:inline-flex;align-items:center;gap:.65rem;margin:1.2rem 0;padding:.65rem .9rem;border-radius:999px;border:1px solid rgba(var(--p-r),.22);background:rgba(var(--p-r),.07);color:var(--text);font-size:.82rem;position:relative;z-index:1;}
+.status-dot{width:9px;height:9px;border-radius:50%;background:var(--p);box-shadow:0 0 16px rgba(var(--p-r),.9);}
+.code-window{position:relative;z-index:1;white-space:pre-wrap;font-family:var(--font-m);font-size:.9rem;line-height:1.75;color:var(--text);}
+.code-key{color:var(--p);}
+.code-prop{color:var(--a);}
+.code-value{color:var(--s);}
+.code-func{color:var(--p);text-shadow:0 0 14px rgba(var(--p-r),.6);}
+.dev-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;margin-top:1.2rem;position:relative;z-index:1;}
+.dev-metrics div{padding:.8rem;border-radius:16px;background:rgba(var(--p-r),.06);border:1px solid rgba(var(--p-r),.15);}
+.dev-metrics strong{display:block;color:var(--p);font-family:var(--font-d);}
+.dev-metrics span{color:var(--muted);font-size:.72rem;}
 
-.hero-stack {
-  display:flex;
-  flex-wrap:wrap;
-  gap:.55rem;
-  margin-top:1rem;
-}
+/* ═══ PROJECTS SECTION ══════════════════════════════════════ */
+#projects-section{padding:5rem 1.8rem 7rem;max-width:1380px;margin:0 auto;position:relative;z-index:1;}
 
-.hero-stack span {
-  padding:.4rem .75rem;
-  border-radius:999px;
-  border:1px solid rgba(var(--p-r),.24);
-  background:rgba(var(--p-r),.07);
-  color:var(--p);
-  font-size:.75rem;
-}
+/* filter + controls */
+.project-filter{display:flex;gap:.7rem;margin-bottom:1.4rem;flex-wrap:wrap;}
+.filter-btn{padding:.7rem 1.3rem;border-radius:999px;border:1px solid var(--border);background:rgba(var(--p-r),.045);color:var(--muted);font-family:var(--font-d);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;transition:var(--ease);}
+.filter-btn.active,.filter-btn:hover{color:var(--p);border-color:rgba(var(--p-r),.45);background:rgba(var(--p-r),.12);box-shadow:0 8px 24px rgba(var(--p-r),.12);}
+.card-controls{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:11px 16px;margin-bottom:1.8rem;border-radius:14px;background:var(--card-bg);border:1px solid var(--border);backdrop-filter:blur(14px);}
+.controls-note{color:var(--muted);font-size:12px;}
+.toggle-chip{display:inline-flex;align-items:center;gap:7px;padding:7px 15px;border-radius:999px;border:1px solid var(--border);background:rgba(var(--p-r),.07);color:var(--text);font-family:var(--font-d);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;transition:var(--ease);user-select:none;}
+.toggle-chip:hover{border-color:var(--p);background:rgba(var(--p-r),.14);box-shadow:0 0 14px rgba(var(--p-r),.18);color:var(--p);}
+.toggle-chip.all-open{border-color:rgba(var(--p-r),.4);}
+.toggle-chip-icon{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(var(--p-r),.12);font-size:13px;line-height:1;transition:transform .35s,background .3s;}
+.toggle-chip.all-open .toggle-chip-icon{transform:rotate(180deg);}
 
-/* ═══ ABOUT POLISH ════════════════════════════════════════ */
-.about-fancy-grid {
-  display:grid;
-  grid-template-columns:1fr 1.2fr;
-  gap:1.5rem;
-}
+/* grid */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:1.8rem;}
 
-.about-main-card,
-.about-stat-card {
-  background:var(--card-bg);
-  border:1px solid var(--border);
-  backdrop-filter:blur(16px);
-  box-shadow:0 18px 50px rgba(var(--p-r),.08);
-}
-
-.about-main-card {
-  position:relative;
-  overflow:hidden;
-  border-radius:24px;
-  padding:2.2rem;
-}
-
-.about-orb {
-  position:absolute;
-  width:190px;
-  height:190px;
-  right:-60px;
-  top:-60px;
-  border-radius:50%;
-  background:radial-gradient(circle,var(--p),transparent 68%);
-  opacity:.16;
-  filter:blur(4px);
-}
-
-.about-kicker {
-  font-family:var(--font-d);
-  font-size:.68rem;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  color:var(--p);
-  margin-bottom:.8rem;
-}
-
-.about-main-card h3 {
-  font-family:var(--font-d);
-  font-size:clamp(1.45rem,3vw,2.25rem);
-  line-height:1.15;
-  margin-bottom:1rem;
-}
-
-.about-main-card p,
-.about-stat-card p {
-  color:var(--muted);
-  line-height:1.8;
-}
-
-.about-status {
-  display:inline-flex;
-  align-items:center;
-  gap:.65rem;
-  margin-top:1.4rem;
-  padding:.7rem 1rem;
-  border-radius:999px;
-  border:1px solid rgba(var(--p-r),.22);
-  background:rgba(var(--p-r),.06);
-  color:var(--text);
-  font-size:.85rem;
-}
-
-.about-status span {
-  width:9px;
-  height:9px;
-  border-radius:50%;
-  background:var(--p);
-  box-shadow:0 0 16px rgba(var(--p-r),.8);
-}
-
-.about-mini-grid {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:1rem;
-}
-
-.about-stat-card {
-  border-radius:20px;
-  padding:1.35rem;
-  transition:var(--ease);
-}
-
-.about-stat-card:hover {
-  transform:translateY(-4px);
-  border-color:rgba(var(--p-r),.4);
-  box-shadow:0 16px 42px var(--glow);
-}
-
-.about-stat-card span {
-  display:inline-flex;
-  font-family:var(--font-d);
-  color:var(--p);
-  font-size:.78rem;
-  margin-bottom:.8rem;
-}
-
-.about-stat-card h4 {
-  font-family:var(--font-d);
-  color:var(--text);
-  margin-bottom:.45rem;
-}
-
-/* ═══ INTERACTION POLISH ══════════════════════════════════ */
-.cursor-glow {
-  position:fixed;
-  left:0;
-  top:0;
-  width:260px;
-  height:260px;
-  border-radius:50%;
-  background:radial-gradient(circle,rgba(var(--p-r),.16),transparent 68%);
-  pointer-events:none;
-  z-index:2;
-  transform:translate(-50%,-50%);
-  opacity:0;
-  transition:opacity .25s ease;
-  mix-blend-mode:screen;
-}
-
-.section-indicator {
-  position:fixed;
-  left:1.2rem;
-  top:50%;
-  transform:translateY(-50%);
-  z-index:90;
-  display:flex;
-  flex-direction:column;
-  gap:.75rem;
-}
-
-.section-indicator a {
-  width:10px;
-  height:10px;
-  border-radius:999px;
-  border:1px solid rgba(var(--p-r),.35);
-  background:rgba(var(--p-r),.08);
-  transition:var(--ease);
-}
-
-.section-indicator a.active {
-  height:28px;
-  background:var(--p);
-  box-shadow:0 0 18px rgba(var(--p-r),.7);
-}
-
-.project-card {
-  transform-style:preserve-3d;
-  will-change:transform;
-}
-
-.toast {
-  position:fixed;
-  right:1.3rem;
-  bottom:1.3rem;
-  z-index:120;
-  padding:.85rem 1.1rem;
-  border-radius:14px;
-  border:1px solid rgba(var(--p-r),.35);
-  background:var(--card-bg);
-  color:var(--text);
-  backdrop-filter:blur(14px);
-  box-shadow:0 12px 34px var(--glow);
-  opacity:0;
-  transform:translateY(16px);
-  pointer-events:none;
-  transition:opacity .25s ease,transform .25s ease;
-}
-
-.toast.show {
-  opacity:1;
-  transform:translateY(0);
-}
-
-.back-top-btn {
-  position:fixed;
-  right:1.3rem;
-  bottom:5rem;
-  z-index:110;
-  width:44px;
-  height:44px;
-  border-radius:50%;
-  border:1px solid rgba(var(--p-r),.35);
-  background:rgba(var(--p-r),.08);
-  color:var(--p);
-  font-family:var(--font-d);
-  font-size:1.1rem;
-  opacity:0;
-  pointer-events:none;
-  transform:translateY(10px);
-  transition:var(--ease);
-}
-
-.back-top-btn.visible {
-  opacity:1;
-  pointer-events:auto;
-  transform:translateY(0);
-}
-
-.back-top-btn:hover {
-  box-shadow:0 8px 28px var(--glow);
-  transform:translateY(-3px);
-}
-
-/* Better Details button */
-.card-btn-text {
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:.55rem 1rem;
-  border-radius:999px;
-  border:1px solid rgba(var(--p-r),.25);
-  background:rgba(var(--p-r),.08);
-  color:var(--p);
-  font-family:var(--font-d);
-  font-size:.72rem;
-  letter-spacing:.1em;
-  text-transform:uppercase;
-  transition:var(--ease);
-}
-
-.card-btn-text:hover {
-  background:rgba(var(--p-r),.16);
-  box-shadow:0 0 18px var(--glow);
-}
-
-/* Ripple-like background reaction */
-.bg-grid {
-  transition:transform .25s ease-out, filter .25s ease-out;
-}
-
-body.mouse-moving .bg-grid {
-  filter:url(#none);
-}
-
-/* Responsive */
-@media(max-width:860px) {
-  .hero-shell,
-  .about-fancy-grid {
-    grid-template-columns:1fr;
-  }
-
-  .hero-split {
-    text-align:center;
-  }
-
-  .hero-left .hero-tag {
-    margin-left:auto;
-    margin-right:auto;
-  }
-
-  .hero-actions {
-    justify-content:center;
-  }
-
-  .section-indicator {
-    display:none;
-  }
-}
-
-@media(max-width:600px) {
-  .about-mini-grid {
-    grid-template-columns:1fr;
-  }
-
-  .cursor-glow {
-    display:none;
-  }
-}
-
-/* Reduced motion support */
-@media(prefers-reduced-motion:reduce) {
-  *,
-  *::before,
-  *::after {
-    animation:none !important;
-    transition:none !important;
-    scroll-behavior:auto !important;
-  }
-
-  .cursor-glow {
-    display:none;
-  }
-}
-
-    /* ═══ PROJECTS ═════════════════════════════════════════ */
-    .projects-section{
-      padding:5rem 1.8rem 7rem;
-      max-width:1380px;margin:0 auto;
-      position:relative;z-index:1;
-    }
-
-    .section-header{text-align:center;margin-bottom:2.6rem;}
-    .section-eyebrow{
-      display:inline-flex;align-items:center;gap:8px;
-      font-family:var(--font-d);font-size:10px;
-      letter-spacing:.2em;text-transform:uppercase;
-      color:var(--p);margin-bottom:.8rem;
-    }
-    .section-eyebrow::before{
-      content:'';width:7px;height:7px;border-radius:50%;
-      background:var(--p);box-shadow:0 0 14px rgba(var(--p-r),.7);
-    }
-    .section-title{
-      font-family:var(--font-d);
-      font-size:clamp(1.8rem,4vw,3rem);
-      font-weight:900;letter-spacing:-.04em;
-      background:linear-gradient(130deg,var(--p),var(--a));
-      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-    }
-    .section-sub{color:var(--muted);font-size:.95rem;margin-top:.5rem;}
-
-    /* controls bar */
-    .card-controls{
-      display:flex;align-items:center;
-      justify-content:space-between;gap:12px;flex-wrap:wrap;
-      padding:11px 16px;margin-bottom:1.8rem;
-      border-radius:14px;
-      background:var(--card-bg);
-      border:1px solid var(--border);
-      backdrop-filter:blur(14px);
-      transition:background .4s,border-color .4s;
-    }
-    .controls-note{color:var(--muted);font-size:12px;}
-
-    /* single toggle chip */
-    .toggle-chip{
-      display:inline-flex;align-items:center;gap:7px;
-      padding:7px 15px;border-radius:999px;
-      border:1px solid var(--border);
-      background:rgba(var(--p-r),.07);
-      color:var(--text);
-      font-family:var(--font-d);font-size:10px;font-weight:700;
-      letter-spacing:.1em;text-transform:uppercase;
-      transition:var(--ease);user-select:none;
-    }
-    .toggle-chip:hover{
-      border-color:var(--p);background:rgba(var(--p-r),.14);
-      box-shadow:0 0 14px rgba(var(--p-r),.18);color:var(--p);
-    }
-    .toggle-chip.all-open{border-color:rgba(var(--p-r),.4);}
-    .toggle-chip-icon{
-      display:inline-flex;align-items:center;justify-content:center;
-      width:20px;height:20px;border-radius:50%;
-      background:rgba(var(--p-r),.12);
-      font-size:13px;line-height:1;
-      transition:transform .35s ease,background .3s;
-    }
-    .toggle-chip.all-open .toggle-chip-icon{transform:rotate(180deg);}
-
-    /* grid */
-    .projects-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fill,minmax(330px,1fr));
-      gap:1.8rem;
-    }
-
-    /* card */
-.project-card{
-  background:var(--card-bg);
-  border:1px solid var(--border);
-  border-radius:18px;
-  overflow:hidden;
-  backdrop-filter:blur(14px);
-  display:flex;
-  flex-direction:column;
-  transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease,background .4s ease;
-  position:relative;
-}
-
-.project-card::after{
-  content:'';
-  position:absolute;
-  inset:0;
-  border-radius:18px;
-  background:linear-gradient(130deg,rgba(var(--p-r),.08),transparent 45%);
-  opacity:0;
-  transition:opacity .35s;
-  pointer-events:none;
-}
-
-.project-card:hover .info-label {
-  box-shadow:0 20px 52px var(--glow),0 0 0 1px rgba(var(--p-r),.12);
-}
-
-.project-card:hover{
-  transform:translateY(-6px);
-  box-shadow:0 20px 52px var(--glow),0 0 0 1px rgba(var(--p-r),.12);
-  border-color:rgba(var(--p-r),.32);
-}
-
+/* card */
+.project-card{background:var(--card-bg);border:1px solid var(--border);border-radius:18px;overflow:hidden;backdrop-filter:blur(14px);display:flex;flex-direction:column;transition:transform .35s,box-shadow .35s,border-color .35s;position:relative;}
+.project-card::after{content:'';position:absolute;inset:0;border-radius:18px;background:linear-gradient(130deg,rgba(var(--p-r),.08),transparent 45%);opacity:0;transition:opacity .35s;pointer-events:none;}
+.project-card:hover{transform:translateY(-6px);box-shadow:0 20px 52px var(--glow),0 0 0 1px rgba(var(--p-r),.12);border-color:rgba(var(--p-r),.32);}
 .project-card:hover::after{opacity:1;}
-
-.card-btn-text {
-  background-color: rgba(48, 48, 48, 0.236);
-   border-radius:10px; padding-inline: .9rem;
-}
-
-.card-btn-text:hover {
-  background-color: rgb(255, 255, 255);
-  size: 1.5rem;
-}
-
-.video-panel{
-  position:relative;
-  background:var(--bg);
-  transition:box-shadow .35s ease,background .35s ease;
-}
-
-.video-panel:hover{
-  box-shadow:0 0 28px rgba(var(--p-r),0.35),0 0 56px rgba(var(--p-r),0.15);
-}
-
-.video-wrap{
-  position:relative;
-  padding-bottom:56.25%;
-  height:0;
-  background:var(--bg);
-  overflow:hidden;
-  border-bottom:1px solid var(--border);
-}
-
-.video-wrap iframe{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  border:0;
-}
-
-.info-panel{
-  display:flex;
-  flex-direction:column;
-  flex:1;
-  background:linear-gradient(180deg,rgba(var(--p-r),.025),transparent 45%);
-  transition:box-shadow .35s ease,background .35s ease;
-}
-
-.info-panel:hover{
-  box-shadow:0 0 22px var(--hover-glow),0 0 48px rgba(var(--hover-glow-rgb),0.25);
-  background:linear-gradient(180deg,rgba(var(--hover-glow-rgb),0.08),transparent 55%);
-}
-
-.card-body{
-  padding:1.5rem;
-  display:flex;
-  flex-direction:column;
-  gap:.75rem;
-  flex:1;
-}
-
-.card-role{
-  font-size:10px;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  color:var(--p);
-  font-family:var(--font-d);
-}
-
-.card-title{
-  font-family:var(--font-d);
-  font-size:1.25rem;
-  font-weight:700;
-  color:var(--text);
-  line-height:1.1;
-  letter-spacing:-.02em;
-  font-family:var(--font-d);
-  /* font-size:clamp(2.8rem,8vw,5.8rem); */
-  font-weight:900;letter-spacing:-.04em;line-height:1.5;
-  background:linear-gradient(130deg,var(--p) 20%,var(--s) 60%,var(--a));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  filter:drop-shadow(0 0 22px rgba(var(--p-r),.45));
-  animation:namePulse 3.5s ease-in-out infinite;
-  transition:filter .5s;
-}@keyframes namePulse{
-  0%,100%{filter:drop-shadow(0 0 18px rgba(var(--p-r),.45));}
-  50%{filter:drop-shadow(0 0 36px rgba(var(--s-r),.55));}
-}
+.video-panel{position:relative;background:var(--bg);}
+.video-panel:hover{box-shadow:0 0 28px rgba(var(--p-r),0.35),0 0 56px rgba(var(--p-r),0.15);}
+.video-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-bottom:1px solid var(--border);}
+.video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+.info-panel{display:flex;flex-direction:column;flex:1;background:linear-gradient(180deg,rgba(var(--p-r),.025),transparent 45%);transition:box-shadow .35s,background .35s;}
+.info-panel:hover{box-shadow:0 0 22px var(--hover-glow),0 0 48px rgba(var(--hover-glow-rgb),0.25);background:linear-gradient(180deg,rgba(var(--hover-glow-rgb),0.08),transparent 55%);}
+.card-body{padding:1.5rem;display:flex;flex-direction:column;gap:.75rem;flex:1;}
+.card-role{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--p);font-family:var(--font-d);}
+.card-title{font-family:var(--font-d);font-weight:900;letter-spacing:-.04em;line-height:1.5;background:linear-gradient(130deg,var(--p) 20%,var(--s) 60%,var(--a));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 22px rgba(var(--p-r),.45));animation:namePulse 3.5s ease-in-out infinite;}
 [data-theme="white"] .card-title{filter:none;}
-
-.card-desc{
-  color:var(--muted);
-  font-size:.88rem;
-  line-height:1.75;
-}
-
+.card-desc{color:var(--muted);font-size:.88rem;line-height:1.75;}
 .card-tags{display:flex;flex-wrap:wrap;gap:.45rem;}
-.tag{
-  font-size:.75rem;padding:.3rem .8rem;border-radius:999px;
-  border:1px solid rgba(var(--p-r),.25);
-  background:rgba(var(--p-r),.07);color:var(--p);letter-spacing:.04em;
-  transition:var(--ease);
-}
+.tag{font-size:.75rem;padding:.3rem .8rem;border-radius:999px;border:1px solid rgba(var(--p-r),.25);background:rgba(var(--p-r),.07);color:var(--p);letter-spacing:.04em;transition:var(--ease);}
 .tag:hover{background:rgba(var(--p-r),.18);transform:scale(1.04);}
- 
-.card-extra{
-  overflow:hidden;
-  max-height:0;
-  opacity:0;
-  transition:max-height .42s ease,opacity .32s ease,margin .32s ease;
-  margin:0;
-}
+.card-extra{overflow:hidden;max-height:0;opacity:0;transition:max-height .42s ease,opacity .32s ease,margin .32s ease;margin:0;}
+.project-card.expanded .card-extra{max-height:480px;opacity:1;margin-top:.3rem;}
+.card-divider{height:1px;background:var(--border);margin-bottom:1rem;}
+.feat-list{list-style:none;display:grid;gap:9px;padding-bottom:.2rem;}
+.feat-list li{padding-left:18px;position:relative;color:var(--text);font-size:.88rem;line-height:1.65;opacity:.85;}
+.feat-list li::before{content:'';position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;background:var(--p);box-shadow:0 0 9px rgba(var(--p-r),.65);}
+.card-footer{display:flex;justify-content:flex-end;padding:0 1.5rem 1.2rem;margin-top:auto;}
+.card-btn-text{display:inline-flex;align-items:center;justify-content:center;padding:.55rem 1rem;border-radius:10px;border:1px solid rgba(var(--p-r),.25);background:rgba(48,48,48,.24);color:var(--p);font-family:var(--font-d);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;transition:var(--ease);}
+.card-btn-text:hover{background:rgba(255,255,255,1);color:#000;}
 
-.project-card.expanded .card-extra{
-  max-height:480px;
-  opacity:1;
-  margin-top:.3rem;
-}
-
-.card-divider{
-  height:1px;
-  background:var(--border);
-  margin-bottom:1rem;
-  transition:background .4s;
-}
-
-.feat-list{
-  list-style:none;
-  display:grid;
-  gap:9px;
-  padding-bottom:.2rem;
-}
-
-.feat-list li{
-  padding-left:18px;
-  position:relative;
-  color:var(--text);
-  font-size:.88rem;
-  line-height:1.65;
-  opacity:.85;
-}
-
-.feat-list li::before{
-  content:'';
-  position:absolute;
-  left:0;
-  top:8px;
-  width:6px;
-  height:6px;
-  border-radius:50%;
-  background:var(--p);
-  box-shadow:0 0 9px rgba(var(--p-r),.65);
-}
-
-.card-footer{
-  display:flex;
-  justify-content:flex-end;
-  padding:0 1.5rem 1.2rem;
-  margin-top:auto;
-}
-
-/* expanded wide layout ≥860px */
 @media(min-width:860px){
-  .project-card.expanded{
-    grid-column:1/-1;
-    display:grid;
-    grid-template-columns:minmax(0,1.18fr) minmax(360px,.82fr);
-    min-height:340px;
+  .project-card.expanded{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1.18fr) minmax(360px,.82fr);min-height:340px;}
+  .project-card.expanded .video-panel{min-height:100%;border-right:1px solid var(--border);}
+  .project-card.expanded .video-wrap{padding-bottom:0;height:100%;min-height:100%;border-bottom:none;}
+  .project-card.expanded .video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;}
+  .project-card.expanded .info-panel{min-height:100%;}
+  .project-card.expanded .card-body{padding:2rem 2rem 1.2rem;justify-content:center;}
+  .project-card.expanded .card-title{font-size:1.6rem;}
+  .project-card.expanded .card-desc{font-size:.93rem;}
+  .project-card.expanded .card-footer{padding:0 2rem 1.6rem;}
+}
+
+/* ═══ ABOUT SECTION ═════════════════════════════════════════ */
+#about-section{position:relative;z-index:1;padding:5rem 1.8rem;max-width:1180px;margin:0 auto;}
+
+/* Tab switcher */
+.view-tabs{display:inline-flex;gap:8px;padding:6px;margin-bottom:28px;border-radius:999px;border:1px solid var(--border);background:rgba(var(--p-r),.04);backdrop-filter:blur(14px);}
+.view-tab-btn{padding:10px 22px;border-radius:999px;background:transparent;color:var(--muted);font-family:var(--font-d);font-size:.74rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;transition:var(--ease);border:0;}
+.view-tab-btn:hover{color:var(--text);}
+.view-tab-btn.active{background:linear-gradient(130deg,var(--p),var(--s));color:var(--bg);box-shadow:0 8px 25px rgba(var(--p-r),.35);}
+[data-theme="white"] .view-tab-btn.active{color:#fff;}
+
+/* About panel */
+#about-panel{animation:panelIn .35s ease both;}
+#github-panel{animation:panelIn .35s ease both;}
+@keyframes panelIn{from{opacity:0;transform:translateY(10px) scale(.98);}to{opacity:1;transform:translateY(0) scale(1);}}
+.panel-hidden{display:none;}
+
+/* About dashboard */
+.dashboard-about{display:grid;grid-template-columns:1fr 1.2fr;gap:1.5rem;}
+.about-profile-card,.about-dash-card{position:relative;overflow:hidden;background:var(--card-bg);border:1px solid var(--border);border-radius:24px;padding:1.6rem;backdrop-filter:blur(16px);box-shadow:0 18px 52px rgba(var(--p-r),.09);}
+.about-profile-card{padding:2rem;}
+.about-profile-glow{position:absolute;width:220px;height:220px;right:-70px;top:-70px;border-radius:50%;background:radial-gradient(circle,var(--p),var(--s),transparent 68%);opacity:.18;filter:blur(6px);animation:orbFloat 7s ease-in-out infinite;}
+.about-label{font-family:var(--font-d);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--p);margin-bottom:.7rem;}
+.about-profile-card h3{font-family:var(--font-d);font-size:clamp(1.4rem,3vw,2.15rem);line-height:1.18;margin:.8rem 0 1rem;}
+.about-profile-card p,.about-dash-card p{color:var(--muted);line-height:1.8;}
+.about-status-pill{display:inline-flex;align-items:center;gap:.65rem;margin-top:1.4rem;padding:.65rem .9rem;border-radius:999px;border:1px solid rgba(var(--p-r),.22);background:rgba(var(--p-r),.07);color:var(--text);font-size:.82rem;}
+.about-status-pill span{width:9px;height:9px;border-radius:50%;background:var(--p);box-shadow:0 0 16px rgba(var(--p-r),.9);}
+.about-dashboard-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.about-dash-card{transition:var(--ease);}
+.about-dash-card:hover{transform:translateY(-5px);border-color:rgba(var(--p-r),.42);box-shadow:0 18px 46px var(--glow);}
+.about-dash-card > span{color:var(--p);font-family:var(--font-d);font-size:.78rem;display:block;margin-bottom:.55rem;}
+.about-dash-card h4{font-family:var(--font-d);margin-bottom:.45rem;}
+
+/* ═══ GITHUB PANEL ══════════════════════════════════════════ */
+.github-workflow{display:grid;grid-template-columns:280px 1fr;gap:24px;}
+.github-left,.github-readme-card{background:var(--card-bg);border:1px solid var(--border);border-radius:22px;padding:22px;backdrop-filter:blur(16px);}
+.github-left h3{font-family:var(--font-d);font-size:1rem;color:var(--p);margin-bottom:14px;}
+.github-project-list{display:grid;gap:14px;}
+.github-project-card{text-align:left;padding:16px;border-radius:16px;border:1px solid var(--border);background:rgba(var(--p-r),.05);color:var(--text);transition:var(--ease);width:100%;}
+.github-project-card:hover,.github-project-card.active{border-color:var(--p);background:rgba(var(--p-r),.12);transform:translateY(-3px);}
+.github-project-card h3{font-family:var(--font-d);font-size:.95rem;margin-bottom:6px;}
+.github-project-card p{color:var(--muted);font-size:.82rem;line-height:1.5;}
+.github-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+.github-tags span{font-size:.72rem;color:var(--p);border:1px solid rgba(var(--p-r),.25);padding:4px 8px;border-radius:999px;}
+.github-readme-header{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:20px;}
+.github-readme-label{color:var(--p);font-size:.72rem;text-transform:uppercase;letter-spacing:.15em;font-family:var(--font-d);margin-bottom:4px;}
+.github-readme-header h3{font-family:var(--font-d);font-size:1.15rem;}
+.repo-btn{white-space:nowrap;padding:10px 16px;border-radius:999px;background:linear-gradient(130deg,var(--p),var(--s));color:var(--bg);font-family:var(--font-d);font-size:.75rem;font-weight:700;transition:var(--ease);}
+.repo-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px var(--glow);}
+[data-theme="white"] .repo-btn{color:#fff;}
+.github-readme-content{max-height:420px;overflow-y:auto;color:var(--text);line-height:1.8;font-size:.9rem;}
+.github-readme-content h1,.github-readme-content h2,.github-readme-content h3{color:var(--p);margin:14px 0 8px;font-family:var(--font-d);}
+.github-readme-content code{color:var(--s);background:rgba(var(--s-r),.08);padding:2px 6px;border-radius:4px;}
+.github-readme-content ul{padding-left:1.2rem;margin:8px 0;}
+.github-readme-content li{margin:4px 0;color:var(--muted);}
+/* GitHub README split view */
+/* =========================
+GITHUB VIEWER — SINGLE LARGE PANEL
+========================= */
+.github-readme-card-large {
+  display: flex;
+  flex-direction: column;
+  min-height: 760px;
+}
+
+.github-readme-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.github-readme-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: auto;
+}
+
+.github-view-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(var(--p-r), 0.06);
+}
+
+.github-view-btn {
+  padding: 9px 16px;
+  border-radius: 999px;
+  color: var(--muted);
+  font-family: var(--font-d);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: var(--ease);
+}
+
+.github-view-btn:hover {
+  color: var(--text);
+}
+
+.github-view-btn.active {
+  color: var(--bg);
+  background: linear-gradient(130deg, var(--p), var(--s));
+  box-shadow: 0 8px 24px rgba(var(--p-r), 0.2);
+}
+
+[data-theme="white"] .github-view-btn.active {
+  color: #fff;
+}
+
+.github-readme-viewer {
+  flex: 1;
+  min-height: 0;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+  background: #0d1117;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
+}
+
+
+.github-readme-pane.active {
+  display: block;
+}
+
+.github-readme-pane::-webkit-scrollbar {
+  width: 11px;
+  height: 11px;
+}
+
+.github-readme-pane::-webkit-scrollbar-track {
+  background: #0d1117;
+}
+
+.github-readme-pane::-webkit-scrollbar-thumb {
+  background: #30363d;
+  border-radius: 999px;
+  border: 2px solid #0d1117;
+}
+
+.github-readme-pane::-webkit-scrollbar-thumb:hover {
+  background: #484f58;
+}
+
+.github-readme-pane-preview {
+  padding: 22px 24px;
+  color: #c9d1d9;
+  background: #0d1117;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+/* Keep the right card fixed */
+.github-readme-card-large {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  height: 760px;
+  max-height: 760px;
+  overflow: hidden;
+}
+
+/* Viewer stays inside the fixed card */
+.github-readme-viewer {
+  flex: 1;
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: #0d1117;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
+}
+
+/* Both panes scroll internally, not the card */
+.github-readme-pane {
+  display: none;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: auto;
+  scrollbar-gutter: stable both-edges;
+}
+
+.github-readme-pane.active {
+  display: block;
+}
+
+/* Horizontal scrollbar support */
+.github-readme-pane::-webkit-scrollbar {
+  width: 11px;
+  height: 11px;
+}
+
+.github-readme-pane::-webkit-scrollbar-track {
+  background: #0d1117;
+}
+
+.github-readme-pane::-webkit-scrollbar-thumb {
+  background: #30363d;
+  border-radius: 999px;
+  border: 2px solid #0d1117;
+}
+
+.github-readme-pane::-webkit-scrollbar-thumb:hover {
+  background: #484f58;
+}
+
+/* CODE: do not wrap, allow horizontal scroll */
+.github-readme-pane-code {
+  padding: 18px 20px;
+  color: #c9d1d9;
+  background: #0d1117;
+  font-family: var(--font-m);
+  font-size: 0.9rem;
+  line-height: 1.75;
+  white-space: pre;
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
+/* PREVIEW: keep preview inside fixed card too */
+.github-readme-pane-preview {
+  padding: 22px 24px;
+  color: #c9d1d9;
+  background: #0d1117;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.8;
+  overflow-x: auto;
+}
+
+/* Long code blocks and tables scroll horizontally */
+.github-readme-pane-preview pre,
+.github-readme-pane-preview table {
+  max-width: 100%;
+  overflow-x: auto;
+  display: block;
+}
+
+/* Mobile: fixed shorter card */
+@media (max-width: 980px) {
+  .github-readme-card-large {
+    height: 520px;
+    max-height: 520px;
+  }
+}
+
+.github-readme-pane-preview h1,
+.github-readme-pane-preview h2,
+.github-readme-pane-preview h3,
+.github-readme-pane-preview h4,
+.github-readme-pane-preview h5,
+.github-readme-pane-preview h6 {
+  color: #f0f6fc;
+  margin: 18px 0 10px;
+  line-height: 1.3;
+  font-family: var(--font-d);
+}
+
+.github-readme-pane-preview h1,
+.github-readme-pane-preview h2 {
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid rgba(240, 246, 252, 0.12);
+}
+
+.github-readme-pane-preview p {
+  margin: 0 0 14px;
+  color: #c9d1d9;
+}
+
+.github-readme-pane-preview ul,
+.github-readme-pane-preview ol {
+  margin: 8px 0 14px;
+  padding-left: 1.4rem;
+}
+
+.github-readme-pane-preview li {
+  margin: 4px 0;
+  color: #c9d1d9;
+}
+
+.github-readme-pane-preview code {
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: rgba(110, 118, 129, 0.22);
+  color: #ff7b72;
+  font-family: var(--font-m);
+  font-size: 0.88em;
+}
+
+.github-readme-pane-preview pre {
+  margin: 14px 0;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(240, 246, 252, 0.08);
+  background: #161b22;
+  overflow-x: auto;
+}
+
+.github-readme-pane-preview pre code {
+  padding: 0;
+  background: transparent;
+  color: #c9d1d9;
+}
+
+.github-readme-pane-preview blockquote {
+  margin: 14px 0;
+  padding: 10px 14px;
+  border-left: 4px solid #30363d;
+  color: #8b949e;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.github-readme-pane-preview a {
+  color: #58a6ff;
+  text-decoration: underline;
+}
+
+.github-readme-pane-preview hr {
+  border: 0;
+  border-top: 1px solid rgba(240, 246, 252, 0.12);
+  margin: 18px 0;
+}
+
+/* Loading/error must never occupy layout space */
+.github-loading.panel-hidden,
+.github-error.panel-hidden {
+  display: none !important;
+}
+
+.github-loading,
+.github-error {
+  display: none !important;
+}
+
+@media (max-width: 980px) {
+  .github-readme-card-large {
+    min-height: 640px;
   }
 
-  .project-card.expanded .video-panel{
-    min-height:100%;
-    border-right:1px solid var(--border);
+  .github-readme-header {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-  .project-card.expanded .video-wrap{
-    padding-bottom:0;
-    height:100%;
-    min-height:100%;
-    border-bottom:none;
+  .github-readme-actions {
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-left: 0;
   }
 
-  .project-card.expanded .video-wrap iframe{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-  }
-
-  .project-card.expanded .info-panel{
-    min-height:100%;
-  }
-
-  .project-card.expanded .card-body{
-    padding:2rem 2rem 1.2rem;
-    justify-content:center;
-  }
-
-  .project-card.expanded .card-title{
-    font-size:1.6rem;
-  }
-
-  .project-card.expanded .card-desc{
-    font-size:.93rem;
-  }
-
-  .project-card.expanded .card-tags{
-    margin-top:auto;
-  }
-
-  .project-card.expanded .card-footer{
-    padding:0 2rem 1.6rem;
+  .github-readme-pane {
+    min-height: 480px;
+    max-height: 480px;
   }
 }
 
-.hero-split {
-  align-items:stretch;
-  text-align:left;
+.github-preview-body h1,
+.github-preview-body h2,
+.github-preview-body h3,
+.github-preview-body h4,
+.github-preview-body h5,
+.github-preview-body h6 {
+  color: #f0f6fc;
+  margin: 18px 0 10px;
+  line-height: 1.3;
+  font-family: var(--font-d);
 }
 
-.hero-shell {
-  position:relative;
-  z-index:1;
-  width:min(1180px,92%);
-  margin:auto;
-  display:grid;
-  grid-template-columns:1.05fr .95fr;
-  gap:3rem;
-  align-items:center;
+.github-preview-body h1,
+.github-preview-body h2 {
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid rgba(240, 246, 252, 0.12);
 }
 
-.hero-left {
-  max-width:680px;
+.github-preview-body p {
+  margin: 0 0 14px;
+  color: #c9d1d9;
 }
 
-.hero-left .hero-tag {
-  margin-left:0;
-  margin-right:0;
+.github-preview-body ul,
+.github-preview-body ol {
+  margin: 8px 0 14px;
+  padding-left: 1.4rem;
 }
 
-.hero-actions {
-  display:flex;
-  gap:1rem;
-  flex-wrap:wrap;
-  align-items:center;
+.github-preview-body li {
+  margin: 4px 0;
+  color: #c9d1d9;
 }
 
-.hero-secondary-btn {
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:.88rem 2rem;
-  border-radius:999px;
-  border:1px solid var(--border);
-  background:rgba(var(--p-r),.045);
-  color:var(--text);
-  font-family:var(--font-d);
-  font-size:.82rem;
-  font-weight:700;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  transition:var(--ease);
+.github-preview-body code {
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: rgba(110, 118, 129, 0.22);
+  color: #ff7b72;
+  font-family: var(--font-m);
+  font-size: 0.88em;
 }
 
-.hero-secondary-btn:hover {
-  color:var(--p);
-  border-color:rgba(var(--p-r),.45);
-  box-shadow:0 8px 28px var(--glow);
-  transform:translateY(-2px);
+.github-preview-body pre {
+  margin: 14px 0;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(240, 246, 252, 0.08);
+  background: #161b22;
+  overflow-x: auto;
 }
 
-.hero-dev-box {
-  background:var(--card-bg);
-  border:1px solid var(--border);
-  border-radius:22px;
-  padding:1.4rem;
-  backdrop-filter:blur(16px);
-  box-shadow:0 22px 70px var(--glow);
-  overflow:hidden;
+.github-preview-body pre code {
+  padding: 0;
+  background: transparent;
+  color: #c9d1d9;
 }
 
-.dev-box-top {
-  display:flex;
-  gap:8px;
-  margin-bottom:1rem;
+.github-preview-body blockquote {
+  margin: 14px 0;
+  padding: 10px 14px;
+  border-left: 4px solid #30363d;
+  color: #8b949e;
+  background: rgba(255, 255, 255, 0.02);
 }
 
-.dev-box-top span {
-  width:12px;
-  height:12px;
-  border-radius:50%;
+.github-preview-body a {
+  color: #58a6ff;
+  text-decoration: underline;
 }
 
-.dev-box-top span:nth-child(1){background:var(--s);}
-.dev-box-top span:nth-child(2){background:var(--p);}
-.dev-box-top span:nth-child(3){background:var(--a);}
-
-.hero-dev-box pre {
-  white-space:pre-wrap;
-  color:var(--text);
-  font-family:var(--font-m);
-  font-size:.95rem;
-  line-height:1.8;
-}
-/*ABOUT SECTION*/
-.about-section,
-.donation-section {
-  position:relative;
-  z-index:1;
-  padding:5rem 1.8rem;
-  max-width:1180px;
-  margin:0 auto;
+.github-preview-body hr {
+  border: 0;
+  border-top: 1px solid rgba(240, 246, 252, 0.12);
+  margin: 18px 0;
 }
 
-.info-section-grid {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:1.5rem;
-}
-
-.info-box,
-.donation-box {
-  background:var(--card-bg);
-  border:1px solid var(--border);
-  border-radius:20px;
-  padding:1.8rem;
-  backdrop-filter:blur(14px);
-  box-shadow:0 14px 42px rgba(var(--p-r),.08);
-}
-
-.info-box h3,
-.donation-box h3 {
-  font-family:var(--font-d);
-  color:var(--p);
-  margin-bottom:.8rem;
-}
-
-.info-box p,
-.donation-box p {
-  color:var(--muted);
-  line-height:1.8;
-}
-
-.about-tags {
-  display:flex;
-  flex-wrap:wrap;
-  gap:.55rem;
-  margin-top:1.3rem;
-}
-
-.about-tags span {
-  padding:.4rem .85rem;
-  border-radius:999px;
-  border:1px solid rgba(var(--p-r),.25);
-  color:var(--p);
-  background:rgba(var(--p-r),.07);
-  font-size:.78rem;
-}
-
-.wallet-row {
-  display:flex;
-  gap:.8rem;
-  margin:1.4rem 0 1rem;
-}
-
-.wallet-row input {
-  flex:1;
-  min-width:0;
-  padding:.85rem 1rem;
-  border-radius:12px;
-  border:1px solid var(--border);
-  background:rgba(var(--p-r),.04);
-  color:var(--text);
-  font-family:var(--font-m);
-}
-
-.copy-wallet-btn {
-  padding:.85rem 1.2rem;
-  border-radius:12px;
-  background:linear-gradient(130deg,var(--p),var(--s));
-  color:var(--bg);
-  font-family:var(--font-d);
-  font-weight:700;
-  transition:var(--ease);
-}
-
-.copy-wallet-btn:hover {
-  transform:translateY(-2px);
-  box-shadow:0 8px 28px var(--glow);
-}
-
-.wallet-note {
-  font-size:.86rem;
-}
-
-@media(max-width:860px) {
-  .hero-shell,
-  .info-section-grid {
-    grid-template-columns:1fr;
+@media (max-width: 980px) {
+  .github-readme-split {
+    grid-template-columns: 1fr;
   }
 
-  .hero-split {
-    text-align:center;
+  .github-pane-body {
+    height: 320px;
   }
+}
+/* Loading / error states */
+.github-loading,.github-error,.github-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:200px;gap:.8rem;color:var(--muted);font-family:var(--font-d);font-size:.82rem;letter-spacing:.1em;text-align:center;}
+.github-loading .spinner{width:32px;height:32px;border:2px solid rgba(var(--p-r),.2);border-top-color:var(--p);border-radius:50%;animation:spin .8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.github-error{color:var(--s);}
+.fallback-notice{padding:.6rem 1rem;border-radius:8px;background:rgba(var(--s-r),.08);border:1px solid rgba(var(--s-r),.2);color:var(--s);font-size:.78rem;margin-bottom:1rem;}
 
-  .hero-left .hero-tag {
-    margin-left:auto;
-    margin-right:auto;
+/* ═══ DONATION ══════════════════════════════════════════════ */
+.donation-section{position:relative;z-index:1;padding:5rem 1.8rem;max-width:1180px;margin:0 auto;}
+.payment-system{max-width:780px;margin:0 auto;padding:1rem;border-radius:28px;background:var(--card-bg);border:1px solid var(--border);backdrop-filter:blur(18px);}
+.payment-tabs{display:flex;gap:.7rem;margin-bottom:1rem;}
+.payment-tab{flex:1;padding:.8rem 1rem;border-radius:999px;border:1px solid var(--border);background:rgba(var(--p-r),.045);color:var(--muted);font-family:var(--font-d);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;transition:var(--ease);}
+.payment-tab.active,.payment-tab:hover{color:var(--p);border-color:rgba(var(--p-r),.45);background:rgba(var(--p-r),.12);box-shadow:0 8px 24px rgba(var(--p-r),.12);}
+.payment-panel{display:none;border-radius:22px;padding:1.5rem;background:linear-gradient(145deg,rgba(var(--p-r),.08),rgba(var(--s-r),.045));border:1px solid rgba(var(--p-r),.18);}
+.payment-panel.active{display:block;animation:panelIn .28s ease both;}
+.payment-head{display:flex;justify-content:space-between;gap:1rem;align-items:flex-start;margin-bottom:1.2rem;}
+.payment-label{font-family:var(--font-d);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--p);margin-bottom:4px;}
+.payment-panel h3{font-family:var(--font-d);font-size:1.45rem;}
+.payment-badge{padding:.45rem .85rem;border-radius:999px;color:var(--p);border:1px solid rgba(var(--p-r),.28);background:rgba(var(--p-r),.1);font-family:var(--font-d);font-size:.72rem;}
+.qr-toggle{display:flex;gap:.7rem;margin-bottom:1rem;}
+.qr-view-btn{flex:1;padding:.8rem 1rem;border-radius:999px;border:1px solid var(--border);background:rgba(var(--p-r),.045);color:var(--muted);font-family:var(--font-d);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;transition:var(--ease);}
+.qr-view-btn.active,.qr-view-btn:hover{color:var(--p);border-color:rgba(var(--p-r),.45);background:rgba(var(--p-r),.12);}
+.payment-view{display:none;}
+.payment-view.active{display:block;animation:panelIn .28s ease both;}
+.wallet-row{display:flex;gap:.8rem;margin:1rem 0;}
+.wallet-row input{flex:1;min-width:0;padding:.85rem 1rem;border-radius:12px;border:1px solid var(--border);background:rgba(var(--p-r),.04);color:var(--text);font-family:var(--font-m);}
+.copy-wallet-btn{padding:.85rem 1.2rem;border-radius:12px;background:linear-gradient(130deg,var(--p),var(--s));color:var(--bg);font-family:var(--font-d);font-weight:700;transition:var(--ease);white-space:nowrap;}
+.copy-wallet-btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px var(--glow);}
+[data-theme="white"] .copy-wallet-btn{color:#fff;}
+.network-meta{display:flex;justify-content:space-between;gap:1rem;padding:1rem;border-radius:16px;background:rgba(var(--p-r),.045);border:1px solid rgba(var(--p-r),.12);color:var(--muted);}
+.network-meta strong{color:var(--text);}
+.qr-card{display:grid;place-items:center;gap:1rem;padding:1.4rem;border-radius:20px;border:1px solid rgba(var(--p-r),.18);background:rgba(var(--p-r),.045);text-align:center;color:var(--muted);}
+.fake-qr{width:170px;height:170px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:14px;border-radius:18px;background:var(--text);box-shadow:0 0 34px rgba(var(--p-r),.22);}
+.fake-qr span{border-radius:6px;background:var(--bg);}
+.fake-qr span:nth-child(3n){background:var(--p);}
+.paypal-qr span:nth-child(3n){background:#0070ba;}
+.extra-networks{max-height:0;overflow:hidden;opacity:0;transition:max-height .35s ease,opacity .25s ease,margin .25s ease;}
+.payment-panel.expanded .extra-networks{max-height:360px;opacity:1;margin-top:1rem;}
+.network-option{display:grid;gap:.4rem;padding:1rem;border-radius:16px;border:1px solid var(--border);background:rgba(var(--p-r),.045);margin-bottom:.75rem;}
+.network-option strong{font-family:var(--font-d);color:var(--text);}
+.network-option code{color:var(--p);word-break:break-all;font-family:var(--font-m);}
+.expand-donation-btn{display:flex;align-items:center;justify-content:center;width:42px;height:42px;margin:1.1rem auto 0;border-radius:50%;color:var(--p);border:1px solid rgba(var(--p-r),.35);background:rgba(var(--p-r),.08);transition:var(--ease);}
+.expand-donation-btn:hover{box-shadow:0 8px 24px var(--glow);}
+.payment-panel.expanded .expand-donation-btn{transform:rotate(180deg);}
+.payment-desc{color:var(--muted);line-height:1.8;}
+
+/* ═══ CONTACT ═══════════════════════════════════════════════ */
+.contact{position:relative;z-index:1;padding:5rem 2rem 4rem;text-align:center;overflow:hidden;}
+.footer-layers{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+.f-ring{position:absolute;border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%);}
+.f-ring:nth-child(1){width:min(56vw,560px);aspect-ratio:1;border:1px solid rgba(var(--p-r),.1);animation:rp 7.5s ease-in-out infinite;}
+.f-ring:nth-child(2){width:min(36vw,360px);aspect-ratio:1;border:1px solid rgba(var(--s-r),.07);animation:rp 7.5s ease-in-out -3.5s infinite;}
+.f-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(var(--p-r),.04) 1px,transparent 1px),linear-gradient(90deg,rgba(var(--p-r),.04) 1px,transparent 1px);background-size:26px 26px;opacity:.28;mask-image:radial-gradient(ellipse at center,black,transparent 75%);}
+.f-sweep{position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(var(--p-r),.055),transparent);width:32%;left:-32%;filter:blur(9px);animation:footSweep 10s linear infinite;}
+@keyframes footSweep{to{left:132%;}}
+.contact-inner{position:relative;z-index:1;}
+.contact h2{font-family:var(--font-d);font-size:clamp(1.8rem,4.5vw,2.8rem);font-weight:900;letter-spacing:-.04em;color:var(--p);text-shadow:0 0 28px rgba(var(--p-r),.38);margin-bottom:.6rem;}
+[data-theme="white"] .contact h2{text-shadow:none;}
+.contact-sub{color:var(--muted);font-size:.98rem;margin-bottom:2.8rem;}
+.contact-links{display:flex;justify-content:center;gap:1.1rem;flex-wrap:wrap;margin-bottom:3.5rem;}
+.c-link{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-d);font-size:.82rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text);padding:.8rem 1.6rem;border:1px solid var(--border);border-radius:999px;background:rgba(var(--p-r),.04);backdrop-filter:blur(10px);transition:var(--ease);position:relative;overflow:hidden;}
+.c-link::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(var(--p-r),.22),transparent);transform:translateX(-120%);transition:transform .55s ease;}
+.c-link:hover::before{transform:translateX(120%);}
+.c-link:hover{border-color:rgba(var(--p-r),.5);background:rgba(var(--p-r),.10);color:var(--p);box-shadow:0 4px 22px var(--glow);transform:translateY(-2px);}
+.footer-copy{color:var(--muted);font-size:.82rem;padding-top:1.8rem;border-top:1px solid rgba(var(--p-r),.12);}
+
+/* ═══ RESPONSIVE ════════════════════════════════════════════ */
+@media(max-width:860px){
+  .hero-shell,.dashboard-about,.github-workflow{grid-template-columns:1fr;}
+  .hero{text-align:center;}
+  .hero-tag,.hero-actions{margin-left:auto;margin-right:auto;}
+  .hero-actions{justify-content:center;}
+  .section-indicator{display:none;}
+  .about-dashboard-grid{grid-template-columns:1fr 1fr;}
+  .github-readme-header{flex-direction:column;align-items:flex-start;}
+}
+@media(max-width:600px){
+  .theme-bar{right:.8rem;top:.8rem;padding:6px 10px;gap:7px;}
+  .theme-bar-label{display:none;}
+  .brand-fixed{font-size:11px;}
+  .projects-grid{grid-template-columns:1fr;}
+  .contact-links{gap:.8rem;}
+  .c-link{font-size:.76rem;padding:.7rem 1.2rem;}
+  .payment-tabs,.qr-toggle,.dev-metrics{grid-template-columns:1fr;display:grid;}
+  .cursor-glow{display:none;}
+  .about-dashboard-grid{grid-template-columns:1fr;}
+  .wallet-row{flex-direction:column;}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none !important;transition:none !important;scroll-behavior:auto !important;}.cursor-glow{display:none;}}
+
+.reveal,
+.project-card,
+.github-card {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+.github-table-wrap {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 14px 0;
+}
+
+.github-readme-pane-preview table {
+  width: max-content;
+  min-width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  background: transparent;
+}
+
+.github-readme-pane-preview th,
+.github-readme-pane-preview td {
+  padding: 10px 12px;
+  border: 1px solid rgba(240, 246, 252, 0.12);
+  text-align: left;
+  vertical-align: top;
+  color: #c9d1d9;
+}
+
+.github-readme-pane-preview th {
+  color: #f0f6fc;
+  background: rgba(255, 255, 255, 0.03);
+  font-weight: 700;
+}
+
+.reveal.visible,
+.project-card.visible,
+.github-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.about-github-section {
+  display: none;
+}
+
+.about-github-section.active {
+  display: block;
+}
+
+  /* HERO FIX */
+  .hero {
+    text-align: left;
+    align-items: flex-start;
   }
-
+  .hero-content {
+    text-align: left;
+    align-items: flex-start;
+  }
+  .hero h1 {
+    text-align: left;
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    margin-bottom: 1rem;
+    max-width: 900px;
+  }
+  .hero-tag,
+  .hero-role,
+  .hero-content p {
+    text-align: left;
+    line-height: 1.65;
+    max-width: 680px;
+    margin-left: 0;
+    margin-right: auto;
+  }
   .hero-actions {
-    justify-content:center;
+    justify-content: flex-start;
   }
-}
-
-@media(max-width:600px) {
-  .wallet-row {
-    flex-direction:column;
-  }
-}
-
-.about-fancy-grid {
-  display:grid;
-  grid-template-columns:1fr 1.2fr;
-  gap:1.5rem;
-}
-
-.about-main-card,
-.about-stat-card,
-.donation-system,
-.donation-card {
-  background:var(--card-bg);
-  border:1px solid var(--border);
-  backdrop-filter:blur(16px);
-  box-shadow:0 18px 50px rgba(var(--p-r),.08);
-}
-
-.about-main-card {
-  position:relative;
-  overflow:hidden;
-  border-radius:24px;
-  padding:2.2rem;
-  min-height:100%;
-}
-
-.about-orb {
-  position:absolute;
-  width:180px;
-  height:180px;
-  right:-55px;
-  top:-55px;
-  border-radius:50%;
-  background:radial-gradient(circle,var(--p),transparent 68%);
-  opacity:.16;
-  filter:blur(4px);
-}
-
-.about-kicker,
-.donation-kicker {
-  font-family:var(--font-d);
-  font-size:.68rem;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  color:var(--p);
-  margin-bottom:.7rem;
-}
-
-.about-main-card h3 {
-  font-family:var(--font-d);
-  font-size:clamp(1.45rem,3vw,2.2rem);
-  line-height:1.15;
-  color:var(--text);
-  margin-bottom:1rem;
-}
-
-.about-main-card p,
-.about-stat-card p,
-.donation-desc {
-  color:var(--muted);
-  line-height:1.8;
-}
-
-.about-mini-grid {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:1rem;
-}
-
-.about-stat-card {
-  border-radius:20px;
-  padding:1.35rem;
-  transition:var(--ease);
-}
-
-.about-stat-card:hover {
-  transform:translateY(-4px);
-  border-color:rgba(var(--p-r),.4);
-  box-shadow:0 16px 42px var(--glow);
-}
-
-.about-stat-card span {
-  display:inline-flex;
-  font-family:var(--font-d);
-  color:var(--p);
-  font-size:.78rem;
-  margin-bottom:.8rem;
-}
-
-.about-stat-card h4 {
-  font-family:var(--font-d);
-  color:var(--text);
-  margin-bottom:.45rem;
-}
-
-.donation-system {
-  max-width:760px;
-  margin:0 auto;
-  border-radius:26px;
-  padding:1rem;
-}
-
-.payment-tabs {
-  display:flex;
-  gap:.7rem;
-  margin-bottom:1rem;
-}
-
-.payment-tab {
-  flex:1;
-  padding:.85rem 1rem;
-  border-radius:999px;
-  border:1px solid var(--border);
-  color:var(--muted);
-  background:rgba(var(--p-r),.035);
-  font-family:var(--font-d);
-  font-size:.75rem;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  transition:var(--ease);
-}
-
-.payment-tab.active,
-.payment-tab:hover {
-  color:var(--p);
-  border-color:rgba(var(--p-r),.45);
-  background:rgba(var(--p-r),.12);
-}
-
-.donation-card {
-  display:none;
-  position:relative;
-  border-radius:22px;
-  padding:1.6rem;
-  overflow:hidden;
-}
-
-.donation-card.active {
-  display:block;
-  animation:donationSwap .28s ease both;
-}
-
-@keyframes donationSwap {
-  from { opacity:0; transform:translateY(8px) scale(.98); }
-  to { opacity:1; transform:translateY(0) scale(1); }
-}
-
-.donation-card-head {
-  display:flex;
-  justify-content:space-between;
-  gap:1rem;
-  align-items:flex-start;
-  margin-bottom:1rem;
-}
-
-.donation-card h3 {
-  font-family:var(--font-d);
-  color:var(--text);
-  font-size:1.45rem;
-}
-
-.network-pill {
-  padding:.45rem .85rem;
-  border-radius:999px;
-  background:rgba(var(--p-r),.1);
-  color:var(--p);
-  border:1px solid rgba(var(--p-r),.28);
-  font-family:var(--font-d);
-  font-size:.72rem;
-}
-
-.clean-wallet {
-  margin:1.25rem 0;
-}
-
-.network-meta {
-  display:flex;
-  justify-content:space-between;
-  gap:1rem;
-  padding:1rem;
-  border-radius:16px;
-  background:rgba(var(--p-r),.045);
-  border:1px solid rgba(var(--p-r),.12);
-  color:var(--muted);
-}
-
-.network-meta strong {
-  color:var(--text);
-  font-weight:400;
-}
-
-.extra-networks {
-  max-height:0;
-  opacity:0;
-  overflow:hidden;
-  transition:max-height .38s ease, opacity .28s ease, margin .28s ease;
-}
-
-.donation-card.expanded .extra-networks {
-  max-height:420px;
-  opacity:1;
-  margin-top:1rem;
-}
-
-.network-option {
-  display:grid;
-  gap:.55rem;
-  padding:1rem;
-  border-radius:16px;
-  border:1px solid var(--border);
-  background:rgba(var(--p-r),.035);
-  margin-bottom:.75rem;
-}
-
-.network-option strong {
-  color:var(--text);
-  font-family:var(--font-d);
-}
-
-.network-option span {
-  display:block;
-  color:var(--muted);
-  font-size:.85rem;
-}
-
-.network-option code {
-  color:var(--p);
-  word-break:break-all;
-  font-family:var(--font-m);
-  font-size:.85rem;
-}
-
-.expand-donation-btn {
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  width:42px;
-  height:42px;
-  margin:1.2rem auto 0;
-  border-radius:50%;
-  border:1px solid rgba(var(--p-r),.35);
-  background:rgba(var(--p-r),.09);
-  color:var(--p);
-  font-family:var(--font-d);
-  font-size:1.2rem;
-  transition:var(--ease);
-}
-
-.expand-donation-btn:hover {
-  transform:translateY(-2px);
-  box-shadow:0 8px 24px var(--glow);
-}
-
-.donation-card.expanded .expand-donation-btn {
-  transform:rotate(180deg);
-}
-
-@media(max-width:860px) {
-  .about-fancy-grid {
-    grid-template-columns:1fr;
-  }
-}
-
-@media(max-width:600px) {
-  .about-mini-grid,
-  .payment-tabs {
-    grid-template-columns:1fr;
-    display:grid;
+  @media (max-width: 860px) {
+    .hero {
+      text-align: center;
+      align-items: center;
+    }
+    .hero-content {
+      text-align: center;
+      align-items: center;
+    }
+    .hero h1,
+    .hero-tag,
+    .hero-role,
+    .hero-content p {
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero-actions {
+      justify-content: center;
+    }
   }
 
-  .donation-card-head,
-  .network-meta {
-    flex-direction:column;
+  /* ABOUT HEADER COLOR FIX */
+  .about-section h2,
+  #aboutSection h2,
+  .section-title {
+    background: linear-gradient(135deg, #7c3aed, #06b6d4);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 800;
+    letter-spacing: -0.03em;
   }
-}
 
-    /* scroll reveal */
-    .reveal{opacity:0;transform:translateY(20px);transition:opacity .65s ease,transform .65s ease;}
-    .reveal.visible{opacity:1;transform:translateY(0);}
+  /* SECTION TOGGLE FIX */
+  .about-github-section {
+    display: none;
+  }
 
-    /* ═══ CONTACT ══════════════════════════════════════════ */
-    .contact{
-      position:relative;z-index:1;
-      padding:5rem 2rem 4rem;text-align:center;overflow:hidden;
-    }
-    .footer-layers{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
-    .f-ring{
-      position:absolute;border-radius:50%;left:50%;top:50%;
-      transform:translate(-50%,-50%);
-    }
-    .f-ring:nth-child(1){width:min(56vw,560px);aspect-ratio:1;border:1px solid rgba(var(--p-r),.1);animation:rp 7.5s ease-in-out infinite;}
-    .f-ring:nth-child(2){width:min(36vw,360px);aspect-ratio:1;border:1px solid rgba(var(--s-r),.07);animation:rp 7.5s ease-in-out -3.5s infinite;}
-    .f-grid{
-      position:absolute;inset:0;
-      background-image:
-        linear-gradient(rgba(var(--p-r),.04) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(var(--p-r),.04) 1px,transparent 1px);
-      background-size:26px 26px;opacity:.28;
-      mask-image:radial-gradient(ellipse at center,black,transparent 75%);
-    }
+  .about-github-section.active {
+    display: block;
+  }
 
-    .f-sweep{
-      position:absolute;inset:0;
-      background:linear-gradient(90deg,transparent,rgba(var(--p-r),.055),transparent);
-      width:32%;left:-32%;filter:blur(9px);
-      animation:footSweep 10s linear infinite;
-    }
-    @keyframes footSweep{to{left:132%;}}
 
-    .contact-inner{position:relative;z-index:1;}
-    .contact h2{
-      font-family:var(--font-d);
-      font-size:clamp(1.8rem,4.5vw,2.8rem);
-      font-weight:900;letter-spacing:-.04em;
-      color:var(--p);text-shadow:0 0 28px rgba(var(--p-r),.38);
-      margin-bottom:.6rem;transition:color .4s,text-shadow .4s;
-    }
-    [data-theme="white"] .contact h2{text-shadow:none;}
-    .contact-sub{color:var(--muted);font-size:.98rem;margin-bottom:2.8rem;}
-    .contact-links{display:flex;justify-content:center;gap:1.1rem;flex-wrap:wrap;margin-bottom:3.5rem;}
-    .c-link{
-      display:inline-flex;align-items:center;gap:9px;
-      font-family:var(--font-d);font-size:.82rem;font-weight:700;
-      letter-spacing:.1em;text-transform:uppercase;color:var(--text);
-      padding:.8rem 1.6rem;border:1px solid var(--border);border-radius:999px;
-      background:rgba(var(--p-r),.04);backdrop-filter:blur(10px);
-      transition:var(--ease);position:relative;overflow:hidden;
-    }
-    .c-link::before{
-      content:'';position:absolute;inset:0;
-      background:linear-gradient(90deg,transparent,rgba(var(--p-r),.22),transparent);
-      transform:translateX(-120%);transition:transform .55s ease;
-    }
-    .c-link:hover::before{transform:translateX(120%);}
-    .c-link:hover{
-      border-color:rgba(var(--p-r),.5);background:rgba(var(--p-r),.10);
-      color:var(--p);box-shadow:0 4px 22px var(--glow);transform:translateY(-2px);
-    }
-    .footer-copy{
-      color:var(--muted);font-size:.82rem;padding-top:1.8rem;
-      border-top:1px solid rgba(var(--p-r),.12);transition:border-color .4s;
-    }
-
-    /* ═══ RESPONSIVE ═══════════════════════════════════════ */
-    @media(max-width:600px){
-      .theme-bar{right:.8rem;top:.8rem;padding:6px 10px;gap:7px;}
-      .theme-bar-label{display:none;}
-      .brand-fixed{font-size:11px;}
-      .projects-grid{grid-template-columns:1fr;}
-      .contact-links{gap:.8rem;}
-      .c-link{font-size:.76rem;padding:.7rem 1.2rem;}
-    }
 
 </style>
-
 </head>
-
 <body>
-  <!-- global background -->
-  <div class="bg-canvas" aria-hidden="true">
-    <div class="bg-base"></div>
-    <div class="bg-grid"></div>
-    <div class="bg-scan"></div>
-    <div class="bg-vignette"></div>
-  </div>
 
-  <!-- chrome -->
-  <div class="brand-fixed">xmvcz</div>
-  <div class="theme-bar" role="group" aria-label="Colour theme">
-    <span class="theme-bar-label">Theme</span>
-    <button class="tdot active" data-t="cyan"    title="Cyan"></button>
-    <button class="tdot"        data-t="magenta" title="Magenta"></button>
-    <button class="tdot"        data-t="lime"    title="Lime"></button>
-    <button class="tdot"        data-t="amber"   title="Amber"></button>
-    <button class="tdot"        data-t="white"   title="White"></button>
-  </div>
+<!-- ═══ BACKGROUND ═══════════════════════════════════════════ -->
+<div class="bg-canvas" aria-hidden="true">
+  <div class="bg-base"></div>
+  <div class="bg-grid"></div>
+  <div class="bg-scan"></div>
+  <div class="bg-vignette"></div>
+</div>
 
-  <!-- HERO -->
-  <section class="hero hero-split" id="top">
+<!-- ═══ CHROME ════════════════════════════════════════════════ -->
+<div class="brand-fixed">xmvcz</div>
+<div class="theme-bar" role="group" aria-label="Colour theme">
+  <span class="theme-bar-label">Theme</span>
+  <button class="tdot active" data-t="cyan"    title="Cyan"></button>
+  <button class="tdot"        data-t="magenta" title="Magenta"></button>
+  <button class="tdot"        data-t="lime"    title="Lime"></button>
+  <button class="tdot"        data-t="amber"   title="Amber"></button>
+  <button class="tdot"        data-t="white"   title="White"></button>
+</div>
+
+<!-- ═══ HERO ══════════════════════════════════════════════════ -->
+<section class="hero" id="top">
   <div class="hero-layers" aria-hidden="true">
     <div class="h-dot-field"></div>
     <div class="h-ring"></div>
@@ -1612,611 +948,1149 @@ body.mouse-moving .bg-grid {
   </div>
 
   <div class="hero-shell">
-    <div class="hero-content hero-left">
+    <div class="hero-content">
       <div class="section-eyebrow">Roblox Developer Portfolio</div>
-
       <h1>Hi, I'm xmvcz</h1>
-
       <p class="hero-role">Game Developer &amp; Systems Designer</p>
-
-      <p class="hero-tag">
-        I build scalable Roblox gameplay systems, combat frameworks,
-        progression loops, NPC logic, UI animation, and clean Luau/Knit architecture.
-      </p>
-
+      <p class="hero-tag">I build scalable Roblox gameplay systems, combat frameworks, progression loops, NPC logic, UI animation, and clean Luau/Knit architecture.</p>
       <div class="hero-actions">
         <a class="cta-btn" href="#projects">View My Work</a>
         <a class="hero-secondary-btn" href="#contact">Contact Me</a>
       </div>
     </div>
 
-    <aside class="hero-dev-box reveal">
-      <div class="dev-box-top">
-        <span></span><span></span><span></span>
+    <aside class="hero-dev-card reveal">
+      <div class="dev-card-glow"></div>
+      <div class="dev-card-top">
+        <div class="dev-dots"><span></span><span></span><span></span></div>
+        <p>LIVE SYSTEM</p>
       </div>
-
-      <pre><code>local developer = {
-  name = "xmvcz",
-  role = "Roblox Developer",
-  stack = { "Luau", "Knit", "Combat", "UI" },
-  focus = "Clean scalable systems",
-  available = true
+      <div class="dev-status-row">
+        <span class="status-dot"></span>
+        <span>Available for Roblox systems work</span>
+      </div>
+      <pre class="code-window"><code><span class="code-key">local</span> developer = {
+  <span class="code-prop">name</span>  = <span class="code-value">"xmvcz"</span>,
+  <span class="code-prop">role</span>  = <span class="code-value">"Roblox Developer"</span>,
+  <span class="code-prop">stack</span> = {
+    <span class="code-value">"Luau"</span>, <span class="code-value">"Knit"</span>,
+    <span class="code-value">"Combat"</span>, <span class="code-value">"UI"</span>
+  }
 }
 
-developer:Build()</code></pre>
-
-      <div class="hero-stack">
-        <span>Luau</span>
-        <span>Knit</span>
-        <span>Combat</span>
-        <span>UI Systems</span>
+<span class="code-func">developer:Deploy()</span></code></pre>
+      <div class="dev-metrics">
+        <div><strong>03+</strong><span>Projects</span></div>
+        <div><strong>5</strong><span>Themes</span></div>
+        <div><strong>100%</strong><span>Systems Focus</span></div>
       </div>
     </aside>
   </div>
 </section>
 
-  <!-- PROJECTS -->
-  <section class="projects-section" id="projects">
-    <div class="section-header reveal">
-      <div class="section-eyebrow">Featured Work</div>
-      <h2 class="section-title">Projects</h2>
-      <p class="section-sub">Roblox systems, mechanics, and UI work</p>
-    </div>
-
-    <div class="card-controls reveal">
-      <button class="toggle-chip" id="toggleAll"
-              aria-label="Expand all project cards" aria-pressed="false">
-        <span class="toggle-chip-icon" aria-hidden="true">^</span>
-        <span class="toggle-chip-label">Expand All</span>
-      </button>
-      <span class="controls-note">Or expand individual cards below</span>
-    </div>
-
-    <div class="projects-grid" id="projectsGrid"></div>
-  </section>
-  <section class="about-section reveal" id="about">
-  <div class="section-header">
-    <div class="section-eyebrow">About Me</div>
-    <h2 class="section-title">Systems-first Roblox Developer</h2>
-    <p class="section-sub">
-      I design gameplay systems that are clean, modular, responsive, and expandable.
-    </p>
+<!-- ═══ PROJECTS ══════════════════════════════════════════════ -->
+<section id="projects-section">
+  <div class="section-header reveal">
+    <div class="section-eyebrow">Featured Work</div>
+    <h2 class="section-title">Projects</h2>
+    <p class="section-sub">Roblox systems, mechanics, and UI work</p>
   </div>
 
-  <div class="about-fancy-grid">
-    <div class="about-main-card">
-      <div class="about-orb"></div>
-      <p class="about-kicker">Developer Profile</p>
-      <h3>Building Roblox systems with structure, polish, and game feel.</h3>
-      <p>
-        I specialize in combat systems, round-based loops, UI animation,
-        NPC behavior, progression mechanics, and reusable Knit services.
-        My goal is to create systems that feel smooth for players and stay
-        maintainable for developers.
-      </p>
-
-      <div class="about-status">
-        <span></span>
-        Available for freelance / contract Roblox work
-      </div>
-    </div>
-
-    <div class="about-mini-grid">
-      <div class="about-stat-card">
-        <span>01</span>
-        <h4>Combat Systems</h4>
-        <p>Combo chains, weapon modules, stun logic, blocking, states.</p>
-      </div>
-
-      <div class="about-stat-card">
-        <span>02</span>
-        <h4>Architecture</h4>
-        <p>Knit services, modular code, clean replication patterns.</p>
-      </div>
-
-      <div class="about-stat-card">
-        <span>03</span>
-        <h4>UI / UX</h4>
-        <p>Animated interfaces, feedback systems, readable player flow.</p>
-      </div>
-
-      <div class="about-stat-card">
-        <span>04</span>
-        <h4>Game Feel</h4>
-        <p>Responsive mechanics, polished interactions, smooth systems.</p>
-      </div>
-    </div>
+  <div class="project-filter reveal" id="project-filter-bar">
+    <button class="filter-btn active" data-filter="all"        type="button">All</button>
+    <button class="filter-btn"        data-filter="Combat"     type="button">Combat</button>
+    <button class="filter-btn"        data-filter="UI / UX"    type="button">UI</button>
+    <button class="filter-btn"        data-filter="Multiplayer" type="button">Systems</button>
   </div>
+
+  <div class="card-controls reveal">
+    <button class="toggle-chip" id="toggle-all-btn" aria-label="Expand all project cards" aria-pressed="false">
+      <span class="toggle-chip-icon" aria-hidden="true">^</span>
+      <span class="toggle-chip-label">Expand All</span>
+    </button>
+    <span class="controls-note">Or expand individual cards below</span>
+  </div>
+
+  <!-- ▶ Project cards are rendered here — independent of GitHub -->
+  <div class="projects-grid" id="projects-grid"></div>
 </section>
 
+<!-- ═══ ABOUT ════════════════════════════════════════════════ -->
+<section id="about-section" class="reveal">
+  <div class="section-header">
+    <div class="section-eyebrow">Developer Profile</div>
+    <h2 class="section-title">About Me</h2>
+  </div>
+
+  <!-- Tab switcher -->
+  <div class="view-tabs" role="tablist" aria-label="About tabs">
+    <button class="view-tab-btn active" role="tab" aria-selected="true"  aria-controls="about-panel"  data-tab="about-panel">About Me</button>
+    <button class="view-tab-btn"        role="tab" aria-selected="false" aria-controls="github-panel" data-tab="github-panel">GitHub Work</button>
+  </div>
+
+  <!-- About panel -->
+  <div id="about-panel" role="tabpanel">
+    <div class="dashboard-about">
+      <div class="about-profile-card">
+        <div class="about-profile-glow"></div>
+        <p class="about-label">Developer Identity</p>
+        <h3>xmvcz builds Roblox systems with clean structure and strong game feel.</h3>
+        <p>My focus is combat frameworks, round loops, NPC logic, UI animation, progression systems, and scalable Knit architecture.</p>
+        <div class="about-status-pill">
+          <span></span>
+          Open to freelance / contract work
+        </div>
+      </div>
+
+      <div class="about-dashboard-grid">
+        <div class="about-dash-card">
+          <span>01</span>
+          <h4>Combat Systems</h4>
+          <p>Weapon modules, combo chains, stun logic, blocking, and state handling.</p>
+        </div>
+        <div class="about-dash-card">
+          <span>02</span>
+          <h4>UI Animation</h4>
+          <p>Bezier-style motion, responsive menus, player feedback, and clean UI flow.</p>
+        </div>
+        <div class="about-dash-card">
+          <span>03</span>
+          <h4>Architecture</h4>
+          <p>Knit services, reusable modules, clean remotes, and organized Luau code.</p>
+        </div>
+        <div class="about-dash-card">
+          <span>04</span>
+          <h4>NPC / Gameplay</h4>
+          <p>NPC movement, round systems, progression loops, and gameplay logic.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================
+REPLACE ONLY THE GITHUB PANEL HTML
+========================= -->
+<div id="github-panel" class="panel-hidden" role="tabpanel">
+  <div class="github-workflow">
+    <aside class="github-left">
+      <h3>GitHub Projects</h3>
+      <div id="github-project-list" class="github-project-list"></div>
+    </aside>
+
+    <section class="github-readme-card github-readme-card-large">
+      <div class="github-readme-header">
+        <div>
+          <p class="github-readme-label">README Viewer</p>
+          <h3 id="github-readme-title">Select a project</h3>
+        </div>
+
+        <div class="github-readme-actions">
+          <div class="github-view-toggle" role="tablist" aria-label="README display mode">
+            <button
+              type="button"
+              id="github-mode-code"
+              class="github-view-btn active"
+              data-mode="code"
+              role="tab"
+              aria-selected="true"
+            >
+              Code
+            </button>
+            <button
+              type="button"
+              id="github-mode-preview"
+              class="github-view-btn"
+              data-mode="preview"
+              role="tab"
+              aria-selected="false"
+            >
+              Preview
+            </button>
+          </div>
+
+          <a id="github-repo-link" class="repo-btn" href="#" target="_blank" rel="noopener">View Repo</a>
+        </div>
+      </div>
+
+      <div id="github-readme-loading" class="github-loading panel-hidden" aria-hidden="true">
+        <div class="spinner"></div>
+        <span>Fetching README…</span>
+      </div>
+
+      <div id="github-readme-error" class="github-error panel-hidden" aria-hidden="true"></div>
+
+      <div class="github-readme-viewer">
+        <div
+          id="github-readme-raw"
+          class="github-readme-pane github-readme-pane-code active"
+        >
+          Select a project to view README source.
+        </div>
+
+        <div
+          id="github-readme-preview"
+          class="github-readme-pane github-readme-pane-preview"
+        >
+          Select a project to view rendered README.
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+</section>
+
+<!-- ═══ DONATION ═════════════════════════════════════════════ -->
 <section class="donation-section reveal" id="donate">
   <div class="section-header">
     <div class="section-eyebrow">Support</div>
-    <h2 class="section-title">Donate / Support My Work</h2>
-    <p class="section-sub">
-      Choose a payment type. Crypto is active now, with room for future payment methods.
-    </p>
+    <h2 class="section-title">Support My Work</h2>
+    <p class="section-sub">USDT is the primary method. More payment methods coming soon.</p>
   </div>
 
-  <div class="donation-system">
-    <div class="payment-tabs" role="tablist" aria-label="Payment type">
+  <div class="payment-system">
+    <div class="payment-tabs">
       <button class="payment-tab active" data-payment="crypto" type="button">Crypto</button>
-      <button class="payment-tab" data-payment="paypal" type="button">PayPal</button>
-      <button class="payment-tab" data-payment="card" type="button">Card</button>
+      <button class="payment-tab"        data-payment="paypal" type="button">PayPal</button>
+      <button class="payment-tab"        data-payment="card"   type="button">Card</button>
     </div>
 
-    <div class="donation-card active" data-panel="crypto">
-      <div class="donation-card-head">
-        <div>
-          <p class="donation-kicker">Primary Network</p>
-          <h3>USDT Donation</h3>
-        </div>
-        <span class="network-pill">USDT</span>
+    <!-- Crypto -->
+    <div class="payment-panel active" data-panel="crypto">
+      <div class="payment-head">
+        <div><p class="payment-label">Primary Network</p><h3>USDT Donation</h3></div>
+        <span class="payment-badge">USDT</span>
       </div>
-
-      <p class="donation-desc">
-        Primary support method. Copy the wallet address below and send only through the selected network.
-      </p>
-
-      <div class="wallet-row clean-wallet">
-        <input id="walletAddress" value="0xF7807e47Ee4c54b7319e8dE4269269571bF0973d" readonly />
-        <button class="copy-wallet-btn" type="button">Copy</button>
+      <div class="qr-toggle">
+        <button class="qr-view-btn active" data-view="address" type="button">Address</button>
+        <button class="qr-view-btn"        data-view="qr"      type="button">QR Code</button>
       </div>
-
-      <div class="network-meta">
-        <span>Network</span>
-        <strong>USDT BNB</strong>
+      <div class="payment-view active" data-view-panel="address">
+        <div class="wallet-row">
+          <input id="wallet-address" value="0xF7807e47Ee4c54b7319e8dE4269269571bF0973d" readonly aria-label="Wallet address" />
+          <button class="copy-wallet-btn" type="button">Copy</button>
+        </div>
+        <div class="network-meta"><span>Network</span><strong>USDT (ERC-20)</strong></div>
       </div>
-
-      <div class="extra-networks" id="extraNetworks">
-        <div class="network-option">
-          <div>
-            <strong>Ethereum</strong>
-            <span>ETH BNB</span>
-          </div>
-          <code>0x8dee08bcf01b512006c060935c25a0839eac3c02</code>
-        </div>
-
-        <div class="network-option">
-          <div>
-            <strong>Bitcoin</strong>
-            <span>BTC support placeholder</span>
-          </div>
-          <code>YourBitcoinAddressHere</code>
-        </div>
-
-        <div class="network-option">
-          <div>
-            <strong>Solana</strong>
-            <span>SOL support placeholder</span>
-          </div>
-          <code>YourSolanaAddressHere</code>
+      <div class="payment-view" data-view-panel="qr">
+        <div class="qr-card">
+          <div class="fake-qr"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          <p>Replace with a real QR image.</p>
         </div>
       </div>
-
-      <button class="expand-donation-btn" type="button" aria-expanded="false">
-        ^
-      </button>
+      <div class="extra-networks">
+        <div class="network-option"><strong>Ethereum</strong><code>0x8dee08bcf01b512006c060935c25a0839eac3c02</code></div>
+        <div class="network-option"><strong>Bitcoin</strong><code>YourBitcoinAddressHere</code></div>
+        <div class="network-option"><strong>Solana</strong><code>YourSolanaAddressHere</code></div>
+      </div>
+      <button class="expand-donation-btn" type="button" aria-expanded="false">^</button>
     </div>
 
-    <div class="donation-card" data-panel="paypal">
-      <div class="donation-card-head">
-        <div>
-          <p class="donation-kicker">Coming Soon</p>
-          <h3>PayPal Support</h3>
-        </div>
-        <span class="network-pill">Soon</span>
+    <!-- PayPal -->
+    <div class="payment-panel" data-panel="paypal">
+      <div class="payment-head">
+        <div><p class="payment-label">Future Method</p><h3>PayPal</h3></div>
+        <span class="payment-badge">Soon</span>
       </div>
-      <p class="donation-desc">
-        PayPal payment support can be added here later.
-      </p>
+      <div class="qr-card">
+        <div class="fake-qr paypal-qr"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        <p>Add your PayPal QR or link here.</p>
+      </div>
     </div>
 
-    <div class="donation-card" data-panel="card">
-      <div class="donation-card-head">
-        <div>
-          <p class="donation-kicker">Coming Soon</p>
-          <h3>Card Payments</h3>
-        </div>
-        <span class="network-pill">Soon</span>
+    <!-- Card -->
+    <div class="payment-panel" data-panel="card">
+      <div class="payment-head">
+        <div><p class="payment-label">Future Method</p><h3>Card / Stripe</h3></div>
+        <span class="payment-badge">Soon</span>
       </div>
-      <p class="donation-desc">
-        Stripe or direct card payment support can be connected here later.
-      </p>
+      <p class="payment-desc">Stripe, Ko-fi, BuyMeACoffee, or direct card support can be added here.</p>
     </div>
   </div>
 </section>
-  <!-- CONTACT -->
-  <section class="contact" id="contact">
-    <div class="footer-layers" aria-hidden="true">
-      <div class="f-grid"></div>
-      <div class="f-ring"></div>
-      <div class="f-ring"></div>
-      <div class="f-sweep"></div>
+
+<!-- ═══ CONTACT ═══════════════════════════════════════════════ -->
+<section class="contact" id="contact">
+  <div class="footer-layers" aria-hidden="true">
+    <div class="f-grid"></div>
+    <div class="f-ring"></div>
+    <div class="f-ring"></div>
+    <div class="f-sweep"></div>
+  </div>
+  <div class="contact-inner">
+    <h2>Let's Create Together</h2>
+    <p class="contact-sub">Open to freelance and contract work in Roblox systems, combat, UI, and progression features.</p>
+    <div class="contact-links">
+      <a class="c-link" href="mailto:dhruvjha1802123@gmail.com">📧 Email</a>
+      <a class="c-link" href="https://discord.com/users/1185876050501185577" target="_blank" rel="noreferrer">🎮 Discord</a>
+      <a class="c-link" href="https://www.roblox.com/users/3556700523/profile" target="_blank" rel="noreferrer">🎯 Roblox</a>
+      <a class="c-link" href="https://github.com/m-hito" target="_blank" rel="noreferrer">💻 GitHub</a>
     </div>
-    <div class="contact-inner">
-      <h2>Let's Create Together</h2>
-      <p class="contact-sub">Open to freelance and contract work in Roblox systems, combat, UI, and progression features.</p>
-      <div class="contact-links">
-        <a class="c-link" href="mailto:dhruvjha1802123@gmail.com">📧 Email</a>
-        <a class="c-link" href="https://discord.com/users/1185876050501185577" target="_blank" rel="noreferrer">🎮 Discord</a>
-        <a class="c-link" href="https://www.roblox.com/users/3556700523/profile" target="_blank" rel="noreferrer">🎯 Roblox</a>
-        <a class="c-link" href="https://github.com/m-hito" target="_blank" rel="noreferrer">💻 GitHub</a>
-      </div>
-      <p class="footer-copy">© <span id="yr"></span> xmvcz — Built with passion for games.</p>
-    </div>
-  </section>
+    <p class="footer-copy">© <span id="yr"></span> xmvcz — Built with passion for games.</p>
+  </div>
+</section>
+
+<!-- ═══ UI CHROME ═════════════════════════════════════════════ -->
 <div class="cursor-glow" aria-hidden="true"></div>
-
 <nav class="section-indicator" aria-label="Section indicator">
-  <a href="#top" class="active" data-section-link="top"></a>
-  <a href="#projects" data-section-link="projects"></a>
-  <a href="#about" data-section-link="about"></a>
-  <a href="#donate" data-section-link="donate"></a>
-  <a href="#contact" data-section-link="contact"></a>
+  <a href="#top"              data-section-link="top"></a>
+  <a href="#projects-section" data-section-link="projects-section"></a>
+  <a href="#about-section"    data-section-link="about-section"></a>
+  <a href="#donate"           data-section-link="donate"></a>
+  <a href="#contact"          data-section-link="contact"></a>
 </nav>
-
 <button class="back-top-btn" type="button" aria-label="Back to top">↑</button>
-
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script>
-    /* ─── DATA ────────────────────────────────────────────── */
-    const PROJECTS = [
-      {
-        title: "Fight with Friends (FWF)",
-        role: "Primary Scripter",
-        description: "A roguelite fast-paced round-based game developed over 1 month. Responsible for core game systems and multiplayer logic.",
-        features: ["Round-based game loop with state machine","Multiplayer replication and remote events","Roguelite progression and item drops"],
-        videoUrl: "https://player.vimeo.com/video/1178587778",
-        tags: ["Forestly Dev's","Luau","Multiplayer","Roguelite"]
-      },
-      {
-        title: "UI Animation Patterns",
-        role: "UI Developer",
-        description: "Bezier Knit package providing S-Curve, ZigZag, and Sphere animation patterns for UI elements and 3D world integration.",
-        features: ["Bezier curve engine in pure Luau","Reusable Knit service package","Works in 3D world space and ScreenGui"],
-        videoUrl: "https://player.vimeo.com/video/1182999223",
-        tags: ["UI / UX","Bezier Curves","Knit","Frontend"]
-      },
-      {
-        title: "Combat System",
-        role: "Game Owner / Lead Scripter",
-        description: "Full combat framework — NPC movement, multiple weapon types, sprint/state detection, and M1–M5 combo chains with stun on the final hit.",
-        features: ["NPC pathfinding and engagement logic","Katana · Dagger · Fist · FireFist weapon modules","M1 → M5 combo system with stun mechanic","State machine: Idle · Sprint · Block · Attack"],
-        videoUrl: "https://player.vimeo.com/video/1183019726",
-        tags: ["Combat","State Machine","NPC AI","Combos"]
-      }
-    ];
 
-    /* ─── HELPERS ─────────────────────────────────────────── */
-    function esc(s) {
-      return String(s)
-        .replace(/&/g,"&amp;").replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;").replace(/"/g,"&quot;");
-    }
-    function allExpanded() {
-      const cards = [...document.querySelectorAll(".project-card")];
-      return cards.length > 0 && cards.every(c => c.classList.contains("expanded"));
-    }
-    function syncChip() {
-      const open = allExpanded();
-      const chip = document.getElementById("toggleAll");
-      chip.classList.toggle("all-open", open);
-      chip.setAttribute("aria-pressed", String(open));
-      chip.setAttribute("aria-label", open ? "Collapse all project cards" : "Expand all project cards");
-      chip.querySelector(".toggle-chip-label").textContent = open ? "Collapse All" : "Expand All";
-    }
+<script>
 
-    /* ─── RENDER ──────────────────────────────────────────── */
-    function renderProjects() {
-      const grid = document.getElementById("projectsGrid");
-      grid.innerHTML = PROJECTS.map((p, i) => `
-        <article class="project-card reveal" style="transition-delay:${i * 0.08}s">
-          <div class="video-panel">
-            <div class="video-wrap">
-              <iframe src="${p.videoUrl}" title="${esc(p.title)}"
-                loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-            </div>
-          </div>
-        
-          <div class="info-panel">
-            <div class="card-body">
-              <div class="card-role">Role: ${esc(p.role)}</div>
-              <div class="card-title">${esc(p.title)}</div>
-              <div class="card-desc">${esc(p.description)}</div>
-            
-              <div class="card-extra">
-                <div class="card-divider"></div>
-                <ul class="feat-list">
-                  ${p.features.map(f=>`<li>${esc(f)}</li>`).join("")}
-                </ul>
-              </div>
-            
-              <div class="card-tags">${p.tags.map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</div>
-            </div>
-          
-            <div class="card-footer">
-              <button class="card-btn" aria-expanded="false" aria-label="Expand details for ${esc(p.title)}">
-                <span class="card-btn-text" style="">Details </span>
-              </button>
-            </div>
-          </div>
-        </article>
-      `).join("");
+function initReveal() {
+  const revealElements = document.querySelectorAll(
+    ".reveal, .project-card, .github-card, .section"
+  );
 
-      /* per-card toggles */
-      grid.querySelectorAll(".project-card").forEach(card => {
-        card.querySelector(".card-btn").addEventListener("click", () => {
-          const open = card.classList.toggle("expanded");
-          const btn = card.querySelector(".card-btn");
-          btn.setAttribute("aria-expanded", String(open));
-          btn.querySelector(".card-btn-text").textContent = open ? "Close" : "Details";
-          syncChip();
-        });
-      });
+  if (!revealElements.length) return;
 
-      initReveal();
-    }
-
-    /* ─── GLOBAL CHIP ─────────────────────────────────────── */
-    document.getElementById("toggleAll").addEventListener("click", () => {
-      const expand = !allExpanded();
-      document.querySelectorAll(".project-card").forEach(card => {
-        card.classList.toggle("expanded", expand);
-        const btn = card.querySelector(".card-btn");
-        if (btn) {
-          btn.setAttribute("aria-expanded", String(expand));
-          btn.querySelector(".card-btn-text").textContent = expand ? "Close" : "Details";
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
         }
       });
-      syncChip();
-    });
-
-    /* ─── THEME ───────────────────────────────────────────── */
-    function applyTheme(t) {
-      document.documentElement.setAttribute("data-theme", t);
-      document.querySelectorAll(".tdot").forEach(d =>
-        d.classList.toggle("active", d.dataset.t === t)
-      );
-      try { localStorage.setItem("xmvcz-theme", t); } catch(_) {}
+    },
+    {
+      threshold: 0.15,
     }
-    (() => {
-      let saved = "cyan";
-      try { saved = localStorage.getItem("xmvcz-theme") || "cyan"; } catch(_) {}
-      applyTheme(saved);
-    })();
-    document.querySelectorAll(".tdot").forEach(dot =>
-      dot.addEventListener("click", () => applyTheme(dot.dataset.t))
-    );
+  );
 
-    /* ─── REVEAL ──────────────────────────────────────────── */
-    function initReveal() {
-      const obs = new IntersectionObserver((entries, o) => {
-        entries.forEach(e => {
-          if (e.isIntersecting) { e.target.classList.add("visible"); o.unobserve(e.target); }
+  revealElements.forEach((el) => observer.observe(el));
+}
+
+/* ═══════════════════════════════════════════════════════════
+   DATA — portfolio projects (independent of GitHub)
+═══════════════════════════════════════════════════════════ */
+const PORTFOLIO_PROJECTS = [
+  {
+    title: "Fight with Friends (FWF)",
+    role: "Primary Scripter",
+    description: "A roguelite fast-paced round-based game developed over 1 month. Responsible for core game systems and multiplayer logic.",
+    features: ["Round-based game loop with state machine","Multiplayer replication and remote events","Roguelite progression and item drops"],
+    videoUrl: "https://player.vimeo.com/video/1178587778",
+    tags: ["Forestly Dev's","Luau","Multiplayer","Roguelite"]
+  },
+  {
+    title: "UI Animation Patterns",
+    role: "UI Developer",
+    description: "Bezier Knit package providing S-Curve, ZigZag, and Sphere animation patterns for UI elements and 3D world integration.",
+    features: ["Bezier curve engine in pure Luau","Reusable Knit service package","Works in 3D world space and ScreenGui"],
+    videoUrl: "https://player.vimeo.com/video/1182999223",
+    tags: ["UI / UX","Bezier Curves","Knit","Frontend"]
+  },
+  {
+    title: "Combat System",
+    role: "Game Owner / Lead Scripter",
+    description: "Full combat framework — NPC movement, multiple weapon types, sprint/state detection, and M1–M5 combo chains with stun on the final hit.",
+    features: ["NPC pathfinding and engagement logic","Katana · Dagger · Fist · FireFist weapon modules","M1 → M5 combo system with stun mechanic","State machine: Idle · Sprint · Block · Attack"],
+    videoUrl: "https://player.vimeo.com/video/1183019726",
+    tags: ["Combat","State Machine","NPC AI","Combos"]
+  }
+];
+
+/* ═══════════════════════════════════════════════════════════
+   DATA — GitHub projects with local readme fallbacks
+═══════════════════════════════════════════════════════════ */
+const GITHUB_PROJECTS = [
+  {
+    title: "Movement System",
+    description: "Advanced Roblox movement with dash, slide, wall-run, and mobility mechanics.",
+    repo: "https://github.com/m-hito/MovementSystem",
+    user: "m-hito",
+    repoName: "MovementSystem",
+    tags: ["Roblox","Luau","Movement"],
+    fallbackReadme: `# Movement System\n\nAdvanced Roblox movement controller.\n\n## Features\n- Dash system\n- Slide movement\n- Wall-run mechanics\n- Smooth player mobility\n\n## Tech Stack\n\`Roblox Studio\`, \`Luau\``
+  },
+  {
+    title: "Combat System",
+    description: "Roblox combat framework with combo attacks, blocking, NPC handling, and state logic.",
+    repo: "https://github.com/m-hito/CombatSystem",
+    user: "m-hito",
+    repoName: "CombatSystem",
+    tags: ["Combat","NPC AI","State Machine"],
+    fallbackReadme: `# Combat System\n\nA Roblox combat framework focused on melee combat.\n\n## Features\n- M1 combo chain\n- Blocking and stun states\n- NPC combat logic\n- Server-authoritative damage\n\n## Tech Stack\n\`Roblox Studio\`, \`Luau\``
+  },
+  {
+    title: "m-hito notes",
+    description: "Documentation of basic notes on lua scripting I made when learning scripting, from brawldev advanced series 1-36 ep",
+    repo: "https://github.com/m-hito/BrawlDevNotes",
+    user: "m-hito",
+    repoName: "BrawlDevNotes",
+    tags: ["Learning","Documentation","Basic-Advance"],
+    fallbackReadme: `# Portfolio Website\n\nPersonal developer portfolio website.\n\n## Features\n- Animated hero section\n- Project showcase\n- GitHub README preview\n- Donation / payment UI\n\n## Tech Stack\n\`HTML\`, \`CSS\`, \`JavaScript\``
+  }
+];
+
+/* ═══════════════════════════════════════════════════════════
+   UTILITIES
+═══════════════════════════════════════════════════════════ */
+function esc(s) {
+  return String(s)
+    .replace(/&/g,"&amp;").replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+
+function safeGet(id) {
+  return document.getElementById(id) || null;
+}
+
+function showToast(msg) {
+  const t = safeGet("toast");
+  if (!t) return;
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(() => t.classList.remove("show"), 1600);
+}
+
+function markdownToHtml(md) {
+  return md.trim()
+    .replace(/^### (.*)$/gim,"<h3>$1</h3>")
+    .replace(/^## (.*)$/gim,"<h2>$1</h2>")
+    .replace(/^# (.*)$/gim,"<h1>$1</h1>")
+    .replace(/`([^`]+)`/gim,"<code>$1</code>")
+    .replace(/^- (.*)$/gim,"<li>$1</li>")
+    .replace(/(<li>[\s\S]*?<\/li>)/g,"<ul>$1</ul>")
+    .replace(/\n/g,"<br>");
+}
+
+/* ═══════════════════════════════════════════════════════════
+   MODULE 1 — PROJECT CARDS (fully independent)
+═══════════════════════════════════════════════════════════ */
+const ProjectCards = (() => {
+  function allExpanded() {
+    const cards = [...document.querySelectorAll(".project-card")];
+    return cards.length > 0 && cards.every(c => c.classList.contains("expanded"));
+  }
+
+  function syncChip() {
+    const chip = safeGet("toggle-all-btn");
+    if (!chip) return;
+    const open = allExpanded();
+    chip.classList.toggle("all-open", open);
+    chip.setAttribute("aria-pressed", String(open));
+    chip.setAttribute("aria-label", open ? "Collapse all project cards" : "Expand all project cards");
+    const label = chip.querySelector(".toggle-chip-label");
+    if (label) label.textContent = open ? "Collapse All" : "Expand All";
+  }
+
+  function toggleCard(card, expand) {
+    card.classList.toggle("expanded", expand);
+    const btn = card.querySelector(".card-btn");
+    if (!btn) return;
+    btn.setAttribute("aria-expanded", String(expand));
+    const txt = btn.querySelector(".card-btn-text");
+    if (txt) txt.textContent = expand ? "Close" : "Details";
+  }
+
+  function render() {
+    const grid = safeGet("projects-grid");
+    if (!grid) return;
+
+    grid.innerHTML = PORTFOLIO_PROJECTS.map((p, i) => `
+      <article class="project-card reveal" style="transition-delay:${i * 0.08}s" data-tags='${JSON.stringify(p.tags)}'>
+        <div class="video-panel">
+          <div class="video-wrap">
+            <iframe src="${esc(p.videoUrl)}" title="${esc(p.title)}"
+              loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div class="info-panel">
+          <div class="card-body">
+            <div class="card-role">Role: ${esc(p.role)}</div>
+            <div class="card-title">${esc(p.title)}</div>
+            <div class="card-desc">${esc(p.description)}</div>
+            <div class="card-extra">
+              <div class="card-divider"></div>
+              <ul class="feat-list">
+                ${p.features.map(f => `<li>${esc(f)}</li>`).join("")}
+              </ul>
+            </div>
+            <div class="card-tags">${p.tags.map(t => `<span class="tag">${esc(t)}</span>`).join("")}</div>
+          </div>
+          <div class="card-footer">
+            <button class="card-btn" type="button" aria-expanded="false" aria-label="Expand ${esc(p.title)}">
+              <span class="card-btn-text">Details</span>
+            </button>
+          </div>
+        </div>
+      </article>
+    `).join("");
+
+    grid.querySelectorAll(".project-card").forEach(card => {
+      const btn = card.querySelector(".card-btn");
+      if (btn) {
+        btn.addEventListener("click", () => {
+          const open = card.classList.contains("expanded");
+          toggleCard(card, !open);
+          syncChip();
         });
-      }, { threshold: 0.08 });
-      document.querySelectorAll(".reveal:not(.visible)").forEach(el => obs.observe(el));
-    }
-    document.addEventListener("click", e => {
-  const btn = e.target.closest(".copy-wallet-btn");
-  if (!btn) return;
-
-  const wallet = document.getElementById("walletAddress");
-  if (!wallet) return;
-
-  navigator.clipboard.writeText(wallet.value).then(() => {
-    btn.textContent = "Copied";
-    setTimeout(() => {
-      btn.textContent = "Copy";
-    }, 1400);
-  });
-});
-
-document.addEventListener("click", e => {
-  const copyBtn = e.target.closest(".copy-wallet-btn");
-
-  if (copyBtn) {
-    const wallet = document.getElementById("walletAddress");
-    if (!wallet) return;
-
-    navigator.clipboard.writeText(wallet.value).then(() => {
-      copyBtn.textContent = "Copied";
-      setTimeout(() => {
-        copyBtn.textContent = "Copy";
-      }, 1400);
-    });
-  }
-
-  const expandBtn = e.target.closest(".expand-donation-btn");
-
-  if (expandBtn) {
-    const card = expandBtn.closest(".donation-card");
-    const expanded = card.classList.toggle("expanded");
-    expandBtn.setAttribute("aria-expanded", String(expanded));
-  }
-
-  const tab = e.target.closest(".payment-tab");
-
-  if (tab) {
-    const payment = tab.dataset.payment;
-
-    document.querySelectorAll(".payment-tab").forEach(btn => {
-      btn.classList.toggle("active", btn === tab);
+      }
     });
 
-    document.querySelectorAll(".donation-card").forEach(card => {
-      card.classList.toggle("active", card.dataset.panel === payment);
-    });
-  }
-});
-
-/* ─── LAUNCH POLISH INTERACTIONS ───────────────────────── */
-const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-function showToast(message) {
-  const toast = document.getElementById("toast");
-  if (!toast) return;
-
-  toast.textContent = message;
-  toast.classList.add("show");
-
-  clearTimeout(showToast.timer);
-  showToast.timer = setTimeout(() => {
-    toast.classList.remove("show");
-  }, 1600);
-}
-
-/* Mouse glow + soft grid movement */
-if (!prefersReducedMotion) {
-  const glow = document.querySelector(".cursor-glow");
-  const grid = document.querySelector(".bg-grid");
-
-  let mouseX = window.innerWidth / 2;
-  let mouseY = window.innerHeight / 2;
-  let glowX = mouseX;
-  let glowY = mouseY;
-
-  window.addEventListener("mousemove", e => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-
-    document.body.classList.add("mouse-moving");
-
-    if (glow) glow.style.opacity = "1";
-
-    if (grid) {
-      const moveX = (mouseX / window.innerWidth - 0.5) * 18;
-      const moveY = (mouseY / window.innerHeight - 0.5) * 18;
-      grid.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.015)`;
-    }
-
-    clearTimeout(window.__mouseStill);
-    window.__mouseStill = setTimeout(() => {
-      document.body.classList.remove("mouse-moving");
-      if (grid) grid.style.transform = "";
-    }, 220);
-  });
-
-  function animateGlow() {
-    glowX += (mouseX - glowX) * 0.14;
-    glowY += (mouseY - glowY) * 0.14;
-
-    if (glow) {
-      glow.style.left = `${glowX}px`;
-      glow.style.top = `${glowY}px`;
-    }
-
-    requestAnimationFrame(animateGlow);
-  }
-
-  animateGlow();
-}
-
-/* Active section indicator */
-const sectionLinks = document.querySelectorAll("[data-section-link]");
-const observedSections = [...sectionLinks]
-  .map(link => document.getElementById(link.dataset.sectionLink))
-  .filter(Boolean);
-
-const sectionObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (!entry.isIntersecting) return;
-
-    sectionLinks.forEach(link => {
-      link.classList.toggle("active", link.dataset.sectionLink === entry.target.id);
-    });
-  });
-}, {
-  threshold: 0.45
-});
-
-observedSections.forEach(section => sectionObserver.observe(section));
-
-/* Project card hover tilt */
-if (!prefersReducedMotion) {
-  document.addEventListener("mousemove", e => {
-    const card = e.target.closest(".project-card");
-    if (!card || card.classList.contains("expanded")) return;
-
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    const rotateX = ((y / rect.height) - 0.5) * -6;
-    const rotateY = ((x / rect.width) - 0.5) * 6;
-
-    card.style.transform = `translateY(-6px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-  });
-
-  document.addEventListener("mouseleave", e => {
-    const card = e.target.closest?.(".project-card");
-    if (card) card.style.transform = "";
-  }, true);
-
-  document.addEventListener("mouseout", e => {
-    const card = e.target.closest?.(".project-card");
-    if (!card) return;
-    if (!card.contains(e.relatedTarget)) card.style.transform = "";
-  });
-}
-
-/* Back to top */
-const backTopBtn = document.querySelector(".back-top-btn");
-
-window.addEventListener("scroll", () => {
-  if (!backTopBtn) return;
-  backTopBtn.classList.toggle("visible", window.scrollY > 650);
-});
-
-if (backTopBtn) {
-  backTopBtn.addEventListener("click", () => {
-    window.scrollTo({ top:0, behavior: prefersReducedMotion ? "auto" : "smooth" });
-  });
-}
-
-/* Improved clipboard feedback */
-document.addEventListener("click", e => {
-  const copyBtn = e.target.closest(".copy-wallet-btn");
-  if (!copyBtn) return;
-
-  const wallet = document.getElementById("walletAddress");
-  if (!wallet) return;
-
-  const done = () => {
-    copyBtn.textContent = "Copied";
-    showToast("Wallet address copied");
-    setTimeout(() => {
-      copyBtn.textContent = "Copy";
-    }, 1400);
-  };
-
-  if (navigator.clipboard && window.isSecureContext) {
-    navigator.clipboard.writeText(wallet.value).then(done).catch(() => {
-      wallet.select();
-      document.execCommand("copy");
-      done();
-    });
-  } else {
-    wallet.select();
-    document.execCommand("copy");
-    done();
-  }
-});
-    /* ─── INIT ────────────────────────────────────────────── */
-document.addEventListener("DOMContentLoaded", () => {
-  const projectList = document.getElementById("githubProjectList");
-  const readmeTitle = document.getElementById("readmeTitle");
-  const readmeContent = document.getElementById("readmeContent");
-  const repoButton = document.getElementById("repoButton");
-
-  if (!projectList || !readmeTitle || !readmeContent || !repoButton) {
-    console.error("GitHub section elements are missing. Check your HTML IDs.");
-    return;
-  }
-
-    renderProjects();
     initReveal();
-  </script>
+  }
+
+  function init() {
+    render();
+
+    // Expand-all chip
+    const chip = safeGet("toggle-all-btn");
+    if (chip) {
+      chip.addEventListener("click", () => {
+        const expand = !allExpanded();
+        document.querySelectorAll(".project-card").forEach(card => toggleCard(card, expand));
+        syncChip();
+      });
+    }
+
+    // Filter buttons
+    const filterBar = safeGet("project-filter-bar");
+    if (filterBar) {
+      filterBar.addEventListener("click", e => {
+        const btn = e.target.closest(".filter-btn");
+        if (!btn) return;
+        const filter = btn.dataset.filter || "all";
+
+        filterBar.querySelectorAll(".filter-btn").forEach(b => b.classList.toggle("active", b === btn));
+
+        document.querySelectorAll(".project-card").forEach((card, idx) => {
+          const project = PORTFOLIO_PROJECTS[idx];
+          if (!project) return;
+          const match = filter === "all" || project.tags.includes(filter);
+          card.style.display = match ? "" : "none";
+        });
+      });
+    }
+  }
+
+  return { init };
+})();
+
+/* ═══════════════════════════════════════════════════════════
+   MODULE 2 — GITHUB SECTION (fully independent)
+═══════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════
+   MODULE 2 — GITHUB SECTION
+═══════════════════════════════════════════════════════════ */
+const GithubSection = (() => {
+  let activeIndex = -1;
+  let activeMode = "preview";
+
+  function setLoadingState() {
+    const loadEl = safeGet("github-readme-loading");
+    if (!loadEl) return;
+    loadEl.classList.add("panel-hidden");
+    loadEl.setAttribute("aria-hidden", "true");
+  }
+
+  function setErrorState(show, message = "") {
+    const errEl = safeGet("github-readme-error");
+    if (!errEl) return;
+
+    if (show && message) {
+      errEl.innerHTML = esc(message);
+      errEl.classList.remove("panel-hidden");
+      errEl.setAttribute("aria-hidden", "false");
+      return;
+    }
+
+    errEl.innerHTML = "";
+    errEl.classList.add("panel-hidden");
+    errEl.setAttribute("aria-hidden", "true");
+  }
+
+  function setViewerMode(mode) {
+    activeMode = mode === "code" ? "code" : "preview";
+
+    const rawEl = safeGet("github-readme-raw");
+    const previewEl = safeGet("github-readme-preview");
+    const codeBtn = safeGet("github-mode-code");
+    const previewBtn = safeGet("github-mode-preview");
+
+    if (rawEl) rawEl.classList.toggle("active", activeMode === "code");
+    if (previewEl) previewEl.classList.toggle("active", activeMode === "preview");
+
+    if (codeBtn) {
+      codeBtn.classList.toggle("active", activeMode === "code");
+      codeBtn.setAttribute("aria-selected", String(activeMode === "code"));
+    }
+
+    if (previewBtn) {
+      previewBtn.classList.toggle("active", activeMode === "preview");
+      previewBtn.setAttribute("aria-selected", String(activeMode === "preview"));
+    }
+  }
+
+  function setContent(rawMarkdown, renderedHtml) {
+    const rawEl = safeGet("github-readme-raw");
+    const previewEl = safeGet("github-readme-preview");
+
+    if (rawEl) {
+      rawEl.textContent = rawMarkdown || "# README unavailable";
+    }
+
+    if (previewEl) {
+      previewEl.innerHTML = renderedHtml || "<p>README unavailable.</p>";
+    }
+
+    setLoadingState(false);
+    setErrorState(false);
+  }
+
+  function escapeHtml(value) {
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
+  function parseInlineMarkdown(text) {
+    let html = escapeHtml(text);
+
+    html = html.replace(/`([^`]+)`/g, "<code>$1</code>");
+    html = html.replace(
+      /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,
+      '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>'
+    );
+    html = html.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+    html = html.replace(/\*([^*]+)\*/g, "<em>$1</em>");
+    html = html.replace(/~~([^~]+)~~/g, "<del>$1</del>");
+
+    return html;
+  }
+
+  function splitTableRow(line) {
+    return line
+      .trim()
+      .replace(/^\|/, "")
+      .replace(/\|$/, "")
+      .split("|")
+      .map((cell) => cell.trim());
+  }
+
+  function isTableSeparatorLine(line) {
+    const cells = splitTableRow(line);
+    if (!cells.length) return false;
+
+    return cells.every((cell) => /^:?-{3,}:?$/.test(cell));
+  }
+
+  function isTableLine(line) {
+    const trimmed = line.trim();
+    return trimmed.includes("|") && splitTableRow(trimmed).length >= 2;
+  }
+
+  function buildTableHtml(headerLine, bodyLines) {
+    const headers = splitTableRow(headerLine);
+    const rows = bodyLines.map(splitTableRow);
+
+    const thead = `
+      <thead>
+        <tr>
+          ${headers.map((cell) => `<th>${parseInlineMarkdown(cell)}</th>`).join("")}
+        </tr>
+      </thead>
+    `;
+
+    const tbody = `
+      <tbody>
+        ${rows.map((row) => `
+          <tr>
+            ${row.map((cell) => `<td>${parseInlineMarkdown(cell)}</td>`).join("")}
+          </tr>
+        `).join("")}
+      </tbody>
+    `;
+
+    return `<div class="github-table-wrap"><table>${thead}${tbody}</table></div>`;
+  }
+
+  function markdownToHtml(markdown) {
+    if (!markdown || !markdown.trim()) {
+      return "<p>README unavailable.</p>";
+    }
+
+    const lines = markdown.replace(/\r\n/g, "\n").split("\n");
+    const html = [];
+
+    let inList = false;
+    let inOrderedList = false;
+    let inCodeBlock = false;
+    let codeBuffer = [];
+    let paragraphBuffer = [];
+
+    function flushParagraph() {
+      if (!paragraphBuffer.length) return;
+      html.push(`<p>${parseInlineMarkdown(paragraphBuffer.join(" "))}</p>`);
+      paragraphBuffer = [];
+    }
+
+    function closeLists() {
+      if (inList) {
+        html.push("</ul>");
+        inList = false;
+      }
+      if (inOrderedList) {
+        html.push("</ol>");
+        inOrderedList = false;
+      }
+    }
+
+    function closeCodeBlock() {
+      if (!inCodeBlock) return;
+      html.push(`<pre><code>${escapeHtml(codeBuffer.join("\n"))}</code></pre>`);
+      codeBuffer = [];
+      inCodeBlock = false;
+    }
+
+    for (let i = 0; i < lines.length; i += 1) {
+      const rawLine = lines[i];
+      const line = rawLine.trimEnd();
+      const trimmed = line.trim();
+
+      if (trimmed.startsWith("```")) {
+        flushParagraph();
+        closeLists();
+
+        if (inCodeBlock) {
+          closeCodeBlock();
+        } else {
+          inCodeBlock = true;
+        }
+        continue;
+      }
+
+      if (inCodeBlock) {
+        codeBuffer.push(rawLine);
+        continue;
+      }
+
+      if (!trimmed) {
+        flushParagraph();
+        closeLists();
+        continue;
+      }
+
+      if (
+        i + 1 < lines.length &&
+        isTableLine(trimmed) &&
+        isTableSeparatorLine(lines[i + 1].trim())
+      ) {
+        flushParagraph();
+        closeLists();
+
+        const headerLine = trimmed;
+        const bodyLines = [];
+        i += 2;
+
+        while (i < lines.length) {
+          const nextTrimmed = lines[i].trim();
+          if (!nextTrimmed || !isTableLine(nextTrimmed)) {
+            i -= 1;
+            break;
+          }
+          bodyLines.push(nextTrimmed);
+          i += 1;
+        }
+
+        html.push(buildTableHtml(headerLine, bodyLines));
+        continue;
+      }
+
+      const headingMatch = trimmed.match(/^(#{1,6})\s+(.*)$/);
+      if (headingMatch) {
+        flushParagraph();
+        closeLists();
+        const level = headingMatch[1].length;
+        html.push(`<h${level}>${parseInlineMarkdown(headingMatch[2])}</h${level}>`);
+        continue;
+      }
+
+      const unorderedMatch = trimmed.match(/^[-*]\s+(.*)$/);
+      if (unorderedMatch) {
+        flushParagraph();
+        if (inOrderedList) {
+          html.push("</ol>");
+          inOrderedList = false;
+        }
+        if (!inList) {
+          html.push("<ul>");
+          inList = true;
+        }
+        html.push(`<li>${parseInlineMarkdown(unorderedMatch[1])}</li>`);
+        continue;
+      }
+
+      const orderedMatch = trimmed.match(/^\d+\.\s+(.*)$/);
+      if (orderedMatch) {
+        flushParagraph();
+        if (inList) {
+          html.push("</ul>");
+          inList = false;
+        }
+        if (!inOrderedList) {
+          html.push("<ol>");
+          inOrderedList = true;
+        }
+        html.push(`<li>${parseInlineMarkdown(orderedMatch[1])}</li>`);
+        continue;
+      }
+
+      const quoteMatch = trimmed.match(/^>\s+(.*)$/);
+      if (quoteMatch) {
+        flushParagraph();
+        closeLists();
+        html.push(`<blockquote>${parseInlineMarkdown(quoteMatch[1])}</blockquote>`);
+        continue;
+      }
+
+      if (/^---+$/.test(trimmed) || /^\*\*\*+$/.test(trimmed)) {
+        flushParagraph();
+        closeLists();
+        html.push("<hr>");
+        continue;
+      }
+
+      paragraphBuffer.push(trimmed);
+    }
+
+    flushParagraph();
+    closeLists();
+    closeCodeBlock();
+
+    return html.join("");
+  }
+
+  async function fetchReadme(user, repo) {
+    const apiUrl = `https://api.github.com/repos/${user}/${repo}/readme`;
+    const res = await fetch(apiUrl, {
+      headers: {
+        Accept: "application/vnd.github.raw+json"
+      }
+    });
+
+    if (!res.ok) {
+      throw new Error(`README fetch failed: ${res.status}`);
+    }
+
+    return await res.text();
+  }
+
+  async function selectProject(index) {
+    if (index === activeIndex) return;
+    activeIndex = index;
+
+    const project = GITHUB_PROJECTS[index];
+    if (!project) return;
+
+    document.querySelectorAll(".github-project-card").forEach((card, i) => {
+      card.classList.toggle("active", i === index);
+    });
+
+    const titleEl = safeGet("github-readme-title");
+    if (titleEl) {
+      titleEl.textContent = project.title;
+    }
+
+    const linkEl = safeGet("github-repo-link");
+    if (linkEl) {
+      linkEl.href = project.repo;
+    }
+
+    setLoadingState(false);
+    setErrorState(false);
+
+    try {
+      const markdown = await fetchReadme(project.user, project.repoName);
+      setContent(markdown, markdownToHtml(markdown));
+    } catch (error) {
+      const fallbackMarkdown = project.fallbackReadme || "# README unavailable";
+      setContent(fallbackMarkdown, markdownToHtml(fallbackMarkdown));
+    }
+  }
+
+  function renderProjectList() {
+    const listEl = safeGet("github-project-list");
+    if (!listEl) return;
+
+    listEl.innerHTML = GITHUB_PROJECTS.map((project, index) => `
+      <button type="button" class="github-project-card" data-github-index="${index}">
+        <h3>${esc(project.title)}</h3>
+        <p>${esc(project.description)}</p>
+        <div class="github-tags">
+          ${project.tags.map((tag) => `<span>${esc(tag)}</span>`).join("")}
+        </div>
+      </button>
+    `).join("");
+
+    listEl.addEventListener("click", (event) => {
+      const card = event.target.closest(".github-project-card");
+      if (!card) return;
+
+      const index = Number(card.dataset.githubIndex);
+      if (!Number.isFinite(index)) return;
+
+      selectProject(index);
+    });
+  }
+
+  function bindModeToggle() {
+    const codeBtn = safeGet("github-mode-code");
+    const previewBtn = safeGet("github-mode-preview");
+
+    if (codeBtn) {
+      codeBtn.addEventListener("click", () => setViewerMode("code"));
+    }
+
+    if (previewBtn) {
+      previewBtn.addEventListener("click", () => setViewerMode("preview"));
+    }
+  }
+
+  function init() {
+    renderProjectList();
+    bindModeToggle();
+    setViewerMode("preview");
+  }
+
+  function onPanelOpen() {
+    if (activeIndex === -1 && GITHUB_PROJECTS.length > 0) {
+      selectProject(0);
+    }
+  }
+
+  return { init, onPanelOpen };
+})();
+/* ═══════════════════════════════════════════════════════════
+   MODULE 3 — ABOUT TAB SWITCHER (independent)
+═══════════════════════════════════════════════════════════ */
+const AboutTabs = (() => {
+  function showPanel(targetId) {
+    ["about-panel", "github-panel"].forEach(id => {
+      const el = safeGet(id);
+      if (!el) return;
+      el.classList.toggle("panel-hidden", id !== targetId);
+    });
+
+    document.querySelectorAll(".view-tab-btn").forEach(btn => {
+      const active = btn.dataset.tab === targetId;
+      btn.classList.toggle("active", active);
+      btn.setAttribute("aria-selected", String(active));
+    });
+
+    if (targetId === "github-panel") {
+      GithubSection.onPanelOpen();
+    }
+  }
+
+  function init() {
+    document.querySelectorAll(".view-tab-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const target = btn.dataset.tab;
+        if (target) showPanel(target);
+      });
+    });
+  }
+
+  return { init };
+})();
+
+
+
+/* ═══════════════════════════════════════════════════════════
+   MODULE 4 — PAYMENT / DONATION
+═══════════════════════════════════════════════════════════ */
+const PaymentSystem = (() => {
+  function init() {
+    document.addEventListener("click", e => {
+      // Payment tabs
+      const payTab = e.target.closest(".payment-tab");
+      if (payTab) {
+        const payment = payTab.dataset.payment;
+        document.querySelectorAll(".payment-tab").forEach(b => b.classList.toggle("active", b === payTab));
+        document.querySelectorAll(".payment-panel").forEach(p => p.classList.toggle("active", p.dataset.panel === payment));
+      }
+
+      // QR / address toggle
+      const qrBtn = e.target.closest(".qr-view-btn");
+      if (qrBtn) {
+        const view = qrBtn.dataset.view;
+        document.querySelectorAll(".qr-view-btn").forEach(b => b.classList.toggle("active", b === qrBtn));
+        document.querySelectorAll(".payment-view").forEach(p => p.classList.toggle("active", p.dataset.viewPanel === view));
+      }
+
+      // Expand extra networks
+      const expandBtn = e.target.closest(".expand-donation-btn");
+      if (expandBtn) {
+        const panel = expandBtn.closest(".payment-panel");
+        if (panel) {
+          const expanded = panel.classList.toggle("expanded");
+          expandBtn.setAttribute("aria-expanded", String(expanded));
+        }
+      }
+
+      // Copy wallet
+      const copyBtn = e.target.closest(".copy-wallet-btn");
+      if (copyBtn) {
+        const wallet = safeGet("wallet-address");
+        if (!wallet) return;
+        const done = () => {
+          copyBtn.textContent = "Copied";
+          showToast("Wallet address copied");
+          setTimeout(() => { copyBtn.textContent = "Copy"; }, 1400);
+        };
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(wallet.value).then(done).catch(() => {
+            wallet.select(); document.execCommand("copy"); done();
+          });
+        } else {
+          wallet.select(); document.execCommand("copy"); done();
+        }
+      }
+    });
+  }
+
+  return { init };
+})();
+
+/* ═══════════════════════════════════════════════════════════
+   MODULE 5 — THEME
+═══════════════════════════════════════════════════════════ */
+const ThemeSystem = (() => {
+  function apply(t) {
+    document.documentElement.setAttribute("data-theme", t);
+    document.querySelectorAll(".tdot").forEach(d => d.classList.toggle("active", d.dataset.t === t));
+    try { localStorage.setItem("xmvcz-theme", t); } catch (_) {}
+  }
+
+  function init() {
+    let saved = "cyan";
+    try { saved = localStorage.getItem("xmvcz-theme") || "cyan"; } catch (_) {}
+    apply(saved);
+    document.querySelectorAll(".tdot").forEach(dot => dot.addEventListener("click", () => apply(dot.dataset.t)));
+  }
+
+  return { init };
+})();
+
+
+
+/* ═══════════════════════════════════════════════════════════
+   MODULE 6 — SCROLL / REVEAL / CURSOR
+═══════════════════════════════════════════════════════════ */
+const ScrollEffects = (() => {
+  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function initReveal() {
+    const obs = new IntersectionObserver((entries, o) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add("visible"); o.unobserve(e.target); }
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll(".reveal:not(.visible)").forEach(el => obs.observe(el));
+  }
+
+  function initSectionNav() {
+    const links = document.querySelectorAll("[data-section-link]");
+    const sections = [...links].map(l => safeGet(l.dataset.sectionLink)).filter(Boolean);
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        links.forEach(l => l.classList.toggle("active", l.dataset.sectionLink === e.target.id));
+      });
+    }, { threshold: 0.35 });
+    sections.forEach(s => obs.observe(s));
+  }
+
+  function initBackTop() {
+    const btn = document.querySelector(".back-top-btn");
+    if (!btn) return;
+    window.addEventListener("scroll", () => btn.classList.toggle("visible", window.scrollY > 650));
+    btn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: prefersReduced ? "auto" : "smooth" }));
+  }
+
+  function initCursor() {
+    if (prefersReduced) return;
+    const glow = document.querySelector(".cursor-glow");
+    const grid = document.querySelector(".bg-grid");
+    let mx = innerWidth / 2, my = innerHeight / 2, gx = mx, gy = my;
+
+    window.addEventListener("mousemove", e => {
+      mx = e.clientX; my = e.clientY;
+      if (glow) glow.style.opacity = "1";
+      if (grid) {
+        const dx = (mx / innerWidth - .5) * 18;
+        const dy = (my / innerHeight - .5) * 18;
+        grid.style.transform = `translate(${dx}px,${dy}px) scale(1.015)`;
+      }
+      clearTimeout(window.__gridReset);
+      window.__gridReset = setTimeout(() => { if (grid) grid.style.transform = ""; }, 250);
+    });
+
+    (function animGlow() {
+      gx += (mx - gx) * .14; gy += (my - gy) * .14;
+      if (glow) { glow.style.left = `${gx}px`; glow.style.top = `${gy}px`; }
+      requestAnimationFrame(animGlow);
+    })();
+  }
+
+  function initCardTilt() {
+    if (prefersReduced) return;
+    document.addEventListener("mousemove", e => {
+      const card = e.target.closest(".project-card");
+      if (!card || card.classList.contains("expanded")) return;
+      const r = card.getBoundingClientRect();
+      const rx = ((e.clientY - r.top) / r.height - .5) * -6;
+      const ry = ((e.clientX - r.left) / r.width - .5) * 6;
+      card.style.transform = `translateY(-6px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+    });
+    document.addEventListener("mouseout", e => {
+      const card = e.target.closest?.(".project-card");
+      if (card && !card.contains(e.relatedTarget)) card.style.transform = "";
+    });
+  }
+
+  function init() {
+    initReveal();
+    initSectionNav();
+    initBackTop();
+    initCursor();
+    initCardTilt();
+  }
+
+  return { init, initReveal };
+})();
+
+/* ═══════════════════════════════════════════════════════════
+   BOOT
+═══════════════════════════════════════════════════════════ */
+document.addEventListener("DOMContentLoaded", () => {
+  // Footer year
+  const yr = safeGet("yr");
+  if (yr) yr.textContent = new Date().getFullYear();
+
+  // Boot all modules
+  ThemeSystem.init();
+  ProjectCards.init();       // renders #projects-grid
+  GithubSection.init();      // prepares github list (lazy fetch)
+  AboutTabs.init();          // wires About / GitHub tabs
+  PaymentSystem.init();      // wires donation UI
+  ScrollEffects.init();      // reveal, nav, cursor, back-to-top
+});
+
+</script>
 </body>
 </html>
